@@ -1,0 +1,1 @@
+SET @@global.sql_mode = '';

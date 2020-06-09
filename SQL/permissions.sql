@@ -1,0 +1,1 @@
+ALTER TABLE `permissions` ADD `visible` ENUM('0', '1') NOT NULL DEFAULT '1' AFTER `level`;

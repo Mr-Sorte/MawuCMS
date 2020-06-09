@@ -1,0 +1,374 @@
+html{
+    font-family:sans-serif;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    height:100%
+}
+body{
+    height:100%;
+    margin:0;
+    background-color:#000;
+    color:#7ecaee;
+    display:-ms-flexbox;
+    display:-webkit-box;
+    display:flex;
+    -ms-flex-direction:column;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    flex-direction:column;
+    font-family:Ubuntu,trebuchet ms,lucida grande,lucida sans unicode,lucida sans,Tahoma,sans-serif;
+    font-size:16px;
+    -webkit-font-variant-ligatures:common-ligatures;
+    font-variant-ligatures:common-ligatures;
+    line-height:1.4;
+    min-height:100vh
+}
+*{
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:antialiased
+}
+a{
+    color:#fff;
+    cursor:pointer;
+    outline:0;
+    text-decoration:none
+}
+a{
+    background-color:transparent
+}
+blockquote:first-child,h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child,p:first-child{
+    margin-top:0
+}
+h1{
+    font-size:36px
+}
+h1,h2,h3,h4,h5,h6{
+    color:#fff;
+    font-family:ubuntu condensed,trebuchet ms,lucida grande,lucida sans unicode,lucida sans,Tahoma,sans-serif;
+    font-weight:400;
+    margin:.6em 0;
+    line-height:1.2
+}
+h1,h2,h3,h4,h5{
+    text-transform:uppercase
+}
+blockquote:last-child,p:last-child{
+    margin-bottom:0
+}
+p{
+    margin:.75em 0
+}
+.hotel-button,h5,h6,p{
+    font-size:16px
+}
+blockquote,p,small{
+    line-height:1.4
+}
+habbo-client-closed,habbo-client-error{
+    -ms-flex-align:center;
+    -webkit-box-align:center;
+    align-items:center;
+    display:-webkit-box;
+    display:flex;
+    -ms-flex-direction:column;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    flex-direction:column;
+    -ms-flex-pack:center;
+    -webkit-box-pack:center;
+    justify-content:center;
+    height:100%;
+    position:absolute;
+    top:0;
+    width:100%;
+    display:-ms-flexbox;
+    padding:48px 12px;
+    z-index:610;
+    left:0
+}
+habbo-client-closed .client-error__background-frank,habbo-client-error .client-error__background-frank{
+    background-image:url(/Mawu/image/client/flash_error_bg.png);
+    display:block;
+    height:368px;
+    padding:80px 17px 35px 242px;
+    position:relative;
+    width:639px
+}
+habbo-client-closed .client-error__background-frank .client-error__text-contents,habbo-client-error .client-error__background-frank .client-error__text-contents{
+    height:253px;
+    position:absolute;
+    text-align:left
+}
+habbo-client-closed .client-error__background-frank .client-error__text-contents .client-error__title,habbo-client-error .client-error__background-frank .client-error__text-contents .client-error__title{
+    text-align:left
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div,habbo-client-error .client-error__background-frank .client-error__hotel-button-div{
+    bottom:30px;
+    float:right;
+    position:absolute;
+    right:30px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button{
+    display:inline-block;
+    line-height:1.2;
+    text-align:center;
+    background-color:#ffb900;
+    border-color:#ffea00;
+    color:#000;
+    border-radius:5px 0 0 5px;
+    border-width:2px 1px 2px 2px;
+    border-style:solid;
+    margin-bottom:4px;
+    text-transform:uppercase;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    position:relative;
+    margin-right:20px;
+    margin-top:-3px;
+    padding:6px 12px 6px 24px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:active,habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:active,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover{
+    border-bottom-style:solid;
+    border-bottom-width:2px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover{
+    background-color:#ffd400;
+    border-color:#fffd70
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover:after,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:hover:after{
+    border-color:transparent transparent transparent #ffd400
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button h5,habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button h6,habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button p,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button h5,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button h6,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button p{
+    font-size:16px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:before,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:before{
+    border-width:21px;
+    top:-2px;
+    border-color:transparent transparent transparent #ffea00;
+    right:-43px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:after,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:after{
+    border-width:19px;
+    top:0;
+    border-color:transparent transparent transparent #ffb900;
+    right:-38px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:after,habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button:before,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:after,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button:before{
+    border-style:solid;
+    position:absolute;
+    display:block;
+    content:''
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button .hotel-button__text,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button .hotel-button__text{
+    position:relative;
+    padding-right:27px;
+    text-align:right;
+    line-height:26px
+}
+habbo-client-closed .client-error__background-frank .client-error__hotel-button-div .hotel-button .hotel-button__text:before,habbo-client-error .client-error__background-frank .client-error__hotel-button-div .hotel-button .hotel-button__text:before{
+    background-image:url(/Mawu/image/client/sprite.png);
+    background-position:-242px -434px;
+    width:21px;
+    height:26px;
+    content:'';
+    display:block;
+    margin-top:-13px;
+    position:absolute;
+    top:50%;
+    right:0
+}
+#advert-container{
+    display:inline-block;
+    left:50%;
+    margin-left:-370px;
+    margin-top:-30px;
+    position:fixed;
+    height:195px;
+    width:740px;
+    background-image:url(/web-gallery/client/client_container.png);
+    background-repeat:no-repeat no-repeat;
+    z-index:99999
+}
+#advert-container #timer{
+    position:absolute;
+    left:6px;
+    top:76px;
+    color:#fff;
+    font-size:10px;
+    font-family:Verdana,sans-serif;
+    visibility:visible;
+    float:left
+}
+#advert-container #close{
+    position:absolute;
+    right:6px;
+    top:76px;
+    color:#fff;
+    font-size:10px;
+    font-family:Verdana,sans-serif;
+    visibility:visible;
+    float:right
+}
+#advert-container #close a{
+    color:#fff;
+    font-weight:700
+}
+#advert-container .ad-holder{
+    position:absolute;
+    left:6px;
+    top:91px
+}
+.client-disconnect-overlay{
+    z-index:9990!important;
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    background-image:url(/web-gallery/disconnected/landing_super_bg.png);
+    text-align:center
+}
+.client-disconnect-overlay .client-landing-image,.client-loading-overlay .client-landing-image{
+    z-index:9991!important;
+    position:absolute;
+    bottom:0
+}
+.client-loading-overlay .client-landing-left,.client-disconnect-overlay .client-landing-left{
+    left:0;
+    height:500px;
+    width:400px;
+    background:url(/web-gallery/disconnected/landing_super_left.png);
+    background-repeat:no-repeat
+}
+.client-loading-overlay .client-landing-right,.client-disconnect-overlay .client-landing-right{
+    right:0;
+    height:700px;
+    width:388px;
+    background:url(/web-gallery/disconnected/landing_super_right.png);
+    background-repeat:no-repeat
+}
+.client-loading-overlay .client-loading-logo,.client-disconnect-overlay .client-disconnect-logo{
+    background:url(/web-gallery/disconnected/landing_logo_new.png);
+    background-position:top center;
+    background-repeat:no-repeat;
+    width:220px;
+    height:431px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5px
+}
+.client-loading-overlay .client-loading-info,.client-disconnect-overlay .client-disconnect-info{
+    z-index:9999!important;
+    position:absolute;
+    width:300px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    bottom:10px;
+    left:0;
+    right:0
+}
+.client-disconnect-overlay .disconnect-box:first-child,.client-loading-overlay .loading-box:first-child{
+    margin-top:0
+}
+.client-loading-overlay .loading-text,.client-disconnect-overlay .disconnect-text{
+    font-family:Tahoma,Helvetica,Arial,sans-serif;
+    font-size:12px;
+    font-weight:400;
+    margin-top:0;
+    color:#fff
+}
+.client-disconnect-overlay .disconnect-button{
+    font-family:Tahoma,Helvetica,Arial,sans-serif;
+    font-weight:400;
+    font-size:22px;
+    display:block;
+    width:100%
+}
+.client-loading-overlay .loading-box,.client-disconnect-overlay .disconnect-box{
+    background:rgba(0,0,0,.2);
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top:5px;
+    border-bottom:2px solid rgba(0,0,0,.4)
+}
+.client-loading-overlay .client-loading-info,.client-disconnect-overlay .client-disconnect-info{
+    z-index:9999!important;
+    position:absolute;
+    width:300px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    bottom:auto;
+    left:0;
+    right:0
+}
+.client-loading-overlay .loading-text-massive,.client-disconnect-overlay .disconnect-text-massive{
+    font-size:40px!important
+}
+.client-disconnect-overlay .disconnect-box:first-child,.client-loading-overlay .loading-box:first-child{
+    margin-top:0
+}
+.client-disconnect-overlay .spacer-tiny{
+    margin-top:5px
+}
+.client-disconnect-overlay .uppercase{
+    text-transform:uppercase!important
+}
+.client-disconnect-overlay .button-green,.client-disconnect-overlay .button-success,.client-disconnect-overlay .button-login{
+    background:#00813e;
+    border:2px solid #8eda55;
+    padding:10px;
+    display:inline-block;
+    color:#fff;
+    -webkit-box-shadow:0 0 0 1px #323232;
+    box-shadow:0 0 0 1px #323232
+}
+.client-disconnect-overlay .button-login:hover,.client-disconnect-overlay .button-green:hover,.client-disconnect-overlay .button-success:hover{
+    background:#00ab54;
+    border:2px solid #b9f373
+}
+.client-disconnect-overlay .spacer{
+    margin-top:20px
+}
+.client-disconnect-overlay div.rounded,.client-disconnect-overlay div.rounded-done{
+    padding:10px!important
+}
+.client-disconnect-overlay .centered{
+    text-align:center!important
+}
+.client-disconnect-overlay .btn-hover:hover{
+    opacity:.8;
+    cursor:pointer
+}
+.client-disconnect-overlay .button{
+    cursor:pointer;
+    font-size:25px
+}
+.client-disconnect-overlay .button-green,.client-disconnect-overlay .button-success,.client-disconnect-overlay .button-login{
+    background:#00813e;
+    border:2px solid #8eda55;
+    padding:10px;
+    display:inline-block;
+    color:#fff;
+    -webkit-box-shadow:0 0 0 1px #323232;
+    box-shadow:0 0 0 1px #323232
+}
+.client-disconnect-overlay .button-login:hover,.client-disconnect-overlay .button-green:hover,.client-disconnect-overlay .button-success:hover{
+    background:#00ab54;
+    border:2px solid #b9f373
+}
+.client-disconnect-overlay .black-outline{
+    -webkit-box-shadow:0 0 0 1px #323232;
+    box-shadow:0 0 0 1px #323232
+}
+.client-disconnect-overlay .rounded{
+    border-radius:4px 4px 4px 4px;
+    -webkit-border-radius:4px 4px 4px 4px;
+    -moz-border-radius:4px 4px 4px 4px;
+    -o-border-radius:4px 4px 4px 4px
+}

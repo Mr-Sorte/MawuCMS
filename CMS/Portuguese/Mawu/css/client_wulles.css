@@ -1,0 +1,237 @@
+#hotel6{
+    border:0;
+    height:100%;
+    width:100%;
+    overflow:hidden
+}
+#hotel7{
+    position:relative;
+    width:550px;
+    height:255px;
+    left:50%;
+    margin-left:-275px;
+    top:50%;
+    margin-top:-135px
+}
+#hotel8{
+    position:relative;
+    font-size:200%;
+    color:#fff;
+    text-transform:uppercase;
+    margin-bottom:30px;
+    left:10px
+}
+#hotel9{
+    position:relative;
+    height:200px;
+    width:310px;
+    background:url(../img/probleme_data.png?6g6g);
+    float:left
+}
+#hotel10{
+    position:relative;
+    width:240px;
+    float:right;
+    margin-top:25px;
+    height:160px
+}
+#hotel11{
+    position:relative;
+    width:100%;
+    font-size:120%;
+    color:#fff
+}
+#hotel12{
+    position:absolute;
+    bottom:0;
+    background:#ea1674;
+    height:80px;
+    width:calc(100% - 10px);
+    color:#fff;
+    font-size:120%;
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+#hotel12:hover{
+    opacity:.7
+}
+#hotel13{
+    position:fixed;
+    min-height:370px;
+    width:670px;
+    top:0;
+    left:0;
+    user-select:none;
+    background:rgba(19,32,48,.8);
+    z-index:999;
+    display:none;
+    top:120px
+}
+#hotel14{
+    position:relative;
+    width:590px;
+    min-height:275px;
+    left:50%;
+    margin-left:-520px;
+    top:50%;
+    margin-top:45px
+}
+#hotel15{
+    position:absolute;
+    height:26px;
+    width:26px;
+    background:#ff9248;
+    border-radius:100%;
+    top:5px
+}
+#hotel16{
+    position:absolute;
+    height:20px;
+    width:9px;
+    left:9px;
+    top:3px
+}
+#hotel17{
+    position:absolute;
+    font-size:200%;
+    color:#fff;
+    left:30px;
+    text-transform:uppercase
+}
+#hotel18{
+    position:absolute;
+    font-size:120%;
+    background:#ff9248;
+    padding:1px 17px 1px 7px;
+    top:6px;
+    right:22px;
+    color:#fff
+}
+#hotel19{
+    position:absolute;
+    right:-14px;
+    top:-25px
+}
+#hotel20{
+    position:relative;
+    float:left;
+    height:250px;
+    width:220px;
+    top:45px;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    left:-100px
+}
+#hotel21{
+    position:absolute;
+    padding:15px;
+    font-size:120%;
+    color:#fff;
+    right:5px;
+    background:rgba(7,13,20,.5);
+    width:325px;
+    border-radius:7px;
+    top:45px
+}
+#hotel22x{
+    text-overflow:ellipsis;
+    word-wrap:break-word;
+    display:-webkit-box;
+    max-height:500px;
+    -webkit-line-clamp:13;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    margin-bottom:40px
+}
+#hotel22{
+    position:relative;
+    font-size:120%;
+    color:#fff;
+    right:5px;
+    width:355px;
+    border-radius:7px;
+    padding-bottom:60px;
+    margin-left:15px;
+    float:left;
+    margin-top:125px
+}
+#hotel23{
+    position:relative;
+    top:0;
+    font-size:85%;
+    left:90px
+}
+#hotel24{
+    position:relative;
+    float:left;
+    height:46px;
+    user-select:none;
+    cursor:pointer;
+    padding:0 25px;
+    background:#ad1952;
+    border:3px solid #e97a99;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:120%;
+    margin-right:13px;
+    box-shadow:0 3px 0 rgba(0,0,0,.3)
+}
+#hotel24:hover{
+    background:#d11f62;
+    border:3px solid #ee99b0
+}
+#hotel24:active{
+    border:3px solid #ad1952;
+    background:#ad1952
+}
+#hotel25{
+    position:relative;
+    float:left;
+    height:46px;
+    user-select:none;
+    cursor:pointer;
+    padding:0 30px;
+    background:#04a057;
+    border:3px solid #bbf699;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:120%;
+    box-shadow:0 3px 0 rgba(0,0,0,.3)
+}
+#hotel25:hover{
+    background:#04d070;
+    border:3px solid #cef9b5
+}
+#hotel25:active{
+    border:3px solid #04a057;
+    background:#04a057
+}
+#hotel26{
+    position:absolute;
+    height:100%;
+    width:100%;
+    text-transform:uppercase;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff
+}
+#hotel27{
+    position:fixed;
+    height:calc(100% + 5px);
+    width:calc(100% + 5px);
+    z-index:99999;
+    background:rgba(22,26,34,.9);
+    left:-5px;
+    top:-5px;
+    display:none
+}

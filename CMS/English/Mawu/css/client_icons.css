@@ -1,0 +1,95 @@
+#habbo-web {
+    position: absolute;
+    z-index: 99999;
+    height: 37px;
+    width: 50px;
+    background: url(../image/client/icons/web.png);
+    border-radius: 9px;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+}
+ #habbo-web:hover{
+     filter: grayscale(0.8);
+     -webkit-filter: grayscale(0.8);
+     -moz-filter: grayscale(0.8);
+     -o-filter: grayscale(0.8);
+     -ms-filter: grayscale(0.8);
+}
+#habbo-fullscreen {
+    position: absolute;
+    z-index: 99999;
+    height: 37px;
+    width: 36px;
+    background: url(../image/client/icons/fullscreen.png);
+    cursor: pointer;
+    border-radius: 10px;
+    left: 80px;
+    top: 20px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+}
+ #habbo-fullscreen:hover{
+     filter: grayscale(0.8);
+     -webkit-filter: grayscale(0.8);
+     -moz-filter: grayscale(0.8);
+     -o-filter: grayscale(0.8);
+     -ms-filter: grayscale(0.8);
+}
+#habbo-camera {
+    position: absolute;
+    z-index: 99999;
+    height: 37px;
+    width: 36px;
+    background: url(../image/client/icons/camera.png);
+    cursor: pointer;
+    border-radius: 10px;
+    left: 125px;
+    top: 20px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+}
+ #habbo-camera:hover{
+     filter: grayscale(0.8);
+     -webkit-filter: grayscale(0.8);
+     -moz-filter: grayscale(0.8);
+     -o-filter: grayscale(0.8);
+     -ms-filter: grayscale(0.8);
+}
+#habbo-support {
+    position: absolute;
+    z-index: 99999;
+    height: 37px;
+    width: 36px;
+    background: url(../image/client/icons/support.png);
+    cursor: pointer;
+    border-radius: 10px;
+    left: 171px;
+    top: 20px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+}
+ #habbo-support:hover{
+     filter: grayscale(0.8);
+     -webkit-filter: grayscale(0.8);
+     -moz-filter: grayscale(0.8);
+     -o-filter: grayscale(0.8);
+     -ms-filter: grayscale(0.8);
+}
+#habbo-panel {
+    position: absolute;
+    z-index: 99999;
+    height: 37px;
+    width: 36px;
+    background: url(../image/client/icons/panel.png);
+    cursor: pointer;
+    border-radius: 10px;
+    left: 217px;
+    top: 20px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+}
+ #habbo-panel:hover{
+     filter: grayscale(0.8);
+     -webkit-filter: grayscale(0.8);
+     -moz-filter: grayscale(0.8);
+     -o-filter: grayscale(0.8);
+     -ms-filter: grayscale(0.8);
+}
