@@ -243,7 +243,6 @@ while($tag = mysql_fetch_array($tags)){
 					<div class="mb-1 text-muted"><font color="#FF9030"><strong><?php echo mysql_real_escape_string($usr->credits); ?></strong> Moedas</font></div>
 					<div class="mb-1 text-muted"><font color="#822273"><strong><?php echo $user_duc['amount']; ?></strong> Duckets</font></div>
 					<div class="mb-1 text-muted"><font color="#0aa8ec"><strong><?php echo $user_dia['amount']; ?></strong> Diamantes</font></div>
-					<div class="mb-1 text-muted"><font color="#307213"><strong><?php echo mysql_real_escape_string($usr->premiar); ?></strong> Eventos Ganhos</font></div>
 					<hr>
 					<div class="mb-0 text-muted">
 					<?php if($usr->online == '1') { 
@@ -268,7 +267,7 @@ while($tag = mysql_fetch_array($tags)){
                         <div class="row">
 							<div class="card">
 								<div class="card-body text-center text-muted">
-									<strong><?php echo mysql_real_escape_string($usr->username); ?></strong> entrou no <?php echo $Holo['name']; ?> em <strong><?php echo date("d/m",mysql_real_escape_string($usr->account_created)); ?></strong> de <strong><?php echo date("Y",mysql_real_escape_string($usr->account_created)); ?></strong>, já recebeu <strong><?php echo $user_n['respects_received']; ?></strong> Respeitos, mas tambêm já deu <strong><?php echo $user_n['respects_given']; ?></strong> Respeitos, informamos também que <?php echo mysql_real_escape_string($usr->username); ?> tem <strong><?php echo $user_n['achievement_score']; ?></strong> Pontos no Placar de Conquistas, ganhou <strong><?php echo mysql_real_escape_string($usr->premiar); ?></strong> Eventos, e já comprou <strong><?php echo mysql_num_rows(mysql_query("SELECT * FROM items WHERE user_id = '".mysql_real_escape_string($usr->id)."'")) ?></strong> Mobis.
+									<strong><?php echo mysql_real_escape_string($usr->username); ?></strong> entrou no <?php echo $Holo['name']; ?> em <strong><?php echo date("d/m",mysql_real_escape_string($usr->account_created)); ?></strong> de <strong><?php echo date("Y",mysql_real_escape_string($usr->account_created)); ?></strong>, já recebeu <strong><?php echo $user_n['respects_received']; ?></strong> Respeitos, mas tambêm já deu <strong><?php echo $user_n['respects_given']; ?></strong> Respeitos, informamos também que <?php echo mysql_real_escape_string($usr->username); ?> tem <strong><?php echo $user_n['achievement_score']; ?></strong> Pontos no Placar de Conquistas, e já comprou <strong><?php echo mysql_num_rows(mysql_query("SELECT * FROM items WHERE user_id = '".mysql_real_escape_string($usr->id)."'")) ?></strong> Mobis.
 								</div>
 							</div>
 						</div>
