@@ -134,6 +134,15 @@ img.emoji {
 		<div class="row">
 		
 			<div class="col-md-3 pr-md-3 mb-4">
+				<h5 class="mb-3">Categorys</h5>
+				<div class="tags grey">
+					<a href="/articles/promocao">Promotions</a>
+					<a href="/articles/gratis">Free things</a>
+					<a href="/articles/mobis">Furnis</a>
+					<a href="/articles/hotel"><?php echo $Holo['name']; ?> Hotel</a>
+					<a href="/articles/sistema">System</a>
+				</div>
+					<br>
 				<h5 class="mb-3">What is this?...</h5>
 				<div class="tags grey">
 					<small>Here will be shown up to <b>45</b> Latest news posted, whether they are Promotions, Events or Newsletters.</small>
@@ -147,13 +156,77 @@ img.emoji {
 					
 <?php $news = mysql_query("SELECT * FROM cms_news ORDER BY id DESC LIMIT 45");
 while($new = mysql_fetch_array($news)){
-
+	
 $authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE username = '".$new['author']."'"));	
 ?>
 	<div class="col">
 		<div class="card news post-<?php echo $new['id']; ?>">
-		<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"></a>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Free things">Free things</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Furnis">Furnis</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promotions">Promotions</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="System">System</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Free things">Free things</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Furnis">Furnis</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promotions">Promotions</div></a>
+<?php } ?>
+<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysql_fetch_array($newscategorys)){	
+?>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="System">System</div></a>
+<?php } ?>
 	<div class="card-body">
+<?php $newsbadges = mysql_query("SELECT * FROM cms_news WHERE active_badge = '1' AND id = '".$new['id']."'");
+while($newsbadge = mysql_fetch_array($newsbadges)){	
+?>
+		<div class="box" data-toggle="tooltip" title="" data-original-title="Win that Badge"><img src="<?php echo $Holo['url_badges']; ?><?php echo $newsbadge['badge']; ?>.gif"></div>
+<?php } ?>
 				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">

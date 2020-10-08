@@ -17,51 +17,6 @@ if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank'])
     header("Location: mantenimiento");
 	exit;
 }
-
-if(isset($_GET['url'])) 
-{ 
-    if(!empty($_GET['url']))
-    { 
-        $id_noticia = (int) mysql_real_escape_string($_GET['url']); 
-        $query_noticias = mysql_query("SELECT * FROM cms_news WHERE id = '".$id_noticia."' LIMIT 1");
-        if(mysql_num_rows($query_noticias) > 0)
-        { 
-            $columna = mysql_fetch_assoc($query_noticias);
-			$user_n = mysql_fetch_assoc(mysql_query("SELECT id,username,look,user_style FROM users WHERE username = '". $columna['author'] ."'"));
-			$noticia = '' . $columna['id'] . '';
-			$noticia2 = '' . $columna['image'] . '';
-			$noticia3 = '' . $columna['title'] . '';
-			$noticia4 = '' . $columna['shortstory'] . '';
-			$noticia5 = '' . $columna['longstory'] . '';
-			$noticia6 = '' . $columna['author'] . '';
-			$noticia7 = '' . $columna['date'] . '';
-			
-		} 
-        else 
-        { 
-            header("Location: /articles");
-            exit;
-        } 
-    } 
-    else 
-    { 
-        header("Location: /articles");
-        exit;
-    } 
-} 
-else
-{ 
-        header("Location: /articles");
-        exit;  
-}
-
-if(isset($_POST['resultado']))
-{
-	$urlresultado = mysql_real_escape_string($_POST['urlresultado']);
-
-    mysql_query("INSERT INTO cms_news_form SET user_id = '". $myrow['id'] ."', news_id = '". $noticia8 ."', urlresultado = '". $urlresultado ."', date = '". time() . "'");
-    $aok = 'Formulário enviado com sucesso.';
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
@@ -69,7 +24,7 @@ if(isset($_POST['resultado']))
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: <?php echo $noticia3; ?></title>
+	<title><?php echo $Holo['name']; ?>: Notícias</title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -172,111 +127,27 @@ function goBack() {
 	</div>
 	</nav>
 
-	<main>
-
-<div class="jumbotron jumbotron-fluid news cover">
-					<img src="<?php echo $noticia2; ?>" class="full">
-		
-		<div class="container text-center">
-		
-		<ul class="post-categories">
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-		    <li><a href="/articles/gratis" rel="category tag">Coisas Grátis</a></li>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-		    <li><a href="/articles/hotel" rel="category tag"><?php echo $Holo['name']; ?> Hotel</a></li>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-		    <li><a href="/articles/mobis" rel="category tag">Mobís</a></li>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-		    <li><a href="/articles/promocao" rel="category tag">Promoções</a></li>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-		    <li><a href="/articles/sistema" rel="category tag">Sistema</a></li>
-<?php } ?>
-		</ul>
-
-			<h1><?php echo $noticia3; ?></h1>
-			<p><small><?php echo $noticia4; ?></small></p>
-
-			<div class="infos">
-				<div class="mx-3 mt-3">
-					<a href="/home/<?php echo $user_n['username']; ?>" class="d-flex align-items-center">
-						<div class="avatar pixel sm mr-2">
-							<img src="<?php echo $Holo['avatar'] . $user_n['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=s" alt="">
-						</div>
-
-						<span data-toggle="tooltip" title="" data-original-title="<?php echo $user_n['username']; ?>"><?php echo $user_n['username']; ?></span>
-					</a>
-				</div>
-
-				<div class="mx-3 mt-3">
-					<i class="fas fa-calendar mr-2"></i> <?php echo GetLast($noticia7); ?>
-				</div>
-
-			</div>
-			
+<main>
+<div class="jumbotron jumbotron-fluid  blue">
+	<div class="container text-center">
+		<div class="d-flex justify-content-center">
+			<div class="btn btn-primary mb-2">Categoria</div>
 		</div>
+		<h1><?php echo $Holo['name']; ?> Hotel</h1>
 	</div>
+</div>
 
-	<section>
-		<div class="container">
-			<div class="reading-content">
-				<div class="article-text">
-			        <p><?php echo $noticia5; ?></p>
-				</div>
-				<div class="d-flex align-items-center mt-4">
-					<div class="tags">
-						<i class="fas fa-tag"></i>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-			<a href="/articles/gratis" rel="tag">Coisas Grátis</a>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-			<a href="/articles/hotel" rel="tag"><?php echo $Holo['name']; ?> Hotel</a>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-			<a href="/articles/mobis" rel="tag">Mobís</a>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-			<a href="/articles/promocao" rel="tag">Promoções</a>
-<?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$noticia."'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
-?>
-			<a href="/articles/sistema" rel="tag">Sistema</a>
-<?php } ?>
-						</div>
-				</div>
-			</div>
-			<hr>
-			<div class="reading-content size-b my-4">
-<div class="swiper-container related swiper-container-initialized swiper-container-horizontal"><div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-	
-<?php $news = mysql_query("SELECT * FROM cms_news WHERE author = '".$noticia6."' ORDER BY id DESC LIMIT 6");
+<section>
+	<div class="container">
+	<div class="section-title"><h3>Existem <b><?php echo mysql_num_rows(mysql_query("SELECT * FROM cms_news WHERE category = 'hotel'")) ?></b> notícias nesta categoria</h3></div>
+		<div class="row">
+		
+<?php $news = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' ORDER BY id DESC LIMIT 60");
 while($new = mysql_fetch_array($news)){
 	
 $authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE username = '".$new['author']."'"));	
 ?>
-	<div class="swiper-slide swiper-slide-next" style="width: 232.667px;">
+				<div class="col-sm-6 col-md-4 col-lg-3">
 		<div class="card news post-<?php echo $new['id']; ?>">
 <?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
 while($newscategory = mysql_fetch_array($newscategorys)){	
@@ -344,7 +215,7 @@ while($newsbadge = mysql_fetch_array($newsbadges)){
 ?>
 		<div class="box" data-toggle="tooltip" title="" data-original-title="Ganhe este Emblema"><img src="<?php echo $Holo['url_badges']; ?><?php echo $newsbadge['badge']; ?>.gif"></div>
 <?php } ?>
-				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 26, "...")); ?></a></h5>
+				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">
 				<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $new['author']; ?>">
@@ -354,14 +225,13 @@ while($newsbadge = mysql_fetch_array($newsbadges)){
 		</div>
 	</div>
 		</div>
-	</div>
-	<?php } ?>
-	
-</div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-			</div>
+				</div>
+<?php } ?>
 
-		</div>
-	</section>
+					</div>
+
+	</div>
+</section>
 
 	</main>
 	
