@@ -145,6 +145,7 @@ $authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users W
 $roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
 ?>
 	<div class="card gallery gallery-<?php echo $photo['id']; ?>">
+		<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" title="" data-original-title="Foto de <?php echo $authorinfo['username']; ?>">
 		<div class="cover">
 			<div class="featured" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Destaque"><i class="fas fa-star"></i></div>			<img src="<?php echo $photo['url']; ?>" alt="cover">
 			<div class="infos">
@@ -153,6 +154,7 @@ $roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE
 				<small class="text-muted mt-auto"><?php echo GetLast($photo['timestamp']); ?></small>
 			</div>
 		</div>
+		</a>
 		<div class="card-body py-3">
 			<div class="w-100">
 				<div class="card-text text-muted d-flex justify-content-end">
@@ -179,6 +181,7 @@ $roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE
 ?>
 						<div class="col-sm-6 col-md-4 mb-4">
 	<div class="card gallery gallery-<?php echo $photo['id']; ?>">
+		<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" title="" data-original-title="Foto de <?php echo $authorinfo['username']; ?>">
 		<div class="cover">
 						<img src="<?php echo $photo['url']; ?>" alt="">
 			<div class="infos">
@@ -187,6 +190,7 @@ $roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE
 				<small class="text-muted mt-auto"><?php echo GetLast($photo['timestamp']); ?></small>
 			</div>
 		</div>
+		</a>
 		<div class="card-body py-3">
 			<div class="w-100">
 				<div class="card-text text-muted d-flex justify-content-end">

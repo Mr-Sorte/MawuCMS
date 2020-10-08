@@ -17,6 +17,44 @@ if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank'])
     header("Location: mantenimiento");
 	exit;
 }
+
+if(isset($_GET['url'])) 
+{ 
+    if(!empty($_GET['url']))
+    { 
+        $id_photo = (int) mysql_real_escape_string($_GET['url']); 
+        $query_photos = mysql_query("SELECT * FROM camera_web WHERE id = '".$id_photo."' LIMIT 1");
+        if(mysql_num_rows($query_photos) > 0)
+        { 
+            $columna = mysql_fetch_assoc($query_photos);
+			$user_n = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE id = '". $columna['user_id'] ."'"));
+			$room_n = mysql_fetch_assoc(mysql_query("SELECT * FROM rooms WHERE id = '". $columna['room_id'] ."'"));
+			$roomowner_n = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE id = '". $room_n['owner_id'] ."'"));
+			$photo = '' . $columna['id'] . '';
+			$photo2 = '' . $columna['user_id'] . '';
+			$photo3 = '' . $columna['room_id'] . '';
+			$photo4 = '' . $columna['likes'] . '';
+			$photo5 = '' . $columna['timestamp'] . '';
+			$photo6 = '' . $columna['url'] . '';
+			
+		} 
+        else 
+        { 
+            header("Location: /gallery");
+            exit;
+        } 
+    } 
+    else 
+    { 
+        header("Location: /gallery");
+        exit;
+    } 
+} 
+else
+{ 
+        header("Location: /gallery");
+        exit;  
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
@@ -24,7 +62,7 @@ if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank'])
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Gallery</title>
+	<title><?php echo $Holo['name']; ?>: Foto de <?php echo $user_n['username']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -62,6 +100,12 @@ img.emoji {
 <link rel="apple-touch-icon-precomposed" href="<?php echo $Holo['url']; ?>/Mawu/image/favicon/cropped-favicon-1-180x180.png" />
 <meta name="msapplication-TileImage" content="<?php echo $Holo['url']; ?>/Mawu/image/favicon/cropped-favicon-1-270x270.png" />
 
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
 </head>
 
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
@@ -74,33 +118,34 @@ img.emoji {
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/me" class="nav-link">Home</a>
+				<a href="/me" class="nav-link">Início</a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/articles" class="nav-link">News</a>
+				<a href="/articles" class="nav-link">Notícias</a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/gallery" class="nav-link active">Gallery</a>
+				<a href="/gallery" class="nav-link active">Galeria</a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Hall</a>
+				<a href="/famous" class="nav-link">Famosos</a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/team" class="nav-link">Team</a>
+				<a href="/team" class="nav-link">Equipe</a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/support" class="nav-link">Support</a>
+				<a href="/support" class="nav-link">Suporte</a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Shop</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
 			</li>-->
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
 		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Panel</font></a>    <?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Join in Hotel</a>    
+        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
+		<a onclick="goBack()" class="btn btn-danger"><font color="white">Voltar</font></a>    
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -111,9 +156,9 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Visit my Profile</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Settings</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Logout</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
 					</div>
 			</div>
 		</div>
@@ -121,96 +166,72 @@ img.emoji {
 	</nav>
 
 <main>
-<div class="jumbotron jumbotron-fluid pink">
-	<div class="container d-flex align-items-center">
-		<h1>Gallery</h1> <a href="/hotel" class="btn btn-success ml-4">Join in Hotel and use the Camera</a>
-	</div>
-</div>
+		
+	<section class="position-relative">
+		<div class="container">
+			<div class="reading-content size-b">
 
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3 pr-md-3 mb-4">
-				<h5 class="mb-3">What is this?...</h5>
-				<div class="tags grey">
-					<small>The last <b>45</b> photos taken and published inside the Hotel, will appear on this page, including seeing yours.</small>
-				</div>
+				<div class="d-flex">
+					<a href="/home/<?php echo $user_n['username']; ?>" class="avatar pixel lg mr-3">
+						<img src="<?php echo $Holo['avatar'] . $user_n['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
+					</a>
 
-				<h5 class="mb-3 mt-5">Random photos</h5>
-
-<?php $photos = mysql_query("SELECT * FROM camera_web ORDER BY rand() DESC LIMIT 1");
-while($photo = mysql_fetch_array($photos)){
-	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
-$roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
-?>
-	<div class="card gallery gallery-<?php echo $photo['id']; ?>">
-		<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" title="" data-original-title="Photo by <?php echo $authorinfo['username']; ?>">
-		<div class="cover">
-			<div class="featured" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Destaque"><i class="fas fa-star"></i></div>			<img src="<?php echo $photo['url']; ?>" alt="cover">
-			<div class="infos">
-				<h5 class="mb-3">Photo by <?php echo $authorinfo['username']; ?></h5>
-				<div class="text-muted mb-3"></div>
-				<small class="text-muted mt-auto"><?php echo GetLast($photo['timestamp']); ?></small>
-			</div>
-		</div>
-		</a>
-		<div class="card-body py-3">
-			<div class="w-100">
-				<div class="card-text text-muted d-flex justify-content-end">
-					<div class="avatar pixel sm mr-2">
-						<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>s&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $authorinfo['username']; ?>">
-					</div>
-						<a href="/home/<?php echo $authorinfo['username']; ?>" data-toggle="tooltip" title="<?php echo $authorinfo['username']; ?>"><?php echo $authorinfo['username']; ?></a>
-						<span class="ml-auto text-muted"><i class="fas fa-calendar-alt ml-3 mr-1"></i> <?php echo GetLast($photo['timestamp']); ?></span>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php } ?>
-
-			</div>
-			<div class="col-md-9 pl-md-3">
-				<div class="row">
-				
-<?php $photos = mysql_query("SELECT * FROM camera_web ORDER BY id DESC LIMIT 45");
-while($photo = mysql_fetch_array($photos)){
-	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
-$roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
-?>
-						<div class="col-sm-6 col-md-4 mb-4">
-	<div class="card gallery gallery-<?php echo $photo['id']; ?>">
-		<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" title="" data-original-title="Photo by <?php echo $authorinfo['username']; ?>">
-		<div class="cover">
-						<img src="<?php echo $photo['url']; ?>" alt="">
-			<div class="infos">
-				<h5 class="mb-3">Photo by <?php echo $authorinfo['username']; ?></h5>
-				<div class="text-muted mb-3"></div>
-				<small class="text-muted mt-auto"><?php echo GetLast($photo['timestamp']); ?></small>
-			</div>
-		</div>
-		</a>
-		<div class="card-body py-3">
-			<div class="w-100">
-				<div class="card-text text-muted d-flex justify-content-end">
-					<div class="avatar pixel sm mr-2">
-						<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>s&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $authorinfo['username']; ?>">
-					</div>
-						<a href="/home/<?php echo $authorinfo['username']; ?>" data-toggle="tooltip" title="<?php echo $authorinfo['username']; ?>"><?php echo $authorinfo['username']; ?></a>
-						<span class="ml-auto text-muted"><i class="fas fa-calendar-alt ml-3 mr-1"></i> <?php echo GetLast($photo['timestamp']); ?></span>
-				</div>
-			</div>
-		</div>
-	</div>
+					<div class="w-100 d-flex flex-column flex-md-row">
+						<div class="w-100">
+							<h4 class="mb-1"><?php echo $user_n['username']; ?></h4>
+							<div class="text-muted">Postada <?php echo GetLast($photo5); ?></strong></div>
 						</div>
-<?php } ?>
-
+					</div>
+					
 				</div>
 			</div>
 		</div>
+									
+		<div class="img-gallery">
+			<div class="reading-content size-b">
+				<img src="<?php echo $photo6; ?>">
+			</div>
+		</div>
+		<div class="container">
+			<div class="reading-content size-b">
+				<div class="row">
+
+					<div class="col-md-12 pl-md-3">
+						<div class="galery-infos">
+								<div><i class="fas fa-calendar fa-fw mr-2"></i> <?php echo GetLast($photo5); ?></div>
+								<div class="mb-2"><i class="fas fa-eye fa-fw mr-2"></i> Foto tirada no quarto de <a href="/home/<?php echo $roomowner_n['username']; ?>"><span data-toggle="tooltip" title="" data-original-title="<?php echo $roomowner_n['username']; ?>"><?php echo $roomowner_n['username']; ?></span></a></div>
+						</div>
+						
+						<hr>
+						
+	<h6 class="mb-3"><a class="text-inherit" href="/home/<?php echo $user_n['username']; ?>">Mais de <span data-toggle="tooltip" title="" data-original-title="<?php echo $user_n['username']; ?>"><?php echo $user_n['username']; ?></span></a></h6>
+
+						<div class="row">
+
+<?php
+$photos = mysql_query("SELECT * FROM camera_web WHERE user_id = '".$user_n['id']."' ORDER BY id DESC");
+while($photo = mysql_fetch_assoc($photos)){
+?>
+	<div class="col-2">
+	    <div class="card list gallery gallery-<?php echo $photo['id']; ?>">
+	    	<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Foto de <?php echo $user_n['username']; ?>">
+	    <div class="cover">
+	        <img src="<?php echo $photo['url']; ?>" alt="">
+		</div>
+		    </a>
+	    </div>
 	</div>
-</section>
+<?php } ?>
+	
+						</div>
+
+					</div>
+
+					
+				</div>
+			</div>
+		</div>
+	</section>
 
 	</main>
 	
