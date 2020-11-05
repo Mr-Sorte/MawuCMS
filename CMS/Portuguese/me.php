@@ -150,7 +150,7 @@ $sql_n_u = mysql_fetch_assoc($sql_news_u);
 $user = mysql_fetch_assoc($user = mysql_query("SELECT * FROM users WHERE id = '".$sql_n_u['owner_id']."'"));
 ?>
 					<div class="carousel-item active">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo mysql_real_escape_string(strip_tags(mb_strimwidth($sql_n_u['name'], 0, 19, "..."))); ?></h5>
 								<div>Criado por <a href="/home/<?php echo $user['username']; ?>"><font color="white"><?php echo mysql_real_escape_string(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
@@ -165,7 +165,7 @@ while($n_info = mysql_fetch_assoc($sql_news))
 $user2 = mysql_fetch_assoc($user2 = mysql_query("SELECT * FROM users WHERE id = '".$n_info['owner_id']."'"));
 ?>
 					<div class="carousel-item">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo mysql_real_escape_string(strip_tags(mb_strimwidth($n_info['name'], 0, 19, "..."))); ?></h5>
 								<div>Criado por <a href="/home/<?php echo $user2['username']; ?>"><font color="white"><?php echo mysql_real_escape_string(mb_strimwidth($user2['username'], 0, 16, "...")); ?></font></a></div>
