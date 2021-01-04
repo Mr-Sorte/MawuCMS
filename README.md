@@ -1,8 +1,15 @@
-# Mawu
-Mawu is a CMS for Arcturus MorningStar based at old HoloCMS(2008).
+# Mawu CMS
 
-This cms has a kind of old system, in some parts there may be failures, if you really use it, be careful.
+Mawu is a CMS for Arcturus MorningStar, with updated HoloCMS(2008) system.
 
-# Support
+Mawu was made by MiguelGonzalezAravena, MarcoCuel, Wulles, Skorp and WagnerDiniz.
+
+## Compatible
+
+*  Arcturus
+*  PHP 7
+*  MariaDB 10.4.14
+
+## Support
 
 My discord: Hensa#8393
