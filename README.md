@@ -16,4 +16,4 @@ My discord: Hensa#8393
 
 ## Screenshot
 
-|<img src="https://raw.githubusercontent.com/Wulles/eyethatseeseverything/master/maawu.png">|
+<img src="https://raw.githubusercontent.com/Wulles/eyethatseeseverything/master/maawu.png">
