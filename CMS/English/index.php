@@ -35,7 +35,7 @@ $lyrics = explode("\n", $lyrics);
 $chosen = $lyrics[ mt_rand(0, count($lyrics) - 1) ];
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -131,16 +131,16 @@ img.emoji {
 
 		<div class="row">
 
-<?php $news = mysql_query("SELECT * FROM cms_news ORDER BY id DESC LIMIT 4");
-while($new = mysql_fetch_array($news)){
+<?php $news = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news ORDER BY id DESC LIMIT 4");
+while($new = mysqli_fetch_array($news)){
 	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE username = '".$new['author']."'"));	
+$authorinfo = mysqli_fetch_assoc($authorinfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '".$new['author']."'"));	
 ?>
 <div class="col-sm-6 col-md-4 col-lg-3">
 		<div class="card news post-<?php echo $new['id']; ?>">
 <a style="cursor:default" class="cover"><img src="<?php echo $new['image']; ?>"></a>
 	<div class="card-body">
-				<h5 class="card-title mb-4"><a style="cursor:default" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
+				<h5 class="card-title mb-4"><a style="cursor:default" data-toggle="tooltip" title="" data-original-title="<?php echo filtro($new['title']); ?>"><?php echo filtro(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">
 				<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $new['author']; ?>">
@@ -169,8 +169,8 @@ $authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users W
 				<div class="card">
 					<div class="card-body last-users">
 						<div class="row">
-<?php $lasts = mysql_query("SELECT * FROM users ORDER BY id DESC LIMIT 15");
-while($last = mysql_fetch_array($lasts)){	
+<?php $lasts = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users ORDER BY id DESC LIMIT 15");
+while($last = mysqli_fetch_array($lasts)){	
 ?>
 									<div class="col">
 										<div class="avatar pixel mx-auto" data-toggle="tooltip" title="<?php echo $last['username']; ?>">
@@ -197,11 +197,11 @@ while($last = mysql_fetch_array($lasts)){
 			</div>
 			<div class="row row-gallery">
 			
-<?php $photos = mysql_query("SELECT * FROM camera_web ORDER BY id DESC LIMIT 8");
-while($photo = mysql_fetch_array($photos)){
+<?php $photos = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM camera_web ORDER BY id DESC LIMIT 8");
+while($photo = mysqli_fetch_array($photos)){
 	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
-$roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
+$authorinfo = mysqli_fetch_assoc($authorinfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
+$roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
 ?>
 				<div class="col">
 					<div class="card gallery gallery-228">
