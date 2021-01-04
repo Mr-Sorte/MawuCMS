@@ -6,8 +6,8 @@
 			        <li id="menu-item-120" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-120"><a href="/support">Suporte</a></li>
 			    </ul>
 			</div>
-			<div class="mb-3"><strong>Mawu CMS</strong> © 2020 - 2021. Todos direitos reservados.</div>
-			Este site não está afiliada com, patrocinada por, apoiada por, ou principalmente aprovada pela Sulake Oy ou suas empresas Afiliadas, <?php echo $Holo['name']; ?> pode utilizar as marcas registradas e outras propriedades intelectuais do Habbo, que estão permitidas sob a Política de Fã Sites Habbo.<br><br>
-			Site desenvolvido por <a href="https://marcocuel.com/" target="_blank"><b><font color="#FFFFFF">Marco Cuel</font></b></a>, <a href="https://www.instagram.com/oisouhen/" target="_blank"><b><font color="#FFFFFF">Lucas Hen</font></b></a> e <b><font color="#FFFFFF">Skorp</font></b>.
+			<div class="mb-3"><strong>Mawu CMS</strong> © 2020 - 2021. All rights reserved.</div>
+			This site is not affiliated with, sponsored by, supported by, or mainly approved by Sulake Oy or its Affiliated companies, <?php echo $Holo['name']; ?> may use Habbo trademarks and other intellectual property, which are permitted under the Habbo Fan Site Policy.<br><br>
+			Site developed by <a href="https://marcocuel.com/" target="_blank"><b><font color="#FFFFFF">Marco Cuel</font></b></a>, <a href="https://www.instagram.com/oisouhen/" target="_blank"><b><font color="#FFFFFF">Lucas Hen</font></b></a> and <b><font color="#FFFFFF">Skorp</font></b>.
 		</div>
 	</div>
