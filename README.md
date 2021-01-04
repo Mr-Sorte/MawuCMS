@@ -13,3 +13,7 @@ Mawu was made by MiguelGonzalezAravena, MarcoCuel, Wulles, Skorp and WagnerDiniz
 ## Support
 
 My discord: Hensa#8393
+
+## Screenshot
+
+|<img src="https://raw.githubusercontent.com/Wulles/eyethatseeseverything/master/maawu.png">|
