@@ -3,12 +3,15 @@ function tooltip() {
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
 	})
+
 }
 
 function toggleLogin() {
 
-	$(".show-register").removeAttr('href');
-	$(".show-login").removeAttr('href');
+	// $(".btn-login").removeAttr('href');
+	
+	// $(".show-login").removeAttr('href');
+	// $(".show-register").removeAttr('href');
 
 	$('.show-register').on('click', function() {
 		$('.toggle-login .login').hide();
@@ -54,6 +57,7 @@ function tags() {
 			}
 		}
 	});
+
 }
 
 function swiper() {
@@ -82,6 +86,7 @@ function quoteComment() {
 
 		});
 	});
+
 }
 
 function darkTheme() {
@@ -104,29 +109,66 @@ function darkTheme() {
 	}
 
 	toggleSwitch.addEventListener('change', switchTheme, false);
+
 }
+
+function teste() {
+	$('.play').on('click', function() {
+		audio = $("#player");
+		$('.play').toggleClass('pause');
+		audio.prop("muted",!audio.prop("muted"));
+	});
+}
+
+
+function audio() {
+	if ('mediaSession' in navigator) {
+
+		navigator.mediaSession.metadata = new MediaMetadata({
+			title: 'Chuta que é macumba',
+			artist: 'Moreno-bombom',
+			album: 'Habbid',
+			artwork: [
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '96x96', type: 'image/jpg' },
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '128x128', type: 'image/jpg' },
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '192x192', type: 'image/jpg' },
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '256x256', type: 'image/jpg' },
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '384x384', type: 'image/jpg' },
+				{ src: 'http://localhost:10000/wp-content/themes/fansite/cover.jpg', sizes: '512x512', type: 'image/jpg' },
+			]
+		});
+
+		navigator.mediaSession.setActionHandler('play', function() {});
+		navigator.mediaSession.setActionHandler('pause', function() {});
+	}
+}
+
 
 // Init
 
 function init() {
+	teste();
 	tooltip();
 	toggleLogin();
 	tags();
 	swiper();
 	quoteComment();
 	darkTheme();
+	audio();
+	// gifts();
 }
+
 
 init();
 
-var Main = {
-	Inits: function(){
-		init();
-	}
-};
+// var Main = {
+// 	Inits: function(){
+// 		init();
+// 	}
+// };
 
-$('main').page({
-	'regenerate': function(){
-		Main.Inits();
-	}
-});
+// $('main').page({
+// 	'regenerate': function(){
+// 		Main.Inits();
+// 	}
+// });
