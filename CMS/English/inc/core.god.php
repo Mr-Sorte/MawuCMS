@@ -50,73 +50,73 @@ function GetLast($a){
 					else { $dias_str = 'days'; }
 					$echo = ''.$dias.' '.$dias_str;
 				}elseif($difference <= '2678399' && $difference >= '518400'){
-					$semana = floor(date('d', $difference) / 7).'<!-- WTF -->';
+					$semana = floor(date('d', $difference) / 7).'';
 					if($semana == 1) { $semana_str = 'week'; }
 					else { $semana_str = 'weeks'; }
 					$echo = ''.floor($semana).' '.$semana_str;
 				}else { $echo = ''.floor(date('m', $difference)).' months'; }
 				return $echo;
 			}else{ return $a; }
-		}else{ return 'Sem informações sobre data.'; }
+		}else{ return 'no date information'; }
 	}
 
 function filtro($str) {
-		$str = mysql_real_escape_string(htmlspecialchars(trim($str)));;
+		$str = mysqli_real_escape_string(connect::cxn_mysqli(),$str);;
+		$str = htmlspecialchars($str);
+		$str = trim($str);
+        $str = stripslashes($str);
 		$texto = $str;
-		$texto = str_replace("INSERT","IN-SER-T",$texto);
-		$texto = str_replace("DELETE","DE-LE-TE",$texto);
-		$texto = str_replace("TRUNCATE","TRUN-CA-TE",$texto);
-		$texto = str_replace("SELECT","SE-LEC-T",$texto);
-		$texto = str_replace("ALTER","AL-TER",$texto);
-		$texto = str_replace("UPDATE","UP-DA-TE",$texto);
-		$texto = str_replace("inert","IN-SER-T",$texto);
-		$texto = str_replace("delete","DE-LE-TE",$texto);
-		$texto = str_replace("truncate","TRUN-CA-TE",$texto);
-		$texto = str_replace("select","SE-LEC-T",$texto);
-		$texto = str_replace("alter","AL-TER",$texto);
-		$texto = str_replace("update","UP-DA-TE",$texto);
-		$texto = str_replace("script","",$texto);
-		$texto = str_replace("SCRIPT","",$texto);
 		$texto = str_replace('"','&#34;',$texto);
 		$texto = str_replace("'","&#39;",$texto);
-		$texto = str_replace("<","&#60;",$texto);
-		$texto = str_replace(">","&#62;",$texto);
-		$texto = str_replace("(","",$texto);
-		$texto = str_replace(")","",$texto);
 		$texto = str_replace("´","",$texto);
 		$texto = str_replace("`","",$texto);
-		$texto = str_replace("ㅤ","",$texto);
 		return $str;
+	}
+	
+function filtronosql($str) {
+		$str = htmlspecialchars($str);
+		$str = trim($str);
+        $str = stripslashes($str);
+		return $str;
+	}
+	
+	
+function HashSecur($themdp) {
+	  
+	  $themdp = hash('md5', $themdp);
+      $themdp = hash('sha256', PASSWORD_SALT.$themdp.PASSWORD_SALT2);
+	  return $themdp;
 	}
 
 function SacarIP() {
-	if($_SERVER) {
-		if($_SERVER["HTTP_X_FORWARDED_FOR"]) {
-		$realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-		} elseif ($_SERVER["HTTP_CLIENT_IP"]) {
-		$realip = $_SERVER["HTTP_CLIENT_IP"];
-		} else {
-		$realip = $_SERVER["REMOTE_ADDR"];
-		}
-	} else {
-				if(getenv("HTTP_X_FORWARDED_FOR")) {
-					$realip = getenv("HTTP_X_FORWARDED_FOR");
-				} elseif(getenv("HTTP_CLIENT_IP")) {
-					$realip = getenv("HTTP_CLIENT_IP");
-				} else {
-					$realip = getenv("REMOTE_ADDR");
-				}
-			}
-	return $realip;
+			
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+      $realip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+      $realip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+      $realip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $realip;
+	
 }
 
 $ip = SacarIP();
 
 function Onlines()
 {
-    $on = mysql_query("SELECT * FROM users WHERE online = '1'");
-	$on1 = mysql_num_rows($on);
+    $on = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE online = '1'");
+	$on1 = mysqli_num_rows($on);
 	$ons = $on1;
+	//$ons = $on1 . " no Hotel";
+    return $ons;
+}
+
+function Onlinescombined()
+{
+    $on = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE online = '1'");
+	$on1 = mysqli_num_rows($on);
+	$ons = $on1 . " no Hotel";
     return $ons;
 }
 
@@ -129,45 +129,33 @@ function IsEven($intNumber)
 	}
 }
 
-function OnlineStatusHotel()
-{
-$host = "127.0.0.1";
-$port = 30000;
-
-$waitTimeoutInSeconds = 0;
-
-if($fp = @fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)) {
-
-    echo("");
-
-    fclose($fp);
-
-} else {
-
-    echo("<meta http-equiv='refresh' content='60'>");
-    die("<link rel='stylesheet' href='/css/client.css'><div id='client'><habbo-client-error><div class='client-error__background-frank'><div class='client-error__text-contents'><h1 class='client-error__title'>Frank está dormindo</h1><p>Parece que o nosso gerente tirou um tempinho para cochilar, aliás todos merecem descansar um pouco, não concorda com a gente?<br><br>Volte em breve, talvez ele já tenha acordado!</p></div></div></habbo-client-error></div>");
-	}
-}
-
 if(isset($_SESSION['Username']) && isset($_SESSION['Password']))
 {
-	$Sesion = mysql_query("SELECT * FROM users WHERE username = '". $_SESSION['Username'] ."' AND password = '". md5($_SESSION['Password']) ."'");
+	$Sesion = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". filtro($_SESSION['Username']) ."' AND password = '". HashSecur($_SESSION['Password']) ."'");
 
-	if(mysql_num_rows($Sesion) > 0)
+	if(mysqli_num_rows($Sesion) > 0)
 	{
-		$myrow = mysql_fetch_assoc($Sesion);
+		$myrow = mysqli_fetch_assoc($Sesion);
 		define("Loged", TRUE);
+	} else {
+	define("Loged", FALSE);
+	session_destroy();	
 	}
 }
 else
 {
 	define("Loged", FALSE);
+
+}
+if(Loged == TRUE)
+{
+$chb = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM bans WHERE user_id = '". $myrow['id'] ."' OR machine_id = '". $myrow['machine_id'] ."' OR ip = '". $myrow['ip_current'] ."'");
+} else {
+$chb = "0";
 }
 
-$chb = mysql_query("SELECT * FROM bans WHERE user_id = '". $myrow['id'] ."' OR machine_id = '". $myrow['machine_id'] ."'");
-
-$mantenimiento = mysql_query("SELECT * FROM cms_mantenimiento");
-$mantenimientoo = mysql_fetch_assoc($mantenimiento);
+$mantenimiento = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_mantenimiento");
+$mantenimientoo = mysqli_fetch_assoc($mantenimiento);
 $mant = $mantenimientoo['mantenimiento'];
 define("MANTENIMIENTO", $mant);
 ?>
