@@ -288,8 +288,10 @@ $roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"S
 						</div>
 <?php } ?>
 
-			</div>
     <div class="alert alert-secondary" role="alert"><b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.</div>
+
+			</div>
+
 		</div>
 	</div>
 </div>

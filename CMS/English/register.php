@@ -13,147 +13,139 @@ if(MANTENIMIENTO == '1')
 	exit;
 }
 
-if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena']) && isset($_POST['RContrasena']) && isset($_POST['Contracode']))
+if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena']) && isset($_POST['RContrasena']))
 {   
 
-	$Getnombre = mysql_query("SELECT * FROM users WHERE username = '". $_POST['Usuario'] ."'");
-	$Getmail = mysql_query("SELECT * FROM users WHERE mail = '". $_POST['Mail'] ."'");
+	$Getnombre = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". filtro($_POST['Usuario']) ."'");
+	$Getmail = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE mail = '". filtro($_POST['Mail']) ."'");
 
 	if(isset($_POST['g-recaptcha-response'])){
           $captcha = $_POST['g-recaptcha-response'];
     }
 
-	if(empty($_POST['Usuario']) || empty($_POST['Mail']) || empty($_POST['Contrasena']) || empty($_POST['RContrasena']) || empty($_POST['Contracode']))
+	if(empty($_POST['Usuario']) || empty($_POST['Mail']) || empty($_POST['Contrasena']) || empty($_POST['RContrasena']))
 	{
 		$regerror = '<div class="alert alert-danger" role="alert">Something is wrong, try again.</div>';
 	}
-	elseif(mysql_num_rows($Getnombre) > 0)
+	elseif(mysqli_num_rows($Getnombre) > 0)
 	{
 		$regerror = '<div class="alert alert-danger" role="alert">You need choose a Name.</div>';
 	}
-	elseif(mysql_num_rows($Getmail) > 0)
+	elseif(mysqli_num_rows($Getmail) > 0)
 	{
 		$regerror = '<div class="alert alert-danger" role="alert">You need put your real e-mail.</div>';
 	}
 	elseif($_POST['Contrasena'] !== $_POST['RContrasena'])
 	{
-		$regerror = '<div class="alert alert-danger" role="alert">Passwords are not the same, check and try again.</div>';
+		$regerror = '<div class="alert alert-danger" role="alert">The passwords are not the same, check and try again.</div>';
 	}
     elseif(strlen($_POST['Usuario']) > 18 || strlen($_POST['Usuario']) < 3) 
 	{
         $regerror = '<div class="alert alert-danger" role="alert">Your username is too short.</div>';
 	}
-	elseif(strlen($_POST['Contracode']) > 11 || strlen($_POST['Contracode']) < 4) 
-	{
-        $regerror = '<div class="alert alert-danger" role="alert">Your security code is too short.</div>';
-	}
 	elseif(strrpos($_POST['Usuario'], "á") || strrpos($_POST['Usuario'], "à") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "é") || strrpos($_POST['Usuario'], "è") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "í") || strrpos($_POST['Usuario'], "ì") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ó") || strrpos($_POST['Usuario'], "ò") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ú") || strrpos($_POST['Usuario'], "ù") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ㅤ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "õ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ã") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ñ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ý") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ç") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "~") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "|") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "¤") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "[") || strrpos($_POST['Usuario'], "]") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "{") || strrpos($_POST['Usuario'], "}") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "!") || strrpos($_POST['Usuario'], "#") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "$") || strrpos($_POST['Usuario'], "%") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "&") || strrpos($_POST['Usuario'], "*") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ê") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "û") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "î") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ô") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "â") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "MOD-") || strrpos($_POST['Usuario'], "MOD_") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
-    }
-	elseif(strrpos($_POST['Usuario'], "Wulles") !== false) 
-	{
-	    $regerror = '<div class="alert alert-danger" role="alert">You cannot create a user with this name.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another name.</div>';
     }
 	elseif(strrpos($_POST['Usuario'], " ") || strrpos($_POST['Usuario'], " ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">You cannot create a user with this name.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">Something is wrong with your name, try another.</div>';
 	}
 	elseif (!$captcha) 
 	{
@@ -161,19 +153,12 @@ if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena
     }
 	else
 	{
-		mysql_query("INSERT INTO users (username, password, passcode, mail, look, gender, motto, ip_register, credits, account_created, account_day_of_birth) VALUES ('". filtro($_POST['Usuario']) ."', '".md5($_POST['Contrasena'])."', '".md5($_POST['Contracode'])."', '". filtro($_POST['Mail']) ."', '". $Holo['look'] ."', '". $Holo['gender'] ."', '". $Holo['mision'] ."', '". $ip ."', '". $Holo['monedas'] ."', '" . time() ."', '" . time() ."')");
-		$_SESSION['Username'] = mysql_real_escape_string($_POST['Usuario']);
-		$_SESSION['Password'] = mysql_real_escape_string($_POST['Contrasena']);
-		$_SESSION['Contracode'] = mysql_real_escape_string($_POST['Contracode']);
+		mysqli_query(connect::cxn_mysqli(),"INSERT INTO users (username, password, mail, look, gender, motto, ip_register, credits, account_created, account_day_of_birth) VALUES ('". filtro($_POST['Usuario']) ."', '". HashSecur($_POST['Contrasena']) ."', '". filtro($_POST['Mail']) ."', '". $Holo['look'] ."', '". $Holo['gender'] ."', '". $Holo['mision'] ."', '". $ip ."', '". $Holo['monedas'] ."', '" . time() ."', '" . time() ."')");
+		$_SESSION['Username'] = filtro($_POST['Usuario']);
+		$_SESSION['Password'] = $_POST['Contrasena'];
 		header("Location: me");
 	}
 }
-
-$_GET['Usuario'] = mysql_real_escape_string($_POST['Usuario']);
-$_GET['Mail'] = mysql_real_escape_string($_POST['Mail']);
-$_GET['Contrasena'] = mysql_real_escape_string($_POST['Contrasena']);
-$_GET['RContrasena'] = mysql_real_escape_string($_POST['RContrasena']);
-$_GET['Contracode'] = mysql_real_escape_string($_POST['Contracode']);
 
 ?>
 <!DOCTYPE html>
@@ -269,23 +254,21 @@ img.emoji {
 			<p class="login-username">
 				<label for="user_login">Choose a Name</label>
 				<input type="text" name="Usuario" class="input" size="20" required>
-				<p class="text-muted">Your name can contain uppercase, lowercase letters, numbers and special characters like _-=?!@:.,</p>
+				<p class="text-muted">Your name can contain lowercase and uppercase letters, numbers and the characters _-=?!@:.,</p>
 			</p>
 			<p class="login-password">
 				<label for="user_pass">Create a Password</label>
 				<input type="password" name="Contrasena" class="input" size="20" required>
 				<p class="text-muted">Repeat your password.</p>
 				<input type="password" name="RContrasena" class="input" size="20" required>
+				<p class="text-muted">Use at least 6 characters. Include at least one letter and at least one number or special character.</p>
 			</p>
 			<p class="login-username">
 				<label for="user_login">Your e-mail</label>
 				<input type="email" name="Mail" class="input" size="20" required>
+				<p class="text-muted">You will need this email address to perform important actions on <?php echo $Holo['name']; ?> Hotel. Please use a valid email address.</p>
 			</p>
 			<p class="login-submit">
-			<label for="user_code">Create a Security Code</label>
-			<input type="password" name="Contracode" class="input" size="20" required>
-			<p class="text-muted">Create a unique code for your account security.</p>
-			<br>
 			<label for="user_code">Are you Human?</label>
                 <script src="https://www.google.com/recaptcha/api.js"></script><center><div class="g-recaptcha" data-sitekey="<?php echo $Holo['recaptcha'] ?>" ></div></center>
 				<hr class="my-4">
