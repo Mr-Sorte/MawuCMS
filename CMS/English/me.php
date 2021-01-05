@@ -7,7 +7,7 @@ if(Loged == FALSE)
 	exit;
 }
 
-if(mysql_num_rows($chb) > 0) 
+if(mysqli_num_rows($chb) > 0) 
 {
     header("Location: banned");
 	exit;
@@ -54,6 +54,7 @@ img.emoji {
 <link rel='stylesheet' id='selectize-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/selectize.css?ver=0.12.6' type='text/css' media='all' />
 <link rel='stylesheet' id='style-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/style.css?ver=1.1' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-styles-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/style.css?ver=5.3.2' type='text/css' media='all' />
+<script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/turbolinks.js'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/jquery.js?ver=1.12.4-wp'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/jquery-migrate.min.js?ver=1.4.1'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/simple-likes-public.js?ver=0.5'></script>
@@ -99,7 +100,7 @@ img.emoji {
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
-		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
+		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
         while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Panel</font></a>    <?php } ?>
 		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Join in Hotel</a>    
 		
@@ -145,12 +146,12 @@ img.emoji {
 			<div id="carouselAds" class="carousel ads slide" data-ride="carousel">
 				<div class="carousel-inner">
 <?php
-$sql_news_u = mysql_query("SELECT * FROM rooms ORDER BY score DESC LIMIT 1");
-$sql_n_u = mysql_fetch_assoc($sql_news_u);
-$user = mysql_fetch_assoc($user = mysql_query("SELECT * FROM users WHERE id = '".$sql_n_u['owner_id']."'"));
+$sql_news_u = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms ORDER BY score DESC LIMIT 1");
+$sql_n_u = mysqli_fetch_assoc($sql_news_u);
+$user = mysqli_fetch_assoc($user = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$sql_n_u['owner_id']."'"));
 ?>
 					<div class="carousel-item active">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default-room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo mysql_real_escape_string(strip_tags(mb_strimwidth($sql_n_u['name'], 0, 19, "..."))); ?></h5>
 								<div>Created by <a href="/home/<?php echo $user['username']; ?>"><font color="white"><?php echo mysql_real_escape_string(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
@@ -159,13 +160,13 @@ $user = mysql_fetch_assoc($user = mysql_query("SELECT * FROM users WHERE id = '"
 							</div>
 						</div>
 <?php
-$sql_news = mysql_query("SELECT * FROM rooms WHERE id <> '". $sql_n_u['id'] ."' ORDER BY score DESC LIMIT 5");
-while($n_info = mysql_fetch_assoc($sql_news))
+$sql_news = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms WHERE id <> '". $sql_n_u['id'] ."' ORDER BY score DESC LIMIT 5");
+while($n_info = mysqli_fetch_assoc($sql_news))
 {
-$user2 = mysql_fetch_assoc($user2 = mysql_query("SELECT * FROM users WHERE id = '".$n_info['owner_id']."'"));
+$user2 = mysqli_fetch_assoc($user2 = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$n_info['owner_id']."'"));
 ?>
 					<div class="carousel-item">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default-room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo mysql_real_escape_string(strip_tags(mb_strimwidth($n_info['name'], 0, 19, "..."))); ?></h5>
 								<div>Created by <a href="/home/<?php echo $user2['username']; ?>"><font color="white"><?php echo mysql_real_escape_string(mb_strimwidth($user2['username'], 0, 16, "...")); ?></font></a></div>
@@ -191,80 +192,80 @@ $user2 = mysql_fetch_assoc($user2 = mysql_query("SELECT * FROM users WHERE id = 
 					<div class="section-title"><h3>Last news</h3></div>
 					<div class="row row-news">
 					
-<?php $news = mysql_query("SELECT * FROM cms_news ORDER BY id DESC LIMIT 6");
-while($new = mysql_fetch_array($news)){
+<?php $news = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news ORDER BY id DESC LIMIT 6");
+while($new = mysqli_fetch_array($news)){
 	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE username = '".$new['author']."'"));	
+$authorinfo = mysqli_fetch_assoc($authorinfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '".$new['author']."'"));	
 ?>
 	<div class="col">
 		<div class="card news post-<?php echo $new['id']; ?>">
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Free things">Free things</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Furnis">Furnis</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promotions">Promotions</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="System">System</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Free things">Free things</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Furnis">Furnis</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promotions">Promotions</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">LIVE</div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="System">System</div></a>
 <?php } ?>
 	<div class="card-body">
-<?php $newsbadges = mysql_query("SELECT * FROM cms_news WHERE active_badge = '1' AND id = '".$new['id']."'");
-while($newsbadge = mysql_fetch_array($newsbadges)){	
+<?php $newsbadges = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE active_badge = '1' AND id = '".$new['id']."'");
+while($newsbadge = mysqli_fetch_array($newsbadges)){	
 ?>
 		<div class="box" data-toggle="tooltip" title="" data-original-title="Win that Badge"><img src="<?php echo $Holo['url_badges']; ?><?php echo $newsbadge['badge']; ?>.gif"></div>
 <?php } ?>
-				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
+				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo filtro($new['title']); ?>"><?php echo filtro(mb_strimwidth($new['title'], 0, 46, "...")); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">
 				<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $new['author']; ?>">
@@ -297,9 +298,8 @@ while($newsbadge = mysql_fetch_array($newsbadges)){
 				
 <ul class="rank">
 
-<?php
-$getScore = mysql_query("SELECT * FROM users INNER JOIN users_settings ON users.id=users_settings.user_id WHERE users.rank < 5 ORDER BY users_settings.achievement_score DESC LIMIT 3");
-while($scoreStats = mysql_fetch_array($getScore)) {
+<?php $getScore = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users INNER JOIN users_settings ON users.id=users_settings.user_id WHERE users.rank < 5 ORDER BY users_settings.achievement_score DESC LIMIT 3");
+while($scoreStats = mysqli_fetch_array($getScore)) {
 
 echo '<li class="card">
 			<div class="avatar pixel lg">
@@ -329,9 +329,8 @@ echo '<li class="card">
 
 				<div class="list">
 
-<?php
-$getRespects = mysql_query("SELECT * FROM users INNER JOIN users_settings ON users.id=users_settings.user_id WHERE users.rank < 5 ORDER BY users_settings.respects_received DESC LIMIT 2");
-while($respectStats = mysql_fetch_array($getRespects)) {
+<?php $getRespects = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users INNER JOIN users_settings ON users.id=users_settings.user_id WHERE users.rank < 5 ORDER BY users_settings.respects_received DESC LIMIT 2");
+while($respectStats = mysqli_fetch_array($getRespects)) {
 		
 echo '<div class="card featured-user">
 	<div class="card-body">
@@ -359,11 +358,11 @@ echo '<div class="card featured-user">
 					<strong><a href="/gallery">See all</a></strong>
 				</div>
 				
-<?php $photos = mysql_query("SELECT * FROM camera_web ORDER BY id DESC LIMIT 1");
-while($photo = mysql_fetch_array($photos)){
+<?php $photos = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM camera_web ORDER BY id DESC LIMIT 1");
+while($photo = mysqli_fetch_array($photos)){
 	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
-$roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
+$authorinfo = mysqli_fetch_assoc($authorinfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$photo['user_id']."'"));	
+$roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms WHERE id = '".$photo['room_id']."'"));	
 ?>
 	<div class="card gallery gallery-224">
 		<a href="/photos/<?php echo $photo['id']; ?>" data-toggle="tooltip" title="" data-original-title="Photo by <?php echo $authorinfo['username']; ?>">
@@ -399,8 +398,8 @@ $roominfo = mysql_fetch_assoc($roominfo = mysql_query("SELECT * FROM rooms WHERE
 				<div class="card">
 					<div class="card-body last-users">
 						<div class="row">
-<?php $lasts = mysql_query("SELECT * FROM users ORDER BY id DESC LIMIT 15");
-while($last = mysql_fetch_array($lasts)){	
+<?php $lasts = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users ORDER BY id DESC LIMIT 15");
+while($last = mysqli_fetch_array($lasts)){	
 ?>
 									<div class="col">
 										<div class="avatar pixel mx-auto" data-toggle="tooltip" title="<?php echo $last['username']; ?>">

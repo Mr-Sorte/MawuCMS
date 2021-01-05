@@ -17,8 +17,9 @@ if(MANTENIMIENTO == '1')
 if(isset($_POST['Username']) && isset($_POST['Password']))
 {
 	
-	$Getuser = mysql_query("SELECT * FROM users WHERE username = '". $_POST['Username'] ."' AND password = '". md5($_POST['Password']) ."'");
+	$Getuser = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". filtro($_POST['Username']) ."' AND password = '". HashSecur($_POST['Password']) ."'");
 
+	
 	if(isset($_POST['g-recaptcha-response'])){
           $captcha = $_POST['g-recaptcha-response'];
     }
@@ -28,25 +29,29 @@ if(isset($_POST['Username']) && isset($_POST['Password']))
 		$loginerror = '<p class="alert alert-danger">Não deixe campos vazios.</p>';
 	}
 
-	elseif(mysql_num_rows($Getuser) == 0)
+	elseif(mysqli_num_rows($Getuser) == 0)
 	{
 		$loginerror = '<p class="alert alert-danger">Nome de usuário inválido.</p>';
 	}
 	
 	elseif (!$captcha) 
 	{
-        $loginerror = '<p class="alert alert-danger">Você não é um Robo? Verifique sua identidade.</p>';
+        $loginerror = '<p class="alert alert-danger">Nome de usuário inválido.</p>';
     }
 
 	else 
 	{
-		if(mysql_num_rows($Getuser) > 0)
+		if(mysqli_num_rows($Getuser) > 0)
 		{
-			$_SESSION['Username'] = mysql_real_escape_string($_POST['Username']);
-			$_SESSION['Password'] = mysql_real_escape_string($_POST['Password']);
+			$_SESSION['Username'] = filtro($_POST['Username']);
+			$_SESSION['Password'] = $_POST['Password'];
 			header("Location: me");
+			
+	
+			} else {
+				$loginerror = '<<p class="alert alert-danger">Você não é um Robo? Verifique sua identidade.</p>';
+			}
 		}
-	}
 }
 ?>
 <!DOCTYPE html>
@@ -84,6 +89,7 @@ img.emoji {
 <link rel='stylesheet' id='selectize-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/selectize.css?ver=0.12.6' type='text/css' media='all' />
 <link rel='stylesheet' id='style-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/style.css?ver=1.1' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-styles-css'  href='<?php echo $Holo['url']; ?>/Mawu/css/style.css?ver=5.3.2' type='text/css' media='all' />
+<script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/turbolinks.js'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/jquery.js?ver=1.12.4-wp'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/jquery-migrate.min.js?ver=1.4.1'></script>
 <script type='text/javascript' src='<?php echo $Holo['url']; ?>/Mawu/js/simple-likes-public.js?ver=0.5'></script>
