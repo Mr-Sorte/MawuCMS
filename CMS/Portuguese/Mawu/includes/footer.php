@@ -8,6 +8,6 @@
 			</div>
 			<div class="mb-3"><strong>Mawu CMS</strong> © 2020 - 2021. Todos direitos reservados.</div>
 			Este site não está afiliada com, patrocinada por, apoiada por, ou principalmente aprovada pela Sulake Oy ou suas empresas Afiliadas, <?php echo $Holo['name']; ?> pode utilizar as marcas registradas e outras propriedades intelectuais do Habbo, que estão permitidas sob a Política de Fã Sites Habbo.<br><br>
-			Site desenvolvido por <a href="https://marcocuel.com/" target="_blank"><b><font color="#FFFFFF">Marco Cuel</font></b></a>, <a href="https://www.instagram.com/oisouhen/" target="_blank"><b><font color="#FFFFFF">Lucas Hen</font></b></a> e <b><font color="#FFFFFF">Skorp</font></b>.
+			Site desenvolvido por <a href="https://github.com/MarcoCuel" target="_blank"><b><font color="#FFFFFF">Marco Cuel</font></b></a>, <a href="https://github.com/Wulles" target="_blank"><b><font color="#FFFFFF">Lucas Hen</font></b></a> e <a href="https://github.com/Itisyan" target="_blank"><b><font color="#FFFFFF">Yanis Skorp</font></b></a>..
 		</div>
 	</div>
