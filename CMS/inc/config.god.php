@@ -14,10 +14,10 @@ define('PASSSTAFF_SALT2', '4ChAnGEItFoRRaNdOm4');
 # CMS
 $Holo = array(
 'panel'         =>     'housekeeping',
-'htmllang'      =>     'fr-FR',
-'name'          =>     'MawuCMS',
-'debut_auto_dark'        =>     '21', # Start of night mode in hours(For automatic theme user)
-'fin_auto_dark'          =>     '7', # End of night mode in hours(For automatic theme user)
+'htmllang'      =>     '', # EN or pt-BR
+'name'          =>     'Mawu',
+'debut_auto_dark'        =>     '18', # Start of night mode in hours(For automatic theme user)
+'fin_auto_dark'          =>     '6', # End of night mode in hours(For automatic theme user)
 
 // Links
 'url'           =>     'http://localhost',
@@ -29,9 +29,9 @@ $Holo = array(
 
 // Registro
 'mision'        =>     '',
-'monedas'       =>     '10000',
-'duckets'       =>     '5000',
-'diamants'      =>     '10',
+'monedas'       =>     '0',
+'duckets'       =>     '160',
+'diamants'      =>     '0',
 'gender'        =>     'M',
 'look'          =>     'ch-215-82.hr-100-42.lg-270-1408.ha-1003-64.hd-180-1370',
 
@@ -64,6 +64,30 @@ $_config['client'] = array(
 'external_figurepartlist' 			=> ''.$Holo['url'].'/swf/gamedata/figuredata.xml',	
 'avatareditor_promohabbos' 			=> ''.$Holo['url'].'/swf/gamedata/hotlooks.xml',	
 'flash_client_url' 	 				=> ''.$Holo['url'].'/swf/gordon/PRODUCTION-202006192205-424220153/',
-'habbo_swf' 		 				=> 'Habbo.swf');
+'habbo_swf' 		 				=> 'xobbaz_v5.swf');
+
+$Lang = array(
+// Logo
+'logo.tag'           =>     'BETA',
+
+// Index
+'index.titulo'       =>     'Início',
+'index.noticias'     =>     'Notícias',
+'index.alertnews'    =>     '<b>Atenção!</b> Você consegue ler as nossas notícias, mas para quaisquer interações, você precisa estar conectado(a) em sua conta!',
+'index.latestusers'  =>     'Recentemente chegados no '.$Holo['name'].'',
+'index.gallery'      =>     'Galeria de Fotos',
+'index.alertphotos'  =>     '<b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.',
+
+// Menu
+'menu.index'         =>     'Início',
+'menu.login'         =>     'Entrar',
+'menu.loginbutton'   =>     'Entrar na sua Conta',
+'menu.register'      =>     'Registrar',
+'menu.articles'      =>     'Notícias',
+'menu.support'       =>     'Suporte',
+'menu.team'          =>     'Equipe',
+'menu.gallery'       =>     'Galeria',
+'menu.onlines'       =>     'Onlines no Hotel',
+);
 	
 ?>

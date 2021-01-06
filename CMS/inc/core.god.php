@@ -15,8 +15,8 @@ public static function cxn_mysqli() {
 
 $mysqld = array (
 
-	'host'  =>  'localhost',
-	'user'  =>  'root',
+	'host'  =>  '',
+	'user'  =>  '',
 	'pass'  =>  '',
 	'db'    =>  ''
 
@@ -146,7 +146,7 @@ function Onlinescombined()
 {
     $on = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE online = '1'");
 	$on1 = mysqli_num_rows($on);
-	$ons = $on1 . " no Hotel";
+	$ons = $on1 . " Connectés";
     return $ons;
 }
 
