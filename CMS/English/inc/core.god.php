@@ -146,7 +146,7 @@ function Onlinescombined()
 {
     $on = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE online = '1'");
 	$on1 = mysqli_num_rows($on);
-	$ons = $on1 . " Connectés";
+	$ons = $on1 . " in Hotel";
     return $ons;
 }
 
