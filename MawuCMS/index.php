@@ -83,7 +83,7 @@ img.emoji {
 <body class="home page-template-default page page-id-28 logged-in" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
+		<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -109,7 +109,7 @@ img.emoji {
 </ul>
 
 <div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a>    
+		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a><span style="cursor:default">    </span>
 		<a href="/login" class="btn btn-primary"><?php echo $Lang['menu.loginbutton']; ?></a>
 </div>
 
@@ -119,7 +119,7 @@ img.emoji {
 	<main>
 	
 <div class="jumbotron jumbotron-fluid hero">
-	<div class="container">
+	<div class="container" style="cursor:default">
 		<h1 class="my-3"><font size="4"><?php echo $chosen; ?></font></h1>
 		<span><b><?php echo Onlines(); ?></b> <?php echo $Lang['menu.onlines']; ?></span>
 	</div>
@@ -129,7 +129,7 @@ img.emoji {
 	<div class="container">
 
 			<div class="section-title">
-				<h3><?php echo $Lang['index.noticias']; ?></h3>
+				<h3 style="cursor:default"><?php echo $Lang['index.noticias']; ?></h3>
 			</div>
 
 		<div class="row">
@@ -220,7 +220,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 </div>
 <?php } ?>
 
-    <div class="alert alert-secondary" role="alert"><?php echo $Lang['index.alertnews']; ?></div>
+    <div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['index.alertnews']; ?></div>
 		</div>
 		
 	</div>
@@ -231,7 +231,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 		<div class="row">
 		<div class="col-lg-12 pl-lg-3">
 
-				<div class="section-title mt-4"><h3><?php echo $Lang['index.latestusers']; ?></h3></div>
+				<div class="section-title mt-4" style="cursor:default"><h3><?php echo $Lang['index.latestusers']; ?></h3></div>
 
 				<div class="card">
 					<div class="card-body last-users">
@@ -260,7 +260,7 @@ while($last = mysqli_fetch_array($lasts)){
 	<div>
 		<div id="custom_widget_galeria-2" class="widget widget_custom_widget_galeria mb-4">
 			<div class="section-title">
-				<h3><?php echo $Lang['index.gallery']; ?></h3>
+				<h3 style="cursor:default"><?php echo $Lang['index.gallery']; ?></h3>
 			</div>
 			<div class="row row-gallery">
 			
@@ -291,7 +291,7 @@ $roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"S
 						</div>
 <?php } ?>
 
-    <div class="alert alert-secondary" role="alert"><?php echo $Lang['index.alertphotos']; ?></div>
+    <div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['index.alertphotos']; ?></div>
 
 			</div>
 
