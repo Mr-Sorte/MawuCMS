@@ -8,28 +8,27 @@ if(Loged == TRUE)
 	exit;
 }
 
-if(MANTENIMIENTO == '1') 
+if(maintenance == '1') 
 {
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 
-$lyrics = 'Crie uma conta agora mesmo.
-O tempo é apenas uma ilusão.
-Quando você menos esperar...
-Chame os seus amigos.
-Carregando mensagem divertida...
-Já comeu pudim hoje?
-Você quer batatas fritas?
-O que acha que ser rico?
-Olhe para um lado. Olhe para o outro.
-Siga o pato amarelo.
-Participe de nossos eventos.
-Eu gosto da sua camiseta.
-Ganhe lindos emblemas.
-Carregando o universo de pixels.
-Seja destaque em nosso Hotel.
-Não é você, sou eu.';
+$lyrics = ''.$Lang['lyrics.1'].'
+'.$Lang['lyrics.2'].'
+'.$Lang['lyrics.3'].'
+'.$Lang['lyrics.4'].'
+'.$Lang['lyrics.5'].'
+'.$Lang['lyrics.6'].'
+'.$Lang['lyrics.7'].'
+'.$Lang['lyrics.8'].'
+'.$Lang['lyrics.9'].'
+'.$Lang['lyrics.10'].'
+'.$Lang['lyrics.11'].'
+'.$Lang['lyrics.12'].'
+'.$Lang['lyrics.13'].'
+'.$Lang['lyrics.14'].'
+'.$Lang['lyrics.15'].'';
 
 $lyrics = explode("\n", $lyrics);
 $chosen = $lyrics[ mt_rand(0, count($lyrics) - 1) ];
