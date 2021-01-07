@@ -104,7 +104,7 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
+		<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -143,7 +143,7 @@ img.emoji {
 			<div class="col-md-4 offset-md-4">
 				<div class="toggle-login">
 					<div class="login">
-						<h3 class="mb-4"><?php echo $Lang['login.titulo']; ?></h3>
+						<h3 style="cursor:default" class="mb-4"><?php echo $Lang['login.titulo']; ?></h3>
 						
 						<?php if($loginerror !== NULL) { echo $loginerror; } ?>
 						
