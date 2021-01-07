@@ -35,12 +35,12 @@ $lyrics = explode("\n", $lyrics);
 $chosen = $lyrics[ mt_rand(0, count($lyrics) - 1) ];
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Início</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['index.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -84,7 +84,7 @@ img.emoji {
 <body class="home page-template-default page page-id-28 logged-in" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -93,22 +93,25 @@ img.emoji {
 			
 <ul id="menu-principal" class="navbar-nav mr-auto">
 	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item active">
-		<a href="/index" class="nav-link active">Início</a>
+		<a href="/index" class="nav-link active"><?php echo $Lang['menu.index']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/login" class="nav-link">Entrar</a>
+		<a href="/login" class="nav-link"><?php echo $Lang['menu.login']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/register" class="nav-link">Registro</a>
+		<a href="/register" class="nav-link"><?php echo $Lang['menu.register']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/support" class="nav-link">Suporte</a>
+		<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
 	</li>
 </ul>
 
 <div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		<a href="/register" class="btn btn-success">Registrar</a>    
-		<a href="/login" class="btn btn-primary">Entrar na sua Conta</a>
+		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a>    
+		<a href="/login" class="btn btn-primary"><?php echo $Lang['menu.loginbutton']; ?></a>
 </div>
 
 		</div>
@@ -119,7 +122,7 @@ img.emoji {
 <div class="jumbotron jumbotron-fluid hero">
 	<div class="container">
 		<h1 class="my-3"><font size="4"><?php echo $chosen; ?></font></h1>
-		<span><b><?php echo Onlines(); ?></b> Pessoas no Hotel</span>
+		<span><b><?php echo Onlines(); ?></b> <?php echo $Lang['menu.onlines']; ?></span>
 	</div>
 </div>
 
@@ -127,7 +130,7 @@ img.emoji {
 	<div class="container">
 
 			<div class="section-title">
-				<h3>Notícias</h3>
+				<h3><?php echo $Lang['index.noticias']; ?></h3>
 			</div>
 
 		<div class="row">
@@ -218,7 +221,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 </div>
 <?php } ?>
 
-    <div class="alert alert-secondary" role="alert"><b>Atenção!</b> Você consegue ler as nossas notícias, mas para quaisquer interações, você precisa estar conectado(a) em sua conta!</div>
+    <div class="alert alert-secondary" role="alert"><?php echo $Lang['index.alertnews']; ?></div>
 		</div>
 		
 	</div>
@@ -229,7 +232,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 		<div class="row">
 		<div class="col-lg-12 pl-lg-3">
 
-				<div class="section-title mt-4"><h3>Recentemente chegados no <?php echo $Holo['name']; ?></h3></div>
+				<div class="section-title mt-4"><h3><?php echo $Lang['index.latestusers']; ?></h3></div>
 
 				<div class="card">
 					<div class="card-body last-users">
@@ -258,7 +261,7 @@ while($last = mysqli_fetch_array($lasts)){
 	<div>
 		<div id="custom_widget_galeria-2" class="widget widget_custom_widget_galeria mb-4">
 			<div class="section-title">
-				<h3>Galeria de Fotos</h3>
+				<h3><?php echo $Lang['index.gallery']; ?></h3>
 			</div>
 			<div class="row row-gallery">
 			
@@ -289,7 +292,7 @@ $roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"S
 						</div>
 <?php } ?>
 
-    <div class="alert alert-secondary" role="alert"><b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.</div>
+    <div class="alert alert-secondary" role="alert"><?php echo $Lang['index.alertphotos']; ?></div>
 
 			</div>
 
