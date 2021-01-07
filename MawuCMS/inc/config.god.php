@@ -53,7 +53,7 @@ $Holo = array(
 $_config['client'] = array(
 'host' 				 				=> '127.0.0.1',
 'port' 				 				=> '30000',
-'client_starting' 		 		 	=> 'Patience '.$Holo['name'].' ! Chargement en cours...',
+'client_starting' 		 		 	=> ''.$Holo['name'].' está carregando...',
 'client_starting_revolving' 		=> "Le temps n'est qu'une illusion.\/Chargement de l'univers...\/Comment cava aujourd'hui?\/Suivez le canard jaune.\/Chargement des citations de l'humanité...",
 'external_variables' 			 	=> ''.$Holo['url'].'/swf/gamedata/external_variables.txt',
 'external_variables_override' 		=> ''.$Holo['url'].'/swf/gamedata/override/external_override_variables.txt',
@@ -70,13 +70,20 @@ $Lang = array(
 // Logo
 'logo.tag'           =>     'BETA',
 
-// Index
-'index.titulo'       =>     'Início',
-'index.noticias'     =>     'Notícias',
-'index.alertnews'    =>     '<b>Atenção!</b> Você consegue ler as nossas notícias, mas para quaisquer interações, você precisa estar conectado(a) em sua conta!',
-'index.latestusers'  =>     'Recentemente chegados no '.$Holo['name'].'',
-'index.gallery'      =>     'Galeria de Fotos',
-'index.alertphotos'  =>     '<b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.',
+// Time
+'time.second'        =>     'segundo',
+'time.seconds'       =>     'segundos',
+'time.minute'        =>     'minuto',
+'time.minutes'       =>     'minutos',
+'time.hour'          =>     'hora',
+'time.hours'         =>     'horas',
+'time.day'           =>     'dia',
+'time.days'          =>     'dias',
+'time.week'          =>     'semana',
+'time.weeks'         =>     'semanas',
+'time.month'         =>     'mês',
+'time.months'        =>     'meses',
+'time.nodate'        =>     'Sem informações sobre data',
 
 // Menu
 'menu.index'         =>     'Início',
@@ -88,6 +95,14 @@ $Lang = array(
 'menu.team'          =>     'Equipe',
 'menu.gallery'       =>     'Galeria',
 'menu.onlines'       =>     'Onlines no Hotel',
+
+// Index
+'index.titulo'       =>     'Início',
+'index.noticias'     =>     'Notícias',
+'index.alertnews'    =>     '<b>Atenção!</b> Você consegue ler as nossas notícias, mas para quaisquer interações, você precisa estar conectado(a) em sua conta!',
+'index.latestusers'  =>     'Recentemente chegados no '.$Holo['name'].'',
+'index.gallery'      =>     'Galeria de Fotos',
+'index.alertphotos'  =>     '<b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.',
 );
 	
 ?>
