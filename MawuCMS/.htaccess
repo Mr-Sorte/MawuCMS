@@ -9,6 +9,8 @@ ErrorDocument 500 /error.php
 
 RewriteRule ^index(|/)$ ./index.php
 RewriteRule ^login(|/)$ ./login.php
+RewriteRule ^forgot(|/)$ ./forgot.php
+RewriteRule ^forgotchange(|/)$ ./forgotchange.php
 RewriteRule ^register(|/)$ ./register.php
 RewriteRule ^support(|/)$ ./support.php
 RewriteRule ^news/(..*)$ ./news.php?url=$1
