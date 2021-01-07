@@ -8,9 +8,9 @@ if(Loged == TRUE)
 	exit;
 }
 
-if(MANTENIMIENTO == '1') 
+if(maintenance == '1') 
 {
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 
@@ -26,41 +26,41 @@ if(isset($_POST['Username']) && isset($_POST['Password']))
 
 	if(empty($_POST['Username']) || empty($_POST['Password']))
 	{
-		$loginerror = '<p class="alert alert-danger">Não deixe campos vazios.</p>';
+		$loginerror = '<p class="alert alert-danger">'.$Lang['login.error1'].'</p>';
 	}
 
 	elseif(mysqli_num_rows($Getuser) == 0)
 	{
-		$loginerror = '<p class="alert alert-danger">Nome de usuário inválido.</p>';
+		$loginerror = '<p class="alert alert-danger">'.$Lang['login.error2'].'</p>';
 	}
 	
-	elseif (!$captcha) 
+	elseif (!$captcha && $Holo['recaptcha_on'] == "true") 
 	{
-        $loginerror = '<p class="alert alert-danger">Nome de usuário inválido.</p>';
+        $loginerror = '<p class="alert alert-danger">'.$Lang['login.error3'].'</p>';
     }
 
 	else 
 	{
 		if(mysqli_num_rows($Getuser) > 0)
 		{
+			unset($_SESSION['jeton']);
 			$_SESSION['Username'] = filtro($_POST['Username']);
 			$_SESSION['Password'] = $_POST['Password'];
 			header("Location: me");
-			
 	
 			} else {
-				$loginerror = '<<p class="alert alert-danger">Você não é um Robo? Verifique sua identidade.</p>';
+				$loginerror = '<p class="alert alert-danger">'.$Lang['login.error3'].'</p>';
 			}
 		}
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Entrar</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['login.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -104,7 +104,7 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -112,22 +112,25 @@ img.emoji {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			
 <ul id="menu-principal" class="navbar-nav mr-auto">
-	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/index" class="nav-link">Início</a>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/index" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item active">
-		<a href="/login" class="nav-link active">Entrar</a>
-	</li>
-	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/register" class="nav-link">Registro</a>
+	<li class="menu-item menu-item-type-post_type_archive nav-item active">
+		<a href="/login" class="nav-link active"><?php echo $Lang['menu.login']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/support" class="nav-link">Suporte</a>
+		<a href="/register" class="nav-link"><?php echo $Lang['menu.register']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type_archive nav-item">
+		<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
 	</li>
 </ul>
 
 <div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		<a href="/register" class="btn btn-success">Registrar</a>
+		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a>
 </div>
 
 		</div>
@@ -140,31 +143,33 @@ img.emoji {
 			<div class="col-md-4 offset-md-4">
 				<div class="toggle-login">
 					<div class="login">
-						<h3 class="mb-4">Entrar</h3>
+						<h3 class="mb-4"><?php echo $Lang['login.titulo']; ?></h3>
 						
 						<?php if($loginerror !== NULL) { echo $loginerror; } ?>
 						
 		<form id="loginform" method="POST">
 			<p class="login-username">
-				<label for="user_login">Nome de Usuário(a)</label>
+				<label for="user_login"><?php echo $Lang['login.username']; ?></label>
 				<input type="text" name="Username" id="user_login" class="input" size="20" required>
 			</p>
 			<p class="login-password">
-				<label for="user_pass">Sua Senha</label>
+				<label for="user_pass"><?php echo $Lang['login.password']; ?></label>
 				<input type="password" name="Password" id="user_pass" class="input" size="20" required>
 			</p>
 			<p class="login-submit">
-			<label for="user_code">Você é Humano?</label>
+			<?php if($Holo['recaptcha_on'] == "true") { ?>
+			<label for="user_code"><?php echo $Lang['login.human']; ?></label>
                 <script src="https://www.google.com/recaptcha/api.js"></script><center><div class="g-recaptcha" data-sitekey="<?php echo $Holo['recaptcha'] ?>" ></div></center>
+			<?php } ?>
 				<hr class="my-4">
 
-				<input name="login" type="submit" id="wp-submit" class="button button-primary" value="Acessar">
+				<input name="login" type="submit" id="wp-submit" class="button button-primary" value="<?php echo $Lang['login.confirm']; ?>">
 			</p>
 		</form>
 		
 		<hr class="ou my-4">
 
-		<div class="text-center"><a href="/register" class="btn btn-lg btn-success">Criar nova conta</a></div>
+		<div class="text-center"><a href="/register" class="btn btn-lg btn-success"><?php echo $Lang['login.register']; ?></a></div>
 
 					</div>
 				</div>
