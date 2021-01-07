@@ -225,7 +225,6 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 	</div>
 </section>
 
-<section>
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-12 pl-lg-3">
@@ -240,21 +239,22 @@ while($last = mysqli_fetch_array($lasts)){
 ?>
 									<div class="col">
 										<div class="avatar pixel mx-auto" data-toggle="tooltip" title="<?php echo $last['username']; ?>">
-											<a style="cursor:default"><img src="<?php echo $Holo['avatar'] . $last['look']; ?>&action=std&direction=2&head_direction=3&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $last['username']; ?>"></a>
+											<img style="cursor:default" src="<?php echo $Holo['avatar'] . $last['look']; ?>&action=std&direction=2&head_direction=3&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $last['username']; ?>">
 										</div>
 									</div>
 <?php } ?>
 						</div>
 					</div>
 				</div>
-				</div>
+		</div>
+		
+		<div class="alert alert-secondary" style="cursor:default" role="alert"><?php echo $Lang['index.aboutlastusr']; ?></div>
 
 		</div>
 	</div>
 </section>
 
 <section>
-	
 <div class="container">
 	<div>
 		<div id="custom_widget_galeria-2" class="widget widget_custom_widget_galeria mb-4">
@@ -298,6 +298,7 @@ $roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"S
 	</div>
 </div>
 </section>
+
 	</main>
 	
 	<?php require_once("Mawu/includes/footer.php"); ?>

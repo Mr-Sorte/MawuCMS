@@ -403,8 +403,9 @@ while($last = mysqli_fetch_array($lasts)){
 						</div>
 					</div>
 				</div>
-				<div class="alert alert-secondary" style="cursor:default" role="alert"><?php echo $Lang['index.aboutlastusr']; ?></div>
-				</div>
+		</div>
+		
+		<div class="alert alert-secondary" style="cursor:default" role="alert"><?php echo $Lang['index.aboutlastusr']; ?></div>
 
 		</div>
 	</div>
