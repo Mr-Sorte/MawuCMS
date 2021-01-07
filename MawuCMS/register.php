@@ -1,4 +1,5 @@
-<?php require_once("inc/core.god.php");
+<?php
+require_once("inc/core.god.php");
 require_once("inc/class.recaptchalib.php");
 
 if(Loged == TRUE)
@@ -7,9 +8,9 @@ if(Loged == TRUE)
 	exit;
 }
 
-if(MANTENIMIENTO == '1') 
+if(maintenance == '1') 
 {
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 
@@ -147,27 +148,32 @@ if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena
 	{
 	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
 	}
-	elseif (!$captcha) 
+	elseif (!$captcha && $Holo['recaptcha_on'] == "true") 
 	{
         $regerror = '<div class="alert alert-danger" role="alert">Você não é um robô? Verifique sua identidade.</div>';
     }
 	else
 	{
-		mysqli_query(connect::cxn_mysqli(),"INSERT INTO users (username, password, mail, look, gender, motto, ip_register, credits, account_created, account_day_of_birth) VALUES ('". filtro($_POST['Usuario']) ."', '". HashSecur($_POST['Contrasena']) ."', '". filtro($_POST['Mail']) ."', '". $Holo['look'] ."', '". $Holo['gender'] ."', '". $Holo['mision'] ."', '". $ip ."', '". $Holo['monedas'] ."', '" . time() ."', '" . time() ."')");
+	mysqli_query(connect::cxn_mysqli(),"INSERT INTO users (username, password, mail, look, gender, motto, ip_register, credits, account_created, account_day_of_birth) VALUES ('". filtro($_POST['Usuario']) ."', '". HashSecur($_POST['Contrasena']) ."', '". filtro($_POST['Mail']) ."', '". $Holo['look'] ."', '". $Holo['gender'] ."', '". $Holo['mision'] ."', '". $ip ."', '". $Holo['monedas'] ."', '" . time() ."', '" . time() ."')");
 		$_SESSION['Username'] = filtro($_POST['Usuario']);
 		$_SESSION['Password'] = $_POST['Contrasena'];
+                
+        $RecupUserCree = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". filtro($_SESSION['Username']) ."' AND password = '". HashSecur($_SESSION['Password']) ."'");
+        $NewUserInsert = mysqli_fetch_assoc($RecupUserCree);
+	mysqli_query(connect::cxn_mysqli(),"INSERT INTO users_currency (user_id, type, amount) VALUES ('". $NewUserInsert['id'] ."', '0', '". $Holo['duckets'] ."')");
+	mysqli_query(connect::cxn_mysqli(),"INSERT INTO users_currency (user_id, type, amount) VALUES ('". $NewUserInsert['id'] ."', '5', '". $Holo['diamants'] ."')");
 		header("Location: me");
 	}
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Criar nova Conta</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['register.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -228,6 +234,9 @@ img.emoji {
 	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item active">
 		<a href="/register" class="nav-link active">Registro</a>
 	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/articles" class="nav-link">Notícias</a>
+	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
 		<a href="/support" class="nav-link">Suporte</a>
 	</li>
@@ -270,8 +279,10 @@ img.emoji {
 				<p class="text-muted">Você vai precisar deste endereço de e-mail para realizar ações importantes no <?php echo $Holo['name']; ?> Hotel. Por favor, utilize email válido.</p>
 			</p>
 			<p class="login-submit">
+			<?php if($Holo['recaptcha_on'] == "true") { ?>
 			<label for="user_code">Você é Humano?</label>
                 <script src="https://www.google.com/recaptcha/api.js"></script><center><div class="g-recaptcha" data-sitekey="<?php echo $Holo['recaptcha'] ?>" ></div></center>
+			<?php } ?>	
 				<hr class="my-4">
 
 				<input name="register" type="submit" id="wp-submit" class="btn btn-lg btn-block btn-success" value="Criar nova Conta">
