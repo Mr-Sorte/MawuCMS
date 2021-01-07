@@ -70,6 +70,21 @@ $Lang = array(
 // Logo
 'logo.tag'           =>     'BETA',
 
+// Time
+'time.second'        =>     'segundo',
+'time.seconds'       =>     'segundos',
+'time.minute'        =>     'minuto',
+'time.minutes'       =>     'minutos',
+'time.hour'          =>     'hora',
+'time.hours'         =>     'horas',
+'time.day'           =>     'dia',
+'time.days'          =>     'dias',
+'time.week'          =>     'semana',
+'time.weeks'         =>     'semanas',
+'time.month'         =>     'mês',
+'time.months'        =>     'meses',
+'time.nodate'        =>     'Sem informações sobre data',
+
 // Menu
 'menu.index'         =>     'Início',
 'menu.login'         =>     'Entrar',
@@ -82,21 +97,21 @@ $Lang = array(
 'menu.onlines'       =>     'Onlines no Hotel',
 
 // Lyrics
-'lyrics.1'       =>     'Crie uma conta agora mesmo.',
-'lyrics.2'       =>     'O tempo é apenas uma ilusão.',
-'lyrics.3'       =>     'Quando você menos esperar...',
-'lyrics.4'       =>     'Chame os seus amigos.',
-'lyrics.5'       =>     'Carregando mensagem divertida...',
-'lyrics.6'       =>     'Já comeu pudim hoje?',
-'lyrics.7'       =>     'Você quer batatas fritas?',
-'lyrics.8'       =>     'O que acha que ser rico?',
-'lyrics.9'       =>     'Olhe para um lado. Olhe para o outro.',
-'lyrics.10'      =>     'Siga o pato amarelo.',
-'lyrics.11'      =>     'Eu gosto da sua camiseta.',
-'lyrics.12'      =>     'Ganhe lindos emblemas.',
-'lyrics.13'      =>     'Carregando o universo de pixels.',
-'lyrics.14'      =>     'Seja destaque em nosso Hotel.',
-'lyrics.15'      =>     'Não é você, sou eu.',
+'lyrics.1'           =>     'Crie uma conta agora mesmo.',
+'lyrics.2'           =>     'O tempo é apenas uma ilusão.',
+'lyrics.3'           =>     'Quando você menos esperar...',
+'lyrics.4'           =>     'Chame os seus amigos.',
+'lyrics.5'           =>     'Carregando mensagem divertida...',
+'lyrics.6'           =>     'Já comeu pudim hoje?',
+'lyrics.7'           =>     'Você quer batatas fritas?',
+'lyrics.8'           =>     'O que acha que ser rico?',
+'lyrics.9'           =>     'Olhe para um lado. Olhe para o outro.',
+'lyrics.10'          =>     'Siga o pato amarelo.',
+'lyrics.11'          =>     'Eu gosto da sua camiseta.',
+'lyrics.12'          =>     'Ganhe lindos emblemas.',
+'lyrics.13'          =>     'Carregando o universo de pixels.',
+'lyrics.14'          =>     'Seja destaque em nosso Hotel.',
+'lyrics.15'          =>     'Não é você, sou eu.',
 
 // Index
 'index.titulo'       =>     'Início',
@@ -116,6 +131,27 @@ $Lang = array(
 'login.error1'       =>     'Não deixe campos vazios.',
 'login.error2'       =>     'Nome de usuário inválido.',
 'login.error3'       =>     'Você não é um robô? Verifique sua identidade.',
+
+// Register
+'register.titulo'    =>     'Criar nova Conta',
+'register.yourname'  =>     'Escolha um Nome:',
+'register.nameinfo'  =>     'Seu nome pode conter letras maiúsculas, minúsculas, números e caracteres especiais como _-=?!@:.,',
+'register.pass'      =>     'Crie uma Senha:',
+'register.repass'    =>     'Repita a sua senha:',
+'register.passtext'  =>     'Utilize, pelo menos, 6 caracteres. Inclua, pelo menos, uma letra, um número e um caracter especial.',
+'register.yourmail'  =>     'Seu E-mail:',
+'register.mailtext'  =>     'Você vai precisar deste endereço de e-mail para realizar ações importantes no '.$Holo['name'].' Hotel. Por favor, utilize email válido.',
+'register.captcha'   =>     'Você é Humano?',
+'register.confirm'   =>     'Criar nova Conta',
+'register.haveone1'  =>     'Já tem uma conta?',
+'register.haveone2'  =>     'Entre agora',
+'register.error1'    =>     'Algo deu errado, tente novamente e verifique todos os dados.',
+'register.error2'    =>     'Você precisa escolher um nome.',
+'register.error3'    =>     'Você precisa escolher um e-mail.',
+'register.error4'    =>     'As senhas não são as mesmas, verifique e tente novamente.',
+'register.error5'    =>     'Seu nome de usuário é muito curto.',
+'register.error6'    =>     'Algo de errado está acontecendo com seu nome, tente outro nome.',
+'register.error7'    =>     'Você não é um robô? Verifique sua identidade.',
 );
 	
 ?>
