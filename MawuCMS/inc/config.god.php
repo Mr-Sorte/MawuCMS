@@ -29,7 +29,7 @@ $Holo = array(
 
 // Registro
 'mision'        =>     '',
-'monedas'       =>     '0',
+'monedas'       =>     '1000',
 'duckets'       =>     '160',
 'diamants'      =>     '0',
 'gender'        =>     'M',
@@ -53,7 +53,7 @@ $Holo = array(
 $_config['client'] = array(
 'host' 				 				=> '127.0.0.1',
 'port' 				 				=> '30000',
-'client_starting' 		 		 	=> ''.$Holo['name'].' está carregando...',
+'client_starting' 		 		 	=> 'Patience '.$Holo['name'].' ! Chargement en cours...',
 'client_starting_revolving' 		=> "Le temps n'est qu'une illusion.\/Chargement de l'univers...\/Comment cava aujourd'hui?\/Suivez le canard jaune.\/Chargement des citations de l'humanité...",
 'external_variables' 			 	=> ''.$Holo['url'].'/swf/gamedata/external_variables.txt',
 'external_variables_override' 		=> ''.$Holo['url'].'/swf/gamedata/override/external_override_variables.txt',
@@ -64,26 +64,11 @@ $_config['client'] = array(
 'external_figurepartlist' 			=> ''.$Holo['url'].'/swf/gamedata/figuredata.xml',	
 'avatareditor_promohabbos' 			=> ''.$Holo['url'].'/swf/gamedata/hotlooks.xml',	
 'flash_client_url' 	 				=> ''.$Holo['url'].'/swf/gordon/PRODUCTION-202006192205-424220153/',
-'habbo_swf' 		 				=> 'xobbaz_v5.swf');
+'habbo_swf' 		 				=> 'Habbo.swf');
 
 $Lang = array(
 // Logo
 'logo.tag'           =>     'BETA',
-
-// Time
-'time.second'        =>     'segundo',
-'time.seconds'       =>     'segundos',
-'time.minute'        =>     'minuto',
-'time.minutes'       =>     'minutos',
-'time.hour'          =>     'hora',
-'time.hours'         =>     'horas',
-'time.day'           =>     'dia',
-'time.days'          =>     'dias',
-'time.week'          =>     'semana',
-'time.weeks'         =>     'semanas',
-'time.month'         =>     'mês',
-'time.months'        =>     'meses',
-'time.nodate'        =>     'Sem informações sobre data',
 
 // Menu
 'menu.index'         =>     'Início',
@@ -103,6 +88,17 @@ $Lang = array(
 'index.latestusers'  =>     'Recentemente chegados no '.$Holo['name'].'',
 'index.gallery'      =>     'Galeria de Fotos',
 'index.alertphotos'  =>     '<b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.',
+
+// Login
+'login.titulo'       =>     'Entrar',
+'login.username'     =>     'Nome de Usuário(a):',
+'login.password'     =>     'Sua Senha:',
+'login.human'        =>     'Você é Humano?',
+'login.confirm'      =>     'Acessar',
+'login.register'     =>     'Criar uma nova Conta',
+'login.error1'       =>     'Não deixe campos vazios.',
+'login.error2'       =>     'Nome de usuário inválido.',
+'login.error3'       =>     'Você não é um robô? Verifique sua identidade.',
 );
 	
 ?>

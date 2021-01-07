@@ -208,9 +208,9 @@ if(Loged == TRUE) {
    }
 }
 
-$mantenimiento = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_mantenimiento");
-$mantenimientoo = mysqli_fetch_assoc($mantenimiento);
-$mant = $mantenimientoo['mantenimiento'];
-define("MANTENIMIENTO", $mant);
+$maintenance = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_maintenance");
+$main = mysqli_fetch_assoc($maintenance);
+$close = $main['maintenance'];
+define("maintenance", $close);
 
 ?>
