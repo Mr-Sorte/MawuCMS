@@ -26,131 +26,131 @@ if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena
 
 	if(empty($_POST['Usuario']) || empty($_POST['Mail']) || empty($_POST['Contrasena']) || empty($_POST['RContrasena']))
 	{
-		$regerror = '<div class="alert alert-danger" role="alert">Algo deu errado, tente novamente e verifique todos os dados.</div>';
+		$regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error1'].'</div>';
 	}
 	elseif(mysqli_num_rows($Getnombre) > 0)
 	{
-		$regerror = '<div class="alert alert-danger" role="alert">Você precisa escolher um nome.</div>';
+		$regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error2'].'</div>';
 	}
 	elseif(mysqli_num_rows($Getmail) > 0)
 	{
-		$regerror = '<div class="alert alert-danger" role="alert">Você precisa escolher um e-mail.</div>';
+		$regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error3'].'</div>';
 	}
 	elseif($_POST['Contrasena'] !== $_POST['RContrasena'])
 	{
-		$regerror = '<div class="alert alert-danger" role="alert">As senhas não são as mesmas, verifique e tente novamente.</div>';
+		$regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error4'].'</div>';
 	}
     elseif(strlen($_POST['Usuario']) > 18 || strlen($_POST['Usuario']) < 3) 
 	{
-        $regerror = '<div class="alert alert-danger" role="alert">Seu nome de usuário é muito curto.</div>';
+        $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error5'].'</div>';
 	}
 	elseif(strrpos($_POST['Usuario'], "á") || strrpos($_POST['Usuario'], "à") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "é") || strrpos($_POST['Usuario'], "è") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "í") || strrpos($_POST['Usuario'], "ì") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ó") || strrpos($_POST['Usuario'], "ò") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ú") || strrpos($_POST['Usuario'], "ù") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ㅤ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "õ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ã") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ñ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ý") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ç") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "~") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "|") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "¤") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "[") || strrpos($_POST['Usuario'], "]") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "{") || strrpos($_POST['Usuario'], "}") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "!") || strrpos($_POST['Usuario'], "#") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "$") || strrpos($_POST['Usuario'], "%") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "&") || strrpos($_POST['Usuario'], "*") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ê") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "û") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "î") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "ô") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "â") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], "MOD-") || strrpos($_POST['Usuario'], "MOD_") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
     }
 	elseif(strrpos($_POST['Usuario'], " ") || strrpos($_POST['Usuario'], " ") !== false) 
 	{
-	    $regerror = '<div class="alert alert-danger" role="alert">Algo de errado está acontecendo com seu nome, tente outro nome.</div>';
+	    $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error6'].'</div>';
 	}
 	elseif (!$captcha && $Holo['recaptcha_on'] == "true") 
 	{
-        $regerror = '<div class="alert alert-danger" role="alert">Você não é um robô? Verifique sua identidade.</div>';
+        $regerror = '<div class="alert alert-danger" role="alert">'.$Lang['register.error7'].'</div>';
     }
 	else
 	{
@@ -217,7 +217,7 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -225,25 +225,25 @@ img.emoji {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			
 <ul id="menu-principal" class="navbar-nav mr-auto">
-	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/index" class="nav-link">Início</a>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/index" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/login" class="nav-link">Entrar</a>
+		<a href="/login" class="nav-link"><?php echo $Lang['menu.login']; ?></a>
 	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item active">
-		<a href="/register" class="nav-link active">Registro</a>
+	<li class="menu-item menu-item-type-post_type_archive nav-item active">
+		<a href="/register" class="nav-link active"><?php echo $Lang['menu.register']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
-		<a href="/articles" class="nav-link">Notícias</a>
+		<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/support" class="nav-link">Suporte</a>
+		<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
 	</li>
 </ul>
 
 <div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		<a href="/login" class="btn btn-primary">Entrar na sua Conta</a>
+		<a href="/login" class="btn btn-primary"><?php echo $Lang['menu.loginbutton']; ?></a>
 </div>
 
 		</div>
@@ -256,40 +256,40 @@ img.emoji {
 			<div class="col-md-4 offset-md-4">
 				<div class="toggle-login">
 					<div class="login">
-						<h3 class="mb-4">Registro</h3>
+						<h3 class="mb-4"><?php echo $Lang['register.titulo']; ?></h3>
 						
 						<?php if($regerror !== NULL) { echo $regerror; } ?>
 						
 		<form id="loginform" method="POST">
 			<p class="login-username">
-				<label for="user_login">Escolha um Nome</label>
+				<label for="user_login"><?php echo $Lang['register.yourname']; ?></label>
 				<input type="text" name="Usuario" class="input" size="20" required>
-				<p class="text-muted">Seu nome pode conter letras maiúsculas, minúsculas, números e caracteres especiais como _-=?!@:.,</p>
+				<p class="text-muted"><?php echo $Lang['register.nameinfo']; ?></p>
 			</p>
 			<p class="login-password">
-				<label for="user_pass">Crie uma Senha</label>
+				<label for="user_pass"><?php echo $Lang['register.pass']; ?></label>
 				<input type="password" name="Contrasena" class="input" size="20" required>
-				<p class="text-muted">Repita a sua senha.</p>
+				<p class="text-muted"><?php echo $Lang['register.repass']; ?></p>
 				<input type="password" name="RContrasena" class="input" size="20" required>
-				<p class="text-muted">Utilize, pelo menos, 6 caracteres. Inclua, pelo menos, uma letra, um número e um caracter especial.</p>
+				<p class="text-muted"><?php echo $Lang['register.passtext']; ?></p>
 			</p>
 			<p class="login-username">
-				<label for="user_login">Seu e-mail</label>
+				<label for="user_login"><?php echo $Lang['register.yourmail']; ?></label>
 				<input type="email" name="Mail" class="input" size="20" required>
-				<p class="text-muted">Você vai precisar deste endereço de e-mail para realizar ações importantes no <?php echo $Holo['name']; ?> Hotel. Por favor, utilize email válido.</p>
+				<p class="text-muted"><?php echo $Lang['register.mailtext']; ?></p>
 			</p>
 			<p class="login-submit">
 			<?php if($Holo['recaptcha_on'] == "true") { ?>
-			<label for="user_code">Você é Humano?</label>
+			<label for="user_code"><?php echo $Lang['register.captcha']; ?></label>
                 <script src="https://www.google.com/recaptcha/api.js"></script><center><div class="g-recaptcha" data-sitekey="<?php echo $Holo['recaptcha'] ?>" ></div></center>
 			<?php } ?>	
 				<hr class="my-4">
 
-				<input name="register" type="submit" id="wp-submit" class="btn btn-lg btn-block btn-success" value="Criar nova Conta">
+				<input name="register" type="submit" id="wp-submit" class="btn btn-lg btn-block btn-success" value="<?php echo $Lang['register.confirm']; ?>">
 			</p>
 		</form>
 		
-		<div class="text-center text-muted mt-4">Já tem uma conta? <a class="text-link text-primary show-login">Entre agora</a></div>
+		<div class="text-center text-muted mt-4"><?php echo $Lang['register.haveone1']; ?> <a href="/login" class="text-link text-primary show-login"><?php echo $Lang['register.haveone2']; ?></a></div>
 
 					</div>
 				</div>
