@@ -81,6 +81,23 @@ $Lang = array(
 'menu.gallery'       =>     'Galeria',
 'menu.onlines'       =>     'Onlines no Hotel',
 
+// Lyrics
+'lyrics.1'       =>     'Crie uma conta agora mesmo.',
+'lyrics.2'       =>     'O tempo é apenas uma ilusão.',
+'lyrics.3'       =>     'Quando você menos esperar...',
+'lyrics.4'       =>     'Chame os seus amigos.',
+'lyrics.5'       =>     'Carregando mensagem divertida...',
+'lyrics.6'       =>     'Já comeu pudim hoje?',
+'lyrics.7'       =>     'Você quer batatas fritas?',
+'lyrics.8'       =>     'O que acha que ser rico?',
+'lyrics.9'       =>     'Olhe para um lado. Olhe para o outro.',
+'lyrics.10'      =>     'Siga o pato amarelo.',
+'lyrics.11'      =>     'Eu gosto da sua camiseta.',
+'lyrics.12'      =>     'Ganhe lindos emblemas.',
+'lyrics.13'      =>     'Carregando o universo de pixels.',
+'lyrics.14'      =>     'Seja destaque em nosso Hotel.',
+'lyrics.15'      =>     'Não é você, sou eu.',
+
 // Index
 'index.titulo'       =>     'Início',
 'index.noticias'     =>     'Notícias',
