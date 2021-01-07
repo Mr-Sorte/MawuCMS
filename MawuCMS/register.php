@@ -217,7 +217,7 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
+		<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -256,7 +256,7 @@ img.emoji {
 			<div class="col-md-4 offset-md-4">
 				<div class="toggle-login">
 					<div class="login">
-						<h3 class="mb-4"><?php echo $Lang['register.titulo']; ?></h3>
+						<h3 style="cursor:default" class="mb-4"><?php echo $Lang['register.titulo']; ?></h3>
 						
 						<?php if($regerror !== NULL) { echo $regerror; } ?>
 						
@@ -264,19 +264,19 @@ img.emoji {
 			<p class="login-username">
 				<label for="user_login"><?php echo $Lang['register.yourname']; ?></label>
 				<input type="text" name="Usuario" class="input" size="20" required>
-				<p class="text-muted"><?php echo $Lang['register.nameinfo']; ?></p>
+				<p class="text-muted" style="cursor:default"><?php echo $Lang['register.nameinfo']; ?></p>
 			</p>
 			<p class="login-password">
 				<label for="user_pass"><?php echo $Lang['register.pass']; ?></label>
 				<input type="password" name="Contrasena" class="input" size="20" required>
-				<p class="text-muted"><?php echo $Lang['register.repass']; ?></p>
+				<p class="text-muted" style="cursor:default"><?php echo $Lang['register.repass']; ?></p>
 				<input type="password" name="RContrasena" class="input" size="20" required>
-				<p class="text-muted"><?php echo $Lang['register.passtext']; ?></p>
+				<p class="text-muted" style="cursor:default"><?php echo $Lang['register.passtext']; ?></p>
 			</p>
 			<p class="login-username">
 				<label for="user_login"><?php echo $Lang['register.yourmail']; ?></label>
 				<input type="email" name="Mail" class="input" size="20" required>
-				<p class="text-muted"><?php echo $Lang['register.mailtext']; ?></p>
+				<p class="text-muted" style="cursor:default"><?php echo $Lang['register.mailtext']; ?></p>
 			</p>
 			<p class="login-submit">
 			<?php if($Holo['recaptcha_on'] == "true") { ?>
@@ -289,7 +289,7 @@ img.emoji {
 			</p>
 		</form>
 		
-		<div class="text-center text-muted mt-4"><?php echo $Lang['register.haveone1']; ?> <a href="/login" class="text-link text-primary show-login"><?php echo $Lang['register.haveone2']; ?></a></div>
+		<div class="text-center text-muted mt-4" style="cursor:default"><?php echo $Lang['register.haveone1']; ?> <a href="/login" class="text-link text-primary show-login"><?php echo $Lang['register.haveone2']; ?></a></div>
 
 					</div>
 				</div>
