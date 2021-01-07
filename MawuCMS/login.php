@@ -155,6 +155,7 @@ img.emoji {
 			<p class="login-password">
 				<label for="user_pass"><?php echo $Lang['login.password']; ?></label>
 				<input type="password" name="Password" id="user_pass" class="input" size="20" required>
+				<small class="form-text text-muted"><a href="/forgot"><?php echo $Lang['login.forgot']; ?></a></small>
 			</p>
 			<p class="login-submit">
 			<?php if($Holo['recaptcha_on'] == "true") { ?>

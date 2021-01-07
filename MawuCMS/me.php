@@ -7,25 +7,19 @@ if(Loged == FALSE)
 	exit;
 }
 
-if(mysqli_num_rows($chb) > 0) 
+if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
-    header("Location: banned");
-	exit;
-}
-
-if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
-{
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Início</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['me.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -69,40 +63,40 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/me" class="nav-link active">Início</a>
+				<a href="/me" class="nav-link active"><?php echo $Lang['menu.index']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/articles" class="nav-link">Notícias</a>
+				<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/gallery" class="nav-link">Galeria</a>
+				<a href="/gallery" class="nav-link"><?php echo $Lang['menu.gallery']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Famosos</a>
+				<a href="/famous" class="nav-link"><?php echo $Lang['menu.famous']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/team" class="nav-link">Equipe</a>
-			</li>
-			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/support" class="nav-link">Suporte</a>
+				<a href="/team" class="nav-link"><?php echo $Lang['menu.team']; ?></a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange"><?php echo $Lang['menu.shop']; ?></font></a>
 			</li>-->
+			<li class="menu-item menu-item-type-post_type_archive nav-item">
+				<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
+			</li>
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
 		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
-        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
+        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a>    <?php } ?>
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a>    
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -113,9 +107,9 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i><?php echo $Lang['menu.myprofile']; ?></a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> <?php echo $Lang['menu.settings']; ?></a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
@@ -127,7 +121,7 @@ img.emoji {
 <div class="jumbotron jumbotron-fluid hero">
 	<div class="container">
 		<h1 class="my-3"><img src="<?php echo $Holo['avatar'] . $myrow['look']; ?>&headonly=0&direction=2&head_direction=3&size=s" /> <font size="5"><?php echo $myrow['username']; ?></font></h1>
-		<span ><b><?php echo Onlines(); ?></b> Pessoas no Hotel</span>
+		<span ><b><?php echo Onlines(); ?></b> <?php echo $Lang['menu.onlines']; ?></span>
 	</div>
 </div>
 
@@ -141,7 +135,7 @@ img.emoji {
 	<div class="sidebar">
 		<div id="custom_widget_publicidades-2" class="widget widget_custom_widget_publicidades mb-4">
 			<div class="section-title">
-				<h3>Quartos destaques</h3>
+				<h3><?php echo $Lang['me.rooms']; ?></h3>
 			</div>
 			<div id="carouselAds" class="carousel ads slide" data-ride="carousel">
 				<div class="carousel-inner">
@@ -151,12 +145,12 @@ $sql_n_u = mysqli_fetch_assoc($sql_news_u);
 $user = mysqli_fetch_assoc($user = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$sql_n_u['owner_id']."'"));
 ?>
 					<div class="carousel-item active">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $sql_n_u['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default-room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo filtro(strip_tags(mb_strimwidth($sql_n_u['name'], 0, 19, "..."))); ?></h5>
-								<div>Criado por <a href="/home/<?php echo $user['username']; ?>"><font color="white"><?php echo filtro(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
-								<div>Com <b><?php echo $sql_n_u['score']; ?></b> curtidas</div>
-								<div>Tem <b><?php echo $sql_n_u['users']; ?></b> pessoas nele</div>
+								<div><?php echo $Lang['me.roomby']; ?> <a href="/home/<?php echo $user['username']; ?>"><font color="white"><?php echo filtro(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
+								<div><?php echo $Lang['me.roomwith']; ?> <b><?php echo $sql_n_u['score']; ?></b> <?php echo $Lang['me.roomlikes']; ?></div>
+								<div><?php echo $Lang['me.roomhave']; ?> <b><?php echo $sql_n_u['users']; ?></b> <?php echo $Lang['me.roomusers']; ?></div>
 							</div>
 						</div>
 <?php
@@ -166,12 +160,12 @@ while($n_info = mysqli_fetch_assoc($sql_news))
 $user2 = mysqli_fetch_assoc($user2 = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$n_info['owner_id']."'"));
 ?>
 					<div class="carousel-item">
-						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default_room.png);">
+						<img src="<?php echo $Holo['thumbsurl']; ?><?php echo $n_info['id']; ?>.png" style="background-image: url(<?php echo $Holo['url']; ?>/Mawu/image/default-room.png);">
 							<div class="carousel-caption">
 								<h5><?php echo filtro(strip_tags(mb_strimwidth($n_info['name'], 0, 19, "..."))); ?></h5>
-								<div>Criado por <a href="/home/<?php echo $user2['username']; ?>"><font color="white"><?php echo filtro(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
-								<div>Com <b><?php echo $n_info['score']; ?></b> curtidas</div>
-								<div>Tem <b><?php echo $n_info['users']; ?></b> pessoas nele</div>
+								<div><?php echo $Lang['me.roomby']; ?> <a href="/home/<?php echo $user2['username']; ?>"><font color="white"><?php echo filtro(mb_strimwidth($user['username'], 0, 16, "...")); ?></font></a></div>
+								<div><?php echo $Lang['me.roomwith']; ?> <b><?php echo $n_info['score']; ?></b> <?php echo $Lang['me.roomlikes']; ?></div>
+								<div><?php echo $Lang['me.roomhave']; ?> <b><?php echo $n_info['users']; ?></b> <?php echo $Lang['me.roomusers']; ?></div>
 							</div>
 						</div>
 <?php } ?>
@@ -180,7 +174,7 @@ $user2 = mysqli_fetch_assoc($user2 = mysqli_query(connect::cxn_mysqli(),"SELECT 
 				</div>
 				
 			<div id="custom_widget_parceiro-2" class="widget widget_custom_widget_parceiro mb-4">
-			    <div class="alert alert-secondary" role="alert"><b>Confuso?</b> Os seis quartos com mais Curtidas vão sempre aparecer destacados aqui.</div>
+			    <div class="alert alert-secondary" role="alert"><?php echo $Lang['me.roomtext']; ?></div>
 			</div>
 			
 							</div>
@@ -189,7 +183,7 @@ $user2 = mysqli_fetch_assoc($user2 = mysqli_query(connect::cxn_mysqli(),"SELECT 
 			<div class="col-md-9 pl-md-3">
 				<div>
 					<div id="custom_widget_noticias-2" class="widget widget_custom_widget_noticias mb-4">
-					<div class="section-title"><h3>Notícias</h3></div>
+					<div class="section-title"><h3><?php echo $Lang['me.news']; ?></h3></div>
 					<div class="row row-news">
 					
 <?php $news = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news ORDER BY id DESC LIMIT 6");
@@ -292,7 +286,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 		<div class="row">
 			<div class="col-sm-6 col-lg-4">
 				<div class="section-title">
-					<h3>Com mais Conquistas</h3>
+					<h3><?php echo $Lang['me.achievements']; ?></h3>
 				</div>
 
 				
@@ -303,14 +297,14 @@ while($scoreStats = mysqli_fetch_array($getScore)) {
 
 echo '<li class="card">
 			<div class="avatar pixel lg">
-				<a href="/home/'.$scoreStats['username'].'"><img src="'.$Holo['avatar'] . $scoreStats['look'].'&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="Página inicial"></a>
+				<a href="/home/'.$scoreStats['username'].'"><img src="'.$Holo['avatar'] . $scoreStats['look'].'&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="Wulles"></a>
 			</div>
 			<div class="content">
 				<h6 class="mb-1">
 					<a class="text-inherit" href="/home/'.$scoreStats['username'].'" data-toggle="tooltip" title="" data-original-title="'.$scoreStats['username'].'">'.$scoreStats['username'].'</a>
 				</h6>
 				<div class="text-muted">
-					<strong>'.$scoreStats['achievement_score'].'</strong> Pontos de Conquista
+					<strong>'.$scoreStats['achievement_score'].'</strong> '.$Lang['me.achievepoints'].'
 				</div>
 			</div>
 		</li>';
@@ -324,7 +318,7 @@ echo '<li class="card">
 	
 			<div class="col-sm-6 col-lg-4">
 				<div class="section-title">
-					<h3>Com mais Respeitos</h3>
+					<h3><?php echo $Lang['me.respects']; ?></h3>
 				</div>
 
 				<div class="list">
@@ -335,12 +329,12 @@ while($respectStats = mysqli_fetch_array($getRespects)) {
 echo '<div class="card featured-user">
 	<div class="card-body">
 		<div class="avatar pixel lg">
-			<a href="/home/'.$respectStats['username'].'"><img src="'.$Holo['avatar'] . $respectStats['look'].'&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="Disco-lee"></a>
+			<a href="/home/'.$respectStats['username'].'"><img src="'.$Holo['avatar'] . $respectStats['look'].'&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="Wulles"></a>
 		</div>
 
 		<div class="content w-100">
 			<h5><a class="text-inherit" href="/home/'.$respectStats['username'].'" data-toggle="tooltip" title="" data-original-title="'.$respectStats['username'].'">'.$respectStats['username'].'</a></h5>
-			<div class="text-muted"><p><b>'.$respectStats['respects_received'].'</b> Respeitos recebidos.<br><b>'.$respectStats['respects_given'].'</b> Respeitos dados.</p></div>
+			<div class="text-muted"><p><b>'.$respectStats['respects_received'].'</b> '.$Lang['me.respectreceived'].'<br><b>'.$respectStats['respects_given'].'</b> '.$Lang['me.respectgiven'].'</p></div>
 		</div>
 	</div>
 </div>';
@@ -354,8 +348,8 @@ echo '<div class="card featured-user">
 			
 			<div class="col-sm-6 col-lg-4">
 				<div class="section-title">
-					<h3>Última foto</h3>
-					<strong><a href="/gallery">Ver todas</a></strong>
+					<h3><?php echo $Lang['me.lastphoto']; ?></h3>
+					<strong><a href="/gallery"><?php echo $Lang['me.seephotos']; ?></a></strong>
 				</div>
 				
 <?php $photos = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM camera_web ORDER BY id DESC LIMIT 1");
@@ -393,7 +387,7 @@ $roominfo = mysqli_fetch_assoc($roominfo = mysqli_query(connect::cxn_mysqli(),"S
 		<div class="row">
 		<div class="col-lg-12 pl-lg-3">
 
-				<div class="section-title mt-4"><h3>Recentemente chegados no <?php echo $Holo['name']; ?></h3></div>
+				<div class="section-title mt-4"><h3><?php echo $Lang['index.latestusers']; ?></h3></div>
 
 				<div class="card">
 					<div class="card-body last-users">
@@ -410,7 +404,7 @@ while($last = mysqli_fetch_array($lasts)){
 						</div>
 					</div>
 				</div>
-				<div class="alert alert-secondary" role="alert"><b>Curiosidade:</b> Aqui você pode conferir os últimos <b>Quinze</b> registrados no <?php echo $Holo['name']; ?>, será que quem você chamou está aqui?</div>
+				<div class="alert alert-secondary" role="alert"><?php echo $Lang['index.aboutlastusr']; ?></div>
 				</div>
 
 		</div>
