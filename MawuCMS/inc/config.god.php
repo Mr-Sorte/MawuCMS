@@ -164,6 +164,7 @@ $Lang = array(
 'me.achievements'    =>     'Com mais Conquistas',
 'me.respects'        =>     'Com mais Respeitos',
 'me.lastphoto'       =>     'Última foto',
+'me.photoby'         =>     'Foto de',
 'me.seephotos'       =>     'Ver todas',
 'me.achievepoints'   =>     'Pontos de Conquista.',
 'me.respectreceived' =>     'Respeitos recebidos.',
