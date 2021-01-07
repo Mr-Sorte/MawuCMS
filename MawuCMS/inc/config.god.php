@@ -4,12 +4,18 @@
 date_default_timezone_set('Europe/Paris'); # Time zone
 ini_set('display_errors', 0);
 
-
 // Hashs
 define('PASSWORD_SALT', 'ChAnGEItFoRRaNdOm');
 define('PASSWORD_SALT2', '2ChAnGEItFoRRaNdOm2');
 define('PASSSTAFF_SALT', '3ChAnGEItFoRRaNdOm3');
 define('PASSSTAFF_SALT2', '4ChAnGEItFoRRaNdOm4');
+	  
+// Mail
+define('SMTP_HOST', 'smtp.example.com'); # SMTP Host(Example: smtp-relay.gmail.com for google gmail)
+define('SMTP_PORT', '25'); # SMTP Port
+define('SMTP_ENCRYPTION', 'null'); # SMTP Encryption(null/ssl/tls)
+define('SMTP_USERNAME', 'yourmail@server.com'); # SMTP Your mail
+define('SMTP_PASSWORD', 'YoUrPass'); # SMTP Password
 	  
 // Configuration
 $Holo = array(
