@@ -1,18 +1,6 @@
 <?php
 require_once("inc/core.god.php");
 
-if(Loged == FALSE)
-{
-	header("Location: /");
-	exit;
-}
-
-if(mysql_num_rows($chb) > 0) 
-{
-    header("Location: banned");
-	exit;
-}
-
 if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
     header("Location: mantenimiento");
@@ -20,12 +8,17 @@ if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank'])
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<?php if(Loged == FALSE) { ?>
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">
+<?php } ?>
+<?php if(Loged == TRUE) { ?>
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
+<?php } ?>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Notícias</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['news.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -67,41 +60,42 @@ img.emoji {
 
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
+<?php if(Loged == TRUE) { ?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/me" class="nav-link">Início</a>
+				<a href="/me" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/articles" class="nav-link active">Notícias</a>
+				<a href="/articles" class="nav-link active"><?php echo $Lang['menu.articles']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/gallery" class="nav-link">Galeria</a>
+				<a href="/gallery" class="nav-link"><?php echo $Lang['menu.gallery']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Famosos</a>
+				<a href="/famous" class="nav-link"><?php echo $Lang['menu.famous']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/team" class="nav-link">Equipe</a>
-			</li>
-			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/support" class="nav-link">Suporte</a>
+				<a href="/team" class="nav-link"><?php echo $Lang['menu.team']; ?></a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange"><?php echo $Lang['menu.shop']; ?></font></a>
 			</li>-->
+			<li class="menu-item menu-item-type-post_type_archive nav-item">
+				<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
+			</li>
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
-		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
+		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
+        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -112,20 +106,56 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i><?php echo $Lang['menu.myprofile']; ?></a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> <?php echo $Lang['menu.settings']; ?></a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
 	</div>
 	</nav>
+<?php } ?>
+<?php if(Loged == FALSE) { ?>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+		<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+<ul id="menu-principal" class="navbar-nav mr-auto">
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/index" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type_archive nav-item">
+		<a href="/login" class="nav-link"><?php echo $Lang['menu.login']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type_archive nav-item">
+		<a href="/register" class="nav-link"><?php echo $Lang['menu.register']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item active">
+		<a href="/articles" class="nav-link active"><?php echo $Lang['menu.articles']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type_archive nav-item">
+		<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
+	</li>
+</ul>
+
+<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
+		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a><span style="cursor:default">    </span>
+		<a href="/login" class="btn btn-primary"><?php echo $Lang['menu.loginbutton']; ?></a>
+</div>
+
+		</div>
+	</nav>
+<?php } ?>
 
 <main>
 
-<div class="jumbotron jumbotron-fluid blue">
+<div style="cursor:default" class="jumbotron jumbotron-fluid blue">
 	<div class="container">
-		<h1>Notícias</h1>
+		<h1><?php echo $Lang['news.titulo']; ?></h1>
 	</div>
 </div>
 
@@ -133,19 +163,19 @@ img.emoji {
 	<div class="container">
 		<div class="row">
 		
-			<div class="col-md-3 pr-md-3 mb-4">
-				<h5 class="mb-3">Categorias</h5>
+			<div style="cursor:default" class="col-md-3 pr-md-3 mb-4">
+				<h5 class="mb-3"><?php echo $Lang['news.categorys']; ?></h5>
 				<div class="tags grey">
-					<a href="/articles/promocao">Promoções</a>
-					<a href="/articles/gratis">Coisas grátis</a>
-					<a href="/articles/mobis">Mobis</a>
-					<a href="/articles/hotel"><?php echo $Holo['name']; ?> Hotel</a>
-					<a href="/articles/sistema">Sistema</a>
+					<a href="/articles/promocao"><?php echo $Lang['news.cat1']; ?></a>
+					<a href="/articles/gratis"><?php echo $Lang['news.cat2']; ?></a>
+					<a href="/articles/mobis"><?php echo $Lang['news.cat3']; ?></a>
+					<a href="/articles/hotel"><?php echo $Lang['news.cat4']; ?></a>
+					<a href="/articles/sistema"><?php echo $Lang['news.cat5']; ?></a>
 				</div>
 					<br>
-				<h5 class="mb-3">Que isso?...</h5>
+				<h5 class="mb-3"><?php echo $Lang['news.whatis']; ?></h5>
 				<div class="tags grey">
-					<small>Aqui vai ser mostrado até <b>45</b> Últimas notícias postadas, sejam elas Promoções, Eventos ou Informativos.</small>
+					<small><?php echo $Lang['news.newstext']; ?></small>
 				</div>
 			</div>
 				
@@ -154,86 +184,91 @@ img.emoji {
 					<div id="custom_widget_noticias-2" class="widget widget_custom_widget_noticias mb-4">
 					<div class="row row-news">
 					
-<?php $news = mysql_query("SELECT * FROM cms_news ORDER BY id DESC LIMIT 45");
-while($new = mysql_fetch_array($news)){
+<?php $news = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news ORDER BY id DESC LIMIT 45");
+while($new = mysqli_fetch_array($news)){
 	
-$authorinfo = mysql_fetch_assoc($authorinfo = mysql_query("SELECT * FROM users WHERE username = '".$new['author']."'"));	
+$authorinfo = mysqli_fetch_assoc($authorinfo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '".$new['author']."'"));	
 ?>
 	<div class="col">
 		<div class="card news post-<?php echo $new['id']; ?>">
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Coisas Grátis">Coisas Grátis</div></a>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat2']; ?>"><?php echo $Lang['news.cat2']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Mobís">Mobís</div></a>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat3']; ?>"><?php echo $Lang['news.cat3']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promoções">Promoções</div></a>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat1']; ?>"><?php echo $Lang['news.cat1']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '0'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '0'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
 	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>">
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Sistema">Sistema</div></a>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat5']; ?>"><?php echo $Lang['news.cat5']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'gratis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
-	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">AO VIVO</div>
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Coisas Grátis">Coisas Grátis</div></a>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live"><?php echo $Lang['news.cat6']; ?></div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat2']; ?>"><?php echo $Lang['news.cat2']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'hotel' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
-	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">AO VIVO</div>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live"><?php echo $Lang['news.cat6']; ?></div>
 	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Holo['name']; ?> Hotel"><?php echo $Holo['name']; ?> Hotel</div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'mobis' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
-	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">AO VIVO</div>
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Mobís">Mobís</div></a>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live"><?php echo $Lang['news.cat6']; ?></div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat3']; ?>"><?php echo $Lang['news.cat3']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'promocao' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
-	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">AO VIVO</div>
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Promoções">Promoções</div></a>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live"><?php echo $Lang['news.cat6']; ?></div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat1']; ?>"><?php echo $Lang['news.cat1']; ?></div></a>
 <?php } ?>
-<?php $newscategorys = mysql_query("SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '1'");
-while($newscategory = mysql_fetch_array($newscategorys)){	
+<?php $newscategorys = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'sistema' AND id = '".$new['id']."' AND livenews = '1'");
+while($newscategory = mysqli_fetch_array($newscategorys)){	
 ?>
-	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live">AO VIVO</div>
-	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="Sistema">Sistema</div></a>
+	<a href="/news/<?php echo $new['id']; ?>" class="cover"><img src="<?php echo $new['image']; ?>"><div class="live"><?php echo $Lang['news.cat6']; ?></div>
+	<div class="cat <?php echo $new['category']; ?>" data-toggle="tooltip" data-html="true" title="" data-original-title="<?php echo $Lang['news.cat5']; ?>"><?php echo $Lang['news.cat5']; ?></div></a>
 <?php } ?>
 	<div class="card-body">
-<?php $newsbadges = mysql_query("SELECT * FROM cms_news WHERE active_badge = '1' AND id = '".$new['id']."'");
-while($newsbadge = mysql_fetch_array($newsbadges)){	
+<?php $newsbadges = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE active_badge = '1' AND id = '".$new['id']."'");
+while($newsbadge = mysqli_fetch_array($newsbadges)){	
 ?>
-		<div class="box" data-toggle="tooltip" title="" data-original-title="Ganhe este Emblema"><img src="<?php echo $Holo['url_badges']; ?><?php echo $newsbadge['badge']; ?>.gif"></div>
+		<div class="box" data-toggle="tooltip" title="" data-original-title="<?php echo $Lang['news.winbadge']; ?>"><img src="<?php echo $Holo['url_badges']; ?><?php echo $newsbadge['badge']; ?>.gif"></div>
 <?php } ?>
-				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string($new['title']); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
+				<h5 class="card-title mb-4"><a href="/news/<?php echo $new['id']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysqli_real_escape_string($new['title']); ?>"><?php echo mysqli_real_escape_string(mb_strimwidth($new['title'], 0, 30, "...")); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">
 				<img src="<?php echo $Holo['avatar'] . $authorinfo['look']; ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $new['author']; ?>">
 			</div>
-			<a href="/home/<?php echo $new['author']; ?>" data-toggle="tooltip" title="<?php echo $new['author']; ?>"><?php echo $new['author']; ?></a> 
-			<span class="ml-auto text-muted"><i class="fas fa-calendar-alt ml-3 mr-1"></i> <?php echo GetLast($new['date']); ?></span>			
+<?php if(Loged == TRUE) { ?>
+<a href="/home/<?php echo $new['author']; ?>" data-toggle="tooltip" title="<?php echo $new['author']; ?>"><?php echo $new['author']; ?></a> 
+<?php } ?>
+<?php if(Loged == FALSE) { ?>
+<a style="cursor:default" data-toggle="tooltip" title="<?php echo $new['author']; ?>"><?php echo $new['author']; ?></a> 
+<?php } ?>
+			<span class="ml-auto text-muted" style="cursor:default"><i class="fas fa-calendar-alt ml-3 mr-1"></i> <?php echo GetLast($new['date']); ?></span>			
 		</div>
 	</div>
 		</div>

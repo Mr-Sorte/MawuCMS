@@ -72,6 +72,7 @@ $_config['client'] = array(
 'flash_client_url' 	 				=> ''.$Holo['url'].'/swf/gordon/PRODUCTION-202006192205-424220153/',
 'habbo_swf' 		 				=> 'Habbo.swf');
 
+// Language
 $Lang = array(
 
 // Logo
@@ -93,6 +94,7 @@ $Lang = array(
 'menu.settings'      =>     'Configurações',
 'menu.logout'        =>     'Desconectar',
 'menu.onlines'       =>     'Onlines no Hotel',
+'menu.back'          =>     'Voltar',
 
 // Lyrics
 'lyrics.1'           =>     'Crie uma conta agora mesmo.',
@@ -175,6 +177,19 @@ $Lang = array(
 'me.achievepoints'   =>     'Pontos de Conquista.',
 'me.respectreceived' =>     'Respeitos recebidos.',
 'me.respectgiven'    =>     'Respeitos dados.',
+
+// News
+'news.titulo'        =>     'Notícias',
+'news.categorys'     =>     'Categorias',
+'news.cat1'          =>     'Promoções',
+'news.cat2'          =>     'Coisas grátis',
+'news.cat3'          =>     'Mobis',
+'news.cat4'          =>     ''.$Holo['name'].' Hotel',
+'news.cat5'          =>     'Sistema',
+'news.cat6'          =>     'AO VIVO',
+'news.whatis'        =>     'Que isso?...',
+'news.newstext'      =>     'Aqui vai ser mostrado até <b>45</b> Últimas notícias postadas, sejam elas Promoções, Eventos ou Informativos.',
+'news.winbadge'      =>     'Ganhe este Emblema',
 );
 	
 ?>
