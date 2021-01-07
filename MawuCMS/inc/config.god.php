@@ -1,17 +1,17 @@
 <?php
 
-# PHP 
+// Php 
 date_default_timezone_set('Europe/Paris'); # Time zone
 ini_set('display_errors', 0);
 
 
-# HASHS
+// Hashs
 define('PASSWORD_SALT', 'ChAnGEItFoRRaNdOm');
 define('PASSWORD_SALT2', '2ChAnGEItFoRRaNdOm2');
 define('PASSSTAFF_SALT', '3ChAnGEItFoRRaNdOm3');
 define('PASSSTAFF_SALT2', '4ChAnGEItFoRRaNdOm4');
 	  
-# CMS
+// Configuration
 $Holo = array(
 'panel'         =>     'housekeeping',
 'htmllang'      =>     '', # EN or pt-BR
@@ -27,7 +27,7 @@ $Holo = array(
 'avatar'        =>     'http://habbo.com.br/habbo-imaging/avatarimage?figure=',
 'url_badges'    =>     'http://localhost/swf/c_images/album1584/',
 
-// Registro
+// Register
 'mision'        =>     '',
 'monedas'       =>     '1000',
 'duckets'       =>     '160',
@@ -42,14 +42,14 @@ $Holo = array(
 'discordinvl'   =>     '',
 'discordwid'    =>     '',
 
-// Segurança
+// Security
 'minrank'       =>     '5',
 'maxrank'       =>     '10',
 'minhkr'        =>     '6',
 'recaptcha_on'  =>     'true',
 'recaptcha'     =>     '');
 
-# HOTEL
+// Flash Client
 $_config['client'] = array(
 'host' 				 				=> '127.0.0.1',
 'port' 				 				=> '30000',
@@ -67,23 +67,9 @@ $_config['client'] = array(
 'habbo_swf' 		 				=> 'Habbo.swf');
 
 $Lang = array(
+
 // Logo
 'logo.tag'           =>     'BETA',
-
-// Time
-'time.second'        =>     'segundo',
-'time.seconds'       =>     'segundos',
-'time.minute'        =>     'minuto',
-'time.minutes'       =>     'minutos',
-'time.hour'          =>     'hora',
-'time.hours'         =>     'horas',
-'time.day'           =>     'dia',
-'time.days'          =>     'dias',
-'time.week'          =>     'semana',
-'time.weeks'         =>     'semanas',
-'time.month'         =>     'mês',
-'time.months'        =>     'meses',
-'time.nodate'        =>     'Sem informações sobre data',
 
 // Menu
 'menu.index'         =>     'Início',
@@ -94,6 +80,7 @@ $Lang = array(
 'menu.gallery'       =>     'Galeria',
 'menu.famous'        =>     'Famosos',
 'menu.team'          =>     'Equipe',
+'menu.shop'          =>     'Loja',
 'menu.support'       =>     'Suporte',
 'menu.hotel'         =>     'Entrar no Hotel',
 'menu.myprofile'     =>     'Ver meu Perfil',
@@ -123,6 +110,7 @@ $Lang = array(
 'index.noticias'     =>     'Notícias',
 'index.alertnews'    =>     '<b>Atenção!</b> Você consegue ler as nossas notícias, mas para quaisquer interações, você precisa estar conectado(a) em sua conta!',
 'index.latestusers'  =>     'Recentemente chegados no '.$Holo['name'].'',
+'index.aboutlastusr' =>     '<b>Curiosidade:</b> Aqui você pode conferir os últimos <b>Quinze</b> registrados no '.$Holo['name'].', será que quem você chamou está aqui?',
 'index.gallery'      =>     'Galeria de Fotos',
 'index.alertphotos'  =>     '<b>Psiu!</b> Quer publicar uma foto ou conferir mais fotos? Conecte em sua conta agora mesmo.',
 
@@ -137,6 +125,10 @@ $Lang = array(
 'login.error1'       =>     'Não deixe campos vazios.',
 'login.error2'       =>     'Nome de usuário inválido.',
 'login.error3'       =>     'Você não é um robô? Verifique sua identidade.',
+
+// Forgot
+'forgot.titulo'      =>     'Esqueci minha Senha',
+'forgot.'       =>     '',
 
 // Register
 'register.titulo'    =>     'Criar nova Conta',
@@ -158,6 +150,24 @@ $Lang = array(
 'register.error5'    =>     'Seu nome de usuário é muito curto.',
 'register.error6'    =>     'Algo de errado está acontecendo com seu nome, tente outro nome.',
 'register.error7'    =>     'Você não é um robô? Verifique sua identidade.',
+
+// Me
+'me.titulo'          =>     'Início',
+'me.rooms'           =>     'Quartos destaques',
+'me.roomby'          =>     'Criado por',
+'me.roomwith'        =>     'Com',
+'me.roomhave'        =>     'Tem',
+'me.roomlikes'       =>     'curtidas',
+'me.roomusers'       =>     'pessoas nele',
+'me.roomtext'        =>     '<b>Confuso?</b> Os seis quartos com mais Curtidas vão sempre aparecer destacados aqui.',
+'me.news'            =>     'Notícias',
+'me.achievements'    =>     'Com mais Conquistas',
+'me.respects'        =>     'Com mais Respeitos',
+'me.lastphoto'       =>     'Última foto',
+'me.seephotos'       =>     'Ver todas',
+'me.achievepoints'   =>     'Pontos de Conquista.',
+'me.respectreceived' =>     'Respeitos recebidos.',
+'me.respectgiven'    =>     'Respeitos dados.',
 );
 	
 ?>
