@@ -229,6 +229,13 @@ $Lang = array(
 'famous.creditdesc'  =>     'Essa categoria mostra apenas as <b>Cinco</b> pessoas mais ricos de <font color="#FF9030">Moedas</font> dentro do '.$Holo['name'].' Hotel.',
 'famous.credits'     =>     'Moedas',
 
+// Error
+'error.titulo'       =>     'Erro',
+'error.erro1'        =>     'Página não encontrada',
+'error.erro2'        =>     'O link pode estar quebrado ou a página pode ter sido removida. Verifique se o link que você está tentando abrir está correto.',
+'error.erro3'        =>     'Voltar a página inicial',
+'error.erro4'        =>     'Voltar aonde estava',
+
 // Footer
 'footer.allrights'   =>     'Todos direitos reservados.',
 'footer.devby'       =>     'Site desenvolvido por',
