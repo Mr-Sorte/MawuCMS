@@ -6,7 +6,6 @@ if(Loged == FALSE)
 	exit;
 }
 
-
 if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
     header("Location: maintenance");

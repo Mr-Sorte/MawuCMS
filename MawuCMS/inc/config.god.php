@@ -211,6 +211,10 @@ $Lang = array(
 'gallery.error2'     =>     '<b>Ei:</b> Ou essa foto não existe, ou ela já foi apagada...',
 'gallery.error3'     =>     '<b>Ops!</b> O ID dessa foto não é válido.',
 'gallery.error4'     =>     '<b>Ops!</b> Seu código de segurança está invalido, cuidado e tente novamente.',
+'gallery.timeah'     =>     'Postada há',
+'gallery.visual'     =>     'Visualizações',
+'gallery.roomby'     =>     'Foto tirada no quarto de',
+'gallery.moreof'     =>     'Mais fotos de',
 
 // Footer
 'footer.allrights'   =>     'Todos direitos reservados.',

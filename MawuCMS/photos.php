@@ -1,20 +1,8 @@
 <?php require_once("inc/core.god.php");
 
-if(Loged == FALSE)
+if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
-	header("Location: /");
-	exit;
-}
-
-if(mysql_num_rows($chb) > 0) 
-{
-    header("Location: banned");
-	exit;
-}
-
-if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
-{
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 
@@ -22,20 +10,20 @@ if(isset($_GET['url']))
 { 
     if(!empty($_GET['url']))
     { 
-        $id_photo = (int) mysql_real_escape_string($_GET['url']); 
-        $query_photos = mysql_query("SELECT * FROM camera_web WHERE id = '".$id_photo."' LIMIT 1");
-        if(mysql_num_rows($query_photos) > 0)
+		$id_photo = (int) filtro($_GET['url']); 
+		$query_photos = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM camera_web WHERE id = '".$id_photo."' LIMIT 1");
+        if(mysqli_num_rows($query_photos) > 0)
         { 
-            $columna = mysql_fetch_assoc($query_photos);
-			$user_n = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE id = '". $columna['user_id'] ."'"));
-			$room_n = mysql_fetch_assoc(mysql_query("SELECT * FROM rooms WHERE id = '". $columna['room_id'] ."'"));
-			$roomowner_n = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE id = '". $room_n['owner_id'] ."'"));
-			$photo = '' . $columna['id'] . '';
-			$photo2 = '' . $columna['user_id'] . '';
-			$photo3 = '' . $columna['room_id'] . '';
-			$photo4 = '' . $columna['likes'] . '';
-			$photo5 = '' . $columna['timestamp'] . '';
-			$photo6 = '' . $columna['url'] . '';
+			$columna = mysqli_fetch_assoc($query_photos);
+			$user_n = mysqli_fetch_assoc(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '". $columna['user_id'] ."'"));
+			$room_n = mysqli_fetch_assoc(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms WHERE id = '". $columna['room_id'] ."'"));
+			$roomowner_n = mysqli_fetch_assoc(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '". $room_n['owner_id'] ."'"));
+			$photo  = ''.$columna['id'].'';
+			$photo2 = ''.$columna['user_id'].'';
+			$photo3 = ''.$columna['room_id'].'';
+			$photo4 = ''.$columna['likes'].'';
+			$photo5 = ''.$columna['timestamp'].'';
+			$photo6 = ''.$columna['url'].'';
 			
 		} 
         else 
@@ -57,12 +45,12 @@ else
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Foto de <?php echo $user_n['username']; ?></title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['gallery.photoby']; ?> <?php echo $user_n['username']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -111,41 +99,40 @@ function goBack() {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a style="cursor:default" class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/me" class="nav-link">Início</a>
+				<a href="/me" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/articles" class="nav-link">Notícias</a>
+				<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/gallery" class="nav-link active">Galeria</a>
+				<a href="/gallery" class="nav-link active"><?php echo $Lang['menu.gallery']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Famosos</a>
+				<a href="/famous" class="nav-link"><?php echo $Lang['menu.famous']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/team" class="nav-link">Equipe</a>
-			</li>
-			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/support" class="nav-link">Suporte</a>
+				<a href="/team" class="nav-link"><?php echo $Lang['menu.team']; ?></a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange"><?php echo $Lang['menu.shop']; ?></font></a>
 			</li>-->
+			<li class="menu-item menu-item-type-post_type_archive nav-item">
+				<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
+			</li>
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		
-		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
-		<a onclick="goBack()" class="btn btn-danger"><font color="white">Voltar</font></a>    
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
+		<a onclick="goBack()" class="btn btn-danger"><font color="white"><?php echo $Lang['menu.back']; ?></font></a><span style="cursor:default">    </span>
+		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
+        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -156,9 +143,9 @@ function goBack() {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i><?php echo $Lang['menu.myprofile']; ?></a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> <?php echo $Lang['menu.settings']; ?></a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
@@ -178,8 +165,8 @@ function goBack() {
 
 					<div class="w-100 d-flex flex-column flex-md-row">
 						<div class="w-100">
-							<h4 class="mb-1"><?php echo $user_n['username']; ?></h4>
-							<div class="text-muted">Postada <?php echo GetLast($photo5); ?></strong></div>
+							<h4 class="mb-1"><a href="/home/<?php echo $user_n['username']; ?>"><font color="black"><?php echo $user_n['username']; ?></font></a></h4>
+							<div style="cursor:default" class="text-muted"><?php echo $Lang['gallery.timeah']; ?> <?php echo GetLast($photo5); ?></strong></div>
 						</div>
 					</div>
 					
@@ -197,20 +184,20 @@ function goBack() {
 				<div class="row">
 
 					<div class="col-md-12 pl-md-3">
-						<div class="galery-infos">
-								<div><i class="fas fa-calendar fa-fw mr-2"></i> <?php echo GetLast($photo5); ?></div>
-								<div class="mb-2"><i class="fas fa-eye fa-fw mr-2"></i> Foto tirada no quarto de <a href="/home/<?php echo $roomowner_n['username']; ?>"><span data-toggle="tooltip" title="" data-original-title="<?php echo $roomowner_n['username']; ?>"><?php echo $roomowner_n['username']; ?></span></a></div>
+						<div style="cursor:default" class="galery-infos">
+								<div><i class="fas fa-eye fa-fw mr-2"></i> <b>1533</b> <?php echo $Lang['gallery.visual']; ?></div>
+								<div class="mb-2"><i class="fas fa-tag fa-fw mr-2"></i> <?php echo $Lang['gallery.roomby']; ?> <a href="/home/<?php echo $roomowner_n['username']; ?>"><span data-toggle="tooltip" title="" data-original-title="<?php echo $roomowner_n['username']; ?>"><?php echo $roomowner_n['username']; ?></span></a></div>
 						</div>
 						
 						<hr>
 						
-	<h6 class="mb-3"><a class="text-inherit" href="/home/<?php echo $user_n['username']; ?>">Mais de <span data-toggle="tooltip" title="" data-original-title="<?php echo $user_n['username']; ?>"><?php echo $user_n['username']; ?></span></a></h6>
+	<h6 class="mb-3" style="cursor:default"><?php echo $Lang['gallery.moreof']; ?> <a class="text-inherit" href="/home/<?php echo $user_n['username']; ?>"><span data-toggle="tooltip" title="" data-original-title="<?php echo $user_n['username']; ?>"><b><?php echo $user_n['username']; ?></b></span></a></h6>
 
 						<div class="row">
 
 <?php
-$photos = mysql_query("SELECT * FROM camera_web WHERE user_id = '".$user_n['id']."' ORDER BY id DESC");
-while($photo = mysql_fetch_assoc($photos)){
+$photos = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM camera_web WHERE user_id = '".$user_n['id']."' ORDER BY id DESC LIMIT 30");
+while($photo = mysqli_fetch_assoc($photos)){
 ?>
 	<div class="col-2">
 	    <div class="card list gallery gallery-<?php echo $photo['id']; ?>">
