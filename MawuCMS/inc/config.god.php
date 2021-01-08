@@ -216,6 +216,19 @@ $Lang = array(
 'gallery.roomby'     =>     'Foto tirada no quarto de',
 'gallery.moreof'     =>     'Mais fotos de',
 
+// Famous
+'famous.titulo'      =>     'Famosos',
+'famous.noshow'      =>     'você não vai aparecer nesta página porque você configurou sua conta para ficar <b>Oculta</b>!',
+'famous.morediamonds'=>     'Com mais Diamantes',
+'famous.diadesc'     =>     'Essa categoria mostra apenas as <b>Cinco</b> pessoas mais ricos de <font color="#0AA8EC">Diamantes</font> dentro do '.$Holo['name'].' Hotel.',
+'famous.diamonds'    =>     'Diamantes',
+'famous.moreduckets' =>     'Com mais Duckets',
+'famous.duckdesc'    =>     'Essa categoria mostra apenas as <b>Cinco</b> pessoas mais ricos de <font color="#822273">Duckets</font> dentro do '.$Holo['name'].' Hotel.',
+'famous.duckets'     =>     'Duckets',
+'famous.morecredits' =>     'Com mais Moedas',
+'famous.creditdesc'  =>     'Essa categoria mostra apenas as <b>Cinco</b> pessoas mais ricos de <font color="#FF9030">Moedas</font> dentro do '.$Holo['name'].' Hotel.',
+'famous.credits'     =>     'Moedas',
+
 // Footer
 'footer.allrights'   =>     'Todos direitos reservados.',
 'footer.devby'       =>     'Site desenvolvido por',
