@@ -177,6 +177,9 @@ $Lang = array(
 'me.achievepoints'   =>     'Pontos de Conquista.',
 'me.respectreceived' =>     'Respeitos recebidos.',
 'me.respectgiven'    =>     'Respeitos dados.',
+'me.yourbadges'      =>     'Alguns dos seus Emblemas',
+'me.badgealert'      =>     '<b>Ei!</b> Estamos mostrando apenas <b>6</b> Emblemas, mas você tem atualmente:',
+'me.smallbadges'     =>     'emblemas.',
 
 // News
 'news.titulo'        =>     'Notícias',

@@ -280,6 +280,35 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 	</div>
 </section>
 
+<section style="cursor:default" class="pb-0">
+	<div class="container">
+		<div class="row">
+		
+		<div class="col-lg-12 pl-lg-3">
+  		    <div id="custom_widget_coisas-2" class="widget widget_custom_widget_coisas mb-4">
+     		    <div style="cursor:default" class="section-title"><h3><?php echo $Lang['me.yourbadges']; ?></h3></div>
+      		   <div class="row">
+<?php $badges = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_badges WHERE user_id = '".$myrow['id']."' ORDER BY slot_id DESC LIMIT 6");
+while($badge = mysqli_fetch_array($badges)){ ?>
+      		      <div class="col-4 col-sm-3 col-lg-2 ">
+      		         <div class="card free  post-153">
+       		           <a style="cursor:default">
+         		            <div class="box pixel"><img src="<?php echo $Holo['url_badges']; ?><?php echo $badge['badge_code']; ?>.gif"></div>
+             		        <div class="info"><?php echo filtro(mb_strimwidth($badge['badge_code'], 0, 13, "...")); ?></div>
+          		        </a>
+      		         </div>
+     		       </div>
+<?php } ?>
+   		      </div>
+ 		  </div>
+		</div>
+		
+		<div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['me.badgealert']; ?> <b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_badges WHERE user_id = '".$myrow['id']."'")) ?></b> <?php echo $Lang['me.smallbadges']; ?></div>
+
+		</div>
+	</div>
+</section>
+
 <section>
 	<div class="container pt-3">
 		<div class="row">

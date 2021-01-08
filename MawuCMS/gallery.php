@@ -2,7 +2,7 @@
 
 if(Loged == FALSE)
 {
-	header("Location: /login?redir=gallery");
+	header("Location: /");
 	exit;
 }
 
@@ -127,7 +127,7 @@ img.emoji {
 		<div class="row">
 			<div class="col-md-3 pr-md-3 mb-4">
 <?php
-if($myrow['rank'] >= 5) {
+if($myrow['rank'] >= $Holo['minhkr']) {
 if($_GET['supprphoto']) {
 if(isset($_GET['jeton']) && ($_GET['jeton'] == $_SESSION['jeton']))
 {
