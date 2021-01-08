@@ -190,6 +190,9 @@ $Lang = array(
 'news.whatis'        =>     'Que isso?...',
 'news.newstext'      =>     'Aqui vai ser mostrado até <b>45</b> Últimas notícias postadas, sejam elas Promoções, Eventos ou Informativos.',
 'news.winbadge'      =>     'Ganhe este Emblema',
+'news.category'      =>     'Categoria',
+'news.have1'         =>     'Existem',
+'news.have2'         =>     'notícias nesta categoria.',
 );
 	
 ?>
