@@ -194,6 +194,21 @@ $Lang = array(
 'news.have1'         =>     'Existem',
 'news.have2'         =>     'notícias nesta categoria.',
 
+// Gallery
+'gallery.titulo'     =>     'Galeria',
+'gallery.desc'       =>     'Entrar no Hotel e usar a Câmera',
+'gallery.whatis'     =>     'Que isso?...',
+'gallery.whatdesc'   =>     'As últimas <b>45</b> fotos tiradas e publicadas dentro do Hotel, vão aparecer nesta página, inclusive ver as suas.',
+'gallery.aleatorys'  =>     'Foto aleatória',
+'gallery.fixed'      =>     'Essa é uma boa foto!',
+'gallery.photoby'    =>     'Foto de',
+'gallery.moderation' =>     'Moderação:',
+'gallery.moddelete'  =>     'Deletar essa foto.',
+'gallery.error1'     =>     '<b>Sucesso!</b> A foto foi apagada.',
+'gallery.error2'     =>     '<b>Ei:</b> Ou essa foto não existe, ou ela já foi apagada...',
+'gallery.error3'     =>     '<b>Ops!</b> O ID dessa foto não é válido.',
+'gallery.error4'     =>     '<b>Ops!</b> Seu código de segurança está invalido, cuidado e tente novamente.',
+
 // Footer
 'footer.allrights'   =>     'Todos direitos reservados.',
 'footer.devby'       =>     'Site desenvolvido por',

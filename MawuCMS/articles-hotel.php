@@ -1,9 +1,9 @@
 <?php
 require_once("inc/core.god.php");
 
-if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
+if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 ?>
