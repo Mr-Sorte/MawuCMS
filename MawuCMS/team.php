@@ -1,4 +1,5 @@
-<?php require_once("inc/core.god.php");
+<?php
+require_once("inc/core.god.php");
 
 if(Loged == FALSE)
 {
@@ -6,25 +7,19 @@ if(Loged == FALSE)
 	exit;
 }
 
-if(mysql_num_rows($chb) > 0) 
+if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
 {
-    header("Location: banned");
-	exit;
-}
-
-if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
-{
-    header("Location: mantenimiento");
+    header("Location: maintenance");
 	exit;
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Equipe</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['team.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -67,40 +62,40 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a style="cursor:default" class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/me" class="nav-link">Início</a>
+				<a href="/me" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/articles" class="nav-link">Notícias</a>
+				<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/gallery" class="nav-link">Galeria</a>
+				<a href="/gallery" class="nav-link"><?php echo $Lang['menu.gallery']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Famosos</a>
+				<a href="/famous" class="nav-link"><?php echo $Lang['menu.famous']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/team" class="nav-link active">Equipe</a>
-			</li>
-			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/support" class="nav-link">Suporte</a>
+				<a href="/team" class="nav-link active"><?php echo $Lang['menu.team']; ?></a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange"><?php echo $Lang['menu.shop']; ?></font></a>
 			</li>-->
+			<li class="menu-item menu-item-type-post_type_archive nav-item">
+				<a href="/support" class="nav-link"><?php echo $Lang['menu.support']; ?></a>
+			</li>
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
-		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
+		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
+        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -111,9 +106,9 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i><?php echo $Lang['menu.myprofile']; ?></a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> <?php echo $Lang['menu.settings']; ?></a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
@@ -121,163 +116,47 @@ img.emoji {
 	</nav>
 	
 	<main>
-<div class="jumbotron jumbotron-fluid purple">
+<div style="cursor:default" class="jumbotron jumbotron-fluid purple">
 	<div class="container d-flex align-items-center">
-		<h1>Equipe</h1>
+		<h1><?php echo $Lang['team.titulo']; ?></h1>
 	</div>
 </div>
 
 <section>
 	<div class="container">
-		<h4>Formais <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="" data-original-title="A Equipe Formal é feita por membros a partir de Moderação até Criação geral."></i></h4>
+		<h4 style="cursor:default"><?php echo $Lang['team.desc']; ?> <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="" data-original-title="<?php echo $Lang['team.descinfo']; ?>"></i></h4>
 			<div class="row">
 			
-			<?php $valores = mysql_query("SELECT * FROM permissions WHERE visible = '0' ORDER BY id DESC LIMIT 1");
-			while($valor = mysql_fetch_assoc($valores)){ ?>
-			<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-			while($isadm = mysql_fetch_assoc($isadmin)){
-			$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$isadm['rank']."'")); ?>
-			<div class="col-md-12">
+			<?php $valores = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM permissions WHERE visible = '0' ORDER BY id DESC LIMIT 1");
+			while($valor = mysqli_fetch_assoc($valores)){ ?>
+			<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= 6");
+			while($isadm = mysqli_fetch_assoc($isadmin)){
+			$rank = mysqli_fetch_assoc($rank = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM permissions WHERE id = '".$isadm['rank']."'")); ?>
+			<div style="cursor:default" class="col-md-12">
 			<div id="custom_widget_parceiro-2" class="widget widget_custom_widget_parceiro mb-4">
-			    <div class="alert alert-secondary" role="alert"><b>Ei...</b> Como vimos que você é <b><?php echo $rank['rank_name']; ?></b>, precisamos lhe informar que existem cargos ocultos aqui, sendo eles - <?php $isadmin = mysql_query("SELECT * FROM permissions WHERE visible = '0'");
-			while($isadm = mysql_fetch_assoc($isadmin)){ ?><b><?php echo $isadm['rank_name']; ?></b> <?php } ?></div>
+			<div class="alert alert-secondary" role="alert"><?php echo $Lang['team.hide1']; ?> <b><?php echo $rank['rank_name']; ?></b>, <?php echo $Lang['team.hide2']; ?> <?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM permissions WHERE visible = '0'");
+			while($isadm = mysqli_fetch_assoc($isadmin)){ ?><b><?php echo $isadm['rank_name']; ?></b> <?php } ?></div>
 			</div>
 			</div>
 			<?php } ?>
 			<?php } ?>
 
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '9' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
+<?php $staffs = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE rank >= '".$Holo['minrank']."' AND visible = '1' ORDER BY rank DESC");
+while($staff = mysqli_fetch_array($staffs)){
+$rank = mysqli_fetch_assoc($rank = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
 ?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
+<?php $visibles = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
+while($visible = mysqli_fetch_array($visibles)){
 ?>
-				<div class="col-md-2">
+				<div style="cursor:default" class="col-md-2">
 				   <div class="section-topic">
 							<div class="side">
 								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
+									<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
 								</div>
 
 								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '9' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '8' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '7' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '6' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
+									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo filtro(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo filtro(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
 
 									<div class="avatar pixel xl d-none d-md-block">
 										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
@@ -293,69 +172,6 @@ while($visible = mysql_fetch_array($visibles)){
 <?php } ?>
 				
 			</div>
-			<br><hr>
-			<h4>Informais <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="" data-original-title="A Equipe Informal é feita por Embaixadores e Arquitetos oficializados pela gerencia."></i></h4>
-			<div class="row">
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '5' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-<?php $staffs = mysql_query("SELECT * FROM users WHERE rank = '3' AND visible = '1' ORDER BY rank DESC");
-while($staff = mysql_fetch_array($staffs)){
-$rank = mysql_fetch_assoc($rank = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."'"));
-?>
-<?php $visibles = mysql_query("SELECT * FROM permissions WHERE id = '".$staff['rank']."' AND visible = '1'");
-while($visible = mysql_fetch_array($visibles)){
-?>
-				<div class="col-md-2">
-				   <div class="section-topic">
-							<div class="side">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&amp;user=4Queijos&amp;action=std&amp;direction=2&amp;head_direction=2&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=b" alt="">
-								</div>
-
-								<div class="infos">
-									<h5 class="mb-md-3 mb-1"><a class="text-inherit" href="/home/<?php echo $staff['username']; ?>" data-toggle="tooltip" title="" data-original-title="<?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?>"><?php echo mysql_real_escape_string(mb_strimwidth($staff['username'], 0, 16, "...")); ?></a></h5>
-
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="<?php echo $Holo['avatar'] . $staff['look']; ?>&amp;action=std&amp;direction=2&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=l" alt="">
-									</div>
-						
-						<div class="rank" style="background-color: <?php echo $rank['prefix_color']; ?>;"><?php echo $rank['rank_name']; ?><div class="nv<?php if($staff['online'] == '1') { echo '1'; } else { echo '0'; } ?>"><?php if($staff['online'] == '1') { echo ''; } else { echo ''; } ?></div></div>
-
-								</div>
-							</div>
-						</div>
-				</div>
-<?php } ?>
-<?php } ?>
-			</div>
-		
 	</div>
 </section>
 

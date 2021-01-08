@@ -1,4 +1,4 @@
-	<div class="site-footer">
+	<div style="cursor:default" class="site-footer">
 		<div class="container">
 			<div class="menu-rodape-container">
 			    <ul id="menu-rodape" class="menu">
