@@ -193,6 +193,11 @@ $Lang = array(
 'news.category'      =>     'Categoria',
 'news.have1'         =>     'Existem',
 'news.have2'         =>     'notícias nesta categoria.',
+
+// Footer
+'footer.allrights'   =>     'Todos direitos reservados.',
+'footer.devby'       =>     'Site desenvolvido por',
+'footer.text'        =>     'Este site não está afiliada com, patrocinada por, apoiada por, ou principalmente aprovada pela Sulake Oy ou suas empresas Afiliadas, '.$Holo['name'].' pode utilizar as marcas registradas e outras propriedades intelectuais do Habbo, que estão permitidas sob a Política de Fã Sites Habbo.',
 );
 	
 ?>
