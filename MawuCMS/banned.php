@@ -1,21 +1,9 @@
 <?php
-require_once("inc/core.god.php");
-
-if(Loged == FALSE)
+if(isset($Holo)) {
+	
+if($chbactive == "False") 
 {
-	header("Location: /");
-	exit;
-}
-
-if(MANTENIMIENTO == '1') 
-{
-    header("Location: mantenimiento");
-	exit;
-}
-
-if(mysql_num_rows($chb) == 0) 
-{
-    header("Location: error");
+    header("Location: /");
 	exit;
 }
 
@@ -24,16 +12,14 @@ if($_GET['action'] == 'logout') {
     header("Location: /");
 	exit;
 }
-
-$chbe = mysql_fetch_assoc($chb);
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Banimento</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['banned.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -76,7 +62,26 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a style="cursor:default" class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
+			<div class="dropdown" style="cursor:cell">
+			
+				<div id="dropUser" class="d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div class="avatar pixel">
+						<img src="<?php echo $Holo['avatar'] . $myrow['look']; ?> &amp;action=std&amp;direction=3&amp;head_direction=3&amp;img_format=png&amp;gesture=std&amp;headonly=0&amp;size=s" alt="<?php echo $myrow['username']; ?>">
+						</div>
+				</div>
+					
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
+						<a class="dropdown-item" href="/logout?action=logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
+					</div>
+			</div>
+		</div>
+	</div>
 	</nav>
 
 <main>
@@ -86,30 +91,49 @@ img.emoji {
 			<div class="col-md-4 offset-md-4">
 				<div class="toggle-login">
 					<div class="login">
-												
-	<div class="text-center"> 
-		<h4 class="mb-4"><?php echo $myrow['username']; ?></h4>
-		<p class="text-muted mb-0">Sua conta foi Banida do <?php echo $Holo['name']; ?> Hotel.</p>
-		<hr>
-		<p class="text-muted mb-0">Banido dia <?php echo date('d/m', $chbe['timestamp']); ?> de <?php echo date('Y', $chbe['timestamp']); ?> até <?php echo date('d/m', $chbe['ban_expire']); ?> de <?php echo date('Y', $chbe['ban_expire']); ?>.</p>
-<?php
-$staffs = mysql_query("SELECT * FROM users WHERE id = '".$chbe['user_staff_id']."'");
-while($staff = mysql_fetch_assoc($staffs)){
+<?PHP
+if($chbtype == "Compte")
+{
 ?>
-		<p class="text-muted mb-0">Banimento adicionado por <?php echo $staff['username']; ?>.</p>
-<?php } ?>
-		<hr>
-		<a class="btn btn-danger px-5" href="banned?action=logout">Desconectar</a>
+	<div style="cursor:default" class="text-center">
+			<div class="card-body text-center">
+					<h1 class="mb-0" data-toggle="tooltip" data-original-title="<?php echo $myrow['username']; ?>"><?php echo $myrow['username']; ?></h1>
+					<div class="mb-3 text-muted"><?php echo $myrow['mail']; ?></div>
+			</div>	
+			<p class="text-muted mb-0"><?php echo $Lang['banned.youreban']; ?></p>
+					<hr>
+			<p class="text-muted mb-0"><?php echo $Lang['banned.text1']; ?> <b><?php echo date('d/m', $chbe['ban_expire']); ?></b> <?php echo $Lang['banned.text2']; ?> <b><?php echo date('Y', $chbe['ban_expire']); ?></b> <?php echo $Lang['banned.text3']; ?> <b><?php echo $chbe['ban_reason']; ?></b>.</p>
+					<hr>
+		<a class="btn btn-lg btn-success" href="/banned"><?php echo $Lang['banned.button']; ?></a>
 	</div>
+<?PHP
+} elseif($chbtype == "IP") {
+?>
+	<div style="cursor:default" class="text-center">
+			<div class="card-body text-center">
+					<h1 class="mb-0" data-toggle="tooltip" data-original-title="<?php echo $myrow['username']; ?>"><?php echo $myrow['username']; ?></h1>
+					<div class="mb-3 text-muted"><?php echo $myrow['mail']; ?></div>
+			</div>	
+			<p class="text-muted mb-0"><?php echo $Lang['banned.youreban']; ?></p>
+					<hr>
+			<p class="text-muted mb-0"><?php echo $Lang['banned.text1']; ?> <b><?php echo date('d/m', $chbe['ban_expire']); ?></b> <?php echo $Lang['banned.text2']; ?> <b><?php echo date('Y', $chbe['ban_expire']); ?></b> <?php echo $Lang['banned.text3']; ?> <b><?php echo $chbe['ban_reason']; ?></b>.</p>
+					<hr>
+		<a class="btn btn-lg btn-success" href="/banned"><?php echo $Lang['banned.button']; ?></a>
+	</div>
+<?PHP
+} else {
+    header("Location: /");
+	exit;
+}
+?>
 
- 					</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-	</main>
+</main>
 	
 	<?php require_once("Mawu/includes/footer.php"); ?>
 	
@@ -127,3 +151,8 @@ while($staff = mysql_fetch_assoc($staffs)){
 		
 </body>
 </html>
+
+<?PHP } else { 
+    header("Location: /");
+    exit; 
+} ?>

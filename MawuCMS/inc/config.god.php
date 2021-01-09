@@ -229,6 +229,21 @@ $Lang = array(
 'famous.creditdesc'  =>     'Essa categoria mostra apenas as <b>Cinco</b> pessoas mais ricos de <font color="#FF9030">Moedas</font> dentro do '.$Holo['name'].' Hotel.',
 'famous.credits'     =>     'Moedas',
 
+// Team
+'team.titulo'        =>     'Equipe',
+'team.desc'          =>     'Nossos membros atuais',
+'team.descinfo'      =>     'A Equipe é feita por membros a partir de Moderação até Criação geral, eles estão aqui dispostos a fazer tudo por vocês e pelo nosso Hotel.',
+'team.hide1'         =>     '<b>Ei...</b> Como vimos que você é',
+'team.hide2'         =>     'precisamos lhe informar que existem cargos ocultos aqui, sendo eles -',
+
+// Banned
+'banned.titulo'      =>     'Banimento',
+'banned.youreban'    =>     'A sua conta está banida do '.$Holo['name'].'.',
+'banned.text1'       =>     'Sua conta está banida até',
+'banned.text2'       =>     'de',
+'banned.text3'       =>     'pelo motivo:',
+'banned.button'      =>     'Atualizar Página',
+
 // Error
 'error.titulo'       =>     'Erro',
 'error.erro1'        =>     'Página não encontrada',
