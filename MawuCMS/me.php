@@ -284,7 +284,7 @@ while($newsbadge = mysqli_fetch_array($newsbadges)){
 	<div class="container">
 		<div class="row">
 		
-		<div class="col-lg-12 pl-lg-3">
+		<div class="col-lg-9 pr-lg-3">
   		    <div id="custom_widget_coisas-2" class="widget widget_custom_widget_coisas mb-4">
      		    <div style="cursor:default" class="section-title"><h3><?php echo $Lang['me.yourbadges']; ?></h3></div>
       		   <div class="row">
@@ -301,9 +301,40 @@ while($badge = mysqli_fetch_array($badges)){ ?>
 <?php } ?>
    		      </div>
  		  </div>
+		  <div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['me.badgealert']; ?> <b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_badges WHERE user_id = '".$myrow['id']."'")) ?></b> <?php echo $Lang['me.smallbadges']; ?></div>
 		</div>
 		
-		<div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['me.badgealert']; ?> <b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_badges WHERE user_id = '".$myrow['id']."'")) ?></b> <?php echo $Lang['me.smallbadges']; ?></div>
+		
+		<div class="col-lg-3 pl-lg-3">
+				<div class="sidebar">
+					<div id="custom_widget_evento-2" class="widget widget_custom_widget_evento mb-4">
+					    <div class="section-title"><h3><?php echo $Lang['me.stats']; ?></h3></div>
+					        <div class="row row-event">
+
+						        <div class="alert alert-secondary" role="alert" style="cursor:default"><?php echo $Lang['me.statsdesc']; ?><br><br><center>
+								<font color="#FF9030"><b><?php echo $myrow['credits']; ?></b></font> <?php echo $Lang['me.stats1']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/credit.png"><br>
+<?php $users_currency = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_currency WHERE user_id = '".$myrow['id']."' AND type = '0' LIMIT 1");
+while($users_currencys = mysqli_fetch_array($users_currency)){ ?>	
+								<font color="#822273"><b><?php echo $users_currencys['amount']; ?></b></font> <?php echo $Lang['me.stats2']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/ducket.png"><br>
+<?php } ?>
+<?php $users_currency = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_currency WHERE user_id = '".$myrow['id']."' AND type = '5' LIMIT 1");
+while($users_currencys = mysqli_fetch_array($users_currency)){ ?>	
+								<font color="#0AA8EC"><b><?php echo $users_currencys['amount']; ?></b></font> <?php echo $Lang['me.stats3']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/diamond.png"><br>
+<?php } ?>
+<?php $users_setting = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_settings WHERE user_id = '".$myrow['id']."' LIMIT 1");
+while($users_settings = mysqli_fetch_array($users_setting)){ ?>	
+								<font color="#8a8e8e"><b><?php echo $users_settings['respects_received']; ?></b></font> <?php echo $Lang['me.stats4']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/respect.png"><br>
+								<font color="#6e4b01"><b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM rooms WHERE owner_id = '".$myrow['id']."'")) ?></b></font> <?php echo $Lang['me.stats5']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/room.png"><br>
+								<font color="#fd6561"><b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users_badges WHERE user_id = '".$myrow['id']."'")) ?></b></font> <?php echo $Lang['me.stats6']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/habbotv.png"><br>
+								<font color="#fed062"><b><?php echo $users_settings['achievement_score']; ?></b></font> <?php echo $Lang['me.stats7']; ?> <img src="<?php echo $Holo['url']; ?>/Mawu/image/icon/star.png"><br>
+<?php } ?>
+								</center></div>
+
+						    </div>
+					</div>
+				</div>
+
+			</div>
 
 		</div>
 	</div>

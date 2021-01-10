@@ -180,6 +180,15 @@ $Lang = array(
 'me.yourbadges'      =>     'Alguns dos seus Emblemas',
 'me.badgealert'      =>     '<b>Ei!</b> Estamos mostrando apenas <b>6</b> Emblemas, mas você tem atualmente:',
 'me.smallbadges'     =>     'emblemas.',
+'me.stats'           =>     'Suas estatísticas.',
+'me.statsdesc'       =>     'Confira o que você possui no Hotel:.',
+'me.stats1'          =>     'Moedas',
+'me.stats2'          =>     'Duckets',
+'me.stats3'          =>     'Diamantes',
+'me.stats4'          =>     'Respeitos',
+'me.stats5'          =>     'Emblemas',
+'me.stats6'          =>     'Quartos',
+'me.stats7'          =>     'Conquistas',
 
 // News
 'news.titulo'        =>     'Notícias',
