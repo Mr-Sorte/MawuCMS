@@ -55,23 +55,6 @@ $Holo = array(
 'recaptcha_on'  =>     'true',
 'recaptcha'     =>     '');
 
-// Flash Client
-$_config['client'] = array(
-'host' 				 				=> '127.0.0.1',
-'port' 				 				=> '30000',
-'client_starting' 		 		 	=> 'Patience '.$Holo['name'].' ! Chargement en cours...',
-'client_starting_revolving' 		=> "Le temps n'est qu'une illusion.\/Chargement de l'univers...\/Comment cava aujourd'hui?\/Suivez le canard jaune.\/Chargement des citations de l'humanité...",
-'external_variables' 			 	=> ''.$Holo['url'].'/swf/gamedata/external_variables.txt',
-'external_variables_override' 		=> ''.$Holo['url'].'/swf/gamedata/override/external_override_variables.txt',
-'external_flash_texts'  			=> ''.$Holo['url'].'/swf/gamedata/external_flash_texts.txt',
-'external_flash_texts_override' 	=> ''.$Holo['url'].'/swf/gamedata/override/external_flash_override_texts.txt',
-'productdata' 			 			=> ''.$Holo['url'].'/swf/gamedata/productdata.txt',
-'furnidata' 			 			=> ''.$Holo['url'].'/swf/gamedata/furnidata.xml',	
-'external_figurepartlist' 			=> ''.$Holo['url'].'/swf/gamedata/figuredata.xml',	
-'avatareditor_promohabbos' 			=> ''.$Holo['url'].'/swf/gamedata/hotlooks.xml',	
-'flash_client_url' 	 				=> ''.$Holo['url'].'/swf/gordon/PRODUCTION-202006192205-424220153/',
-'habbo_swf' 		 				=> 'Habbo.swf');
-
 // Language
 $Lang = array(
 
