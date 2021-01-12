@@ -11,32 +11,32 @@ define('PASSSTAFF_SALT', '3ChAnGEItFoRRaNdOm3');
 define('PASSSTAFF_SALT2', '4ChAnGEItFoRRaNdOm4');
 	  
 // Mail
-define('SMTP_HOST', 'smtp.example.com'); # SMTP Host(Example: smtp-relay.gmail.com for google gmail)
-define('SMTP_PORT', '25'); # SMTP Port
-define('SMTP_ENCRYPTION', 'null'); # SMTP Encryption(null/ssl/tls)
-define('SMTP_USERNAME', 'yourmail@server.com'); # SMTP Your mail
-define('SMTP_PASSWORD', 'YoUrPass'); # SMTP Password
+define('SMTP_HOST', 'smtp.gmail.com'); # SMTP Host(Example: smtp.gmail.com for google gmail)
+define('SMTP_PORT', '587'); # SMTP Port
+define('SMTP_ENCRYPTION', ''); # SMTP Encryption(null/ssl/tls)
+define('SMTP_USERNAME', '@gmail.com'); # SMTP Your mail
+define('SMTP_PASSWORD', ''); # SMTP Password
 	  
 // Configuration
 $Holo = array(
 'panel'         =>     'housekeeping',
-'htmllang'      =>     '', # EN or pt-BR
-'name'          =>     'Mawu',
-'debut_auto_dark'        =>     '18', # Start of night mode in hours(For automatic theme user)
-'fin_auto_dark'          =>     '6', # End of night mode in hours(For automatic theme user)
+'htmllang'      =>     'fr-FR',
+'name'          =>     'MawuCMS',
+'debut_auto_dark'        =>     '21', # Start of night mode in hours(For automatic theme user)
+'fin_auto_dark'          =>     '7', # End of night mode in hours(For automatic theme user)
 
 // Links
 'url'           =>     'http://localhost',
 'client_url'    =>     'http://localhost/hotel',
-'cameraurl'     =>     'http://localhost/swf/camera/',
-'thumbsurl'     =>     'http://localhost/swf/camera/thumbnails/',
+'cameraurl'     =>     'http://localhost/WulezSWF/camera/',
+'thumbsurl'     =>     'http://localhost/WulezSWF/camera/thumbnails/',
 'avatar'        =>     'http://habbo.com.br/habbo-imaging/avatarimage?figure=',
-'url_badges'    =>     'http://localhost/swf/c_images/album1584/',
+'url_badges'    =>     'http://localhost/WulezSWF/c_images/album1584/',
 
 // Register
 'mision'        =>     '',
-'monedas'       =>     '1000',
-'duckets'       =>     '160',
+'monedas'       =>     '0',
+'duckets'       =>     '0',
 'diamants'      =>     '0',
 'gender'        =>     'M',
 'look'          =>     'ch-215-82.hr-100-42.lg-270-1408.ha-1003-64.hd-180-1370',
@@ -119,7 +119,6 @@ $Lang = array(
 
 // Forgot
 'forgot.titulo'      =>     'Esqueci minha Senha',
-'forgot.'       =>     '',
 
 // Register
 'register.titulo'    =>     'Criar nova Conta',
@@ -228,6 +227,10 @@ $Lang = array(
 'team.hide1'         =>     '<b>Ei...</b> Como vimos que você é',
 'team.hide2'         =>     'precisamos lhe informar que existem cargos ocultos aqui, sendo eles -',
 
+// Maintenance
+'maintenance.text1'  =>     '<b>ATENÇÃO!</b> '.$Holo['name'].' Hotel está temporariamente fechado para Manutenções, o motivo seria -',
+'maintenance.text2'  =>     'Tentaremos voltar o mais rápido possível, prometemos!...',
+
 // Banned
 'banned.titulo'      =>     'Banimento',
 'banned.youreban'    =>     'A sua conta está banida do '.$Holo['name'].'.',
@@ -247,6 +250,7 @@ $Lang = array(
 'footer.allrights'   =>     'Todos direitos reservados.',
 'footer.devby'       =>     'Site desenvolvido por',
 'footer.text'        =>     'Este site não está afiliada com, patrocinada por, apoiada por, ou principalmente aprovada pela Sulake Oy ou suas empresas Afiliadas, '.$Holo['name'].' pode utilizar as marcas registradas e outras propriedades intelectuais do Habbo, que estão permitidas sob a Política de Fã Sites Habbo.',
+
 );
 	
 ?>

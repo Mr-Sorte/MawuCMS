@@ -8,12 +8,6 @@ if(Loged == TRUE)
 	exit;
 }
 
-if(maintenance == '1') 
-{
-    header("Location: maintenance");
-	exit;
-}
-
 $lyrics = ''.$Lang['lyrics.1'].'
 '.$Lang['lyrics.2'].'
 '.$Lang['lyrics.3'].'

@@ -8,12 +8,6 @@ if(Loged == TRUE)
 	exit;
 }
 
-if(maintenance == '1') 
-{
-    header("Location: maintenance");
-	exit;
-}
-
 if(isset($_POST['Username']) && isset($_POST['Password']))
 {
 	

@@ -15,10 +15,10 @@ public static function cxn_mysqli() {
 
 $mysqld = array (
 
-	'host'  =>  '',
-	'user'  =>  '',
+	'host'  =>  'localhost',
+	'user'  =>  'root',
 	'pass'  =>  '',
-	'db'    =>  ''
+	'db'    =>  'mawuskorp'
 
 	 );
 		
