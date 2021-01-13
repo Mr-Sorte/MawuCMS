@@ -7,6 +7,7 @@ CREATE TABLE `cms_news` (
   `longstory` text NOT NULL,
   `author` varchar(200) NOT NULL DEFAULT 'Hotel',
   `livenews` enum('0','1') NOT NULL DEFAULT '0',
+  `active_comment` enum('0','1') DEFAULT '0',
   `active_form` enum('0','1') DEFAULT '0',
   `active_badge` enum('0','1') NOT NULL DEFAULT '0',
   `category` enum('gratis','hotel','mobis','promocao','sistema') NOT NULL DEFAULT 'hotel',

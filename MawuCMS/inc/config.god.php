@@ -184,6 +184,16 @@ $Lang = array(
 'news.category'      =>     'Categoria',
 'news.have1'         =>     'Existem',
 'news.have2'         =>     'notícias nesta categoria.',
+'news.comments'      =>     'Comentários',
+'news.makecomment'   =>     'Escreva um comentário',
+'news.alertcant'     =>     'Não é mais possível fazer comentários nesta notícia',
+'news.alertlogin'    =>     'Você precisa <a href="/login">entrar</a> para publicar um comentário.',
+'news.confirm'       =>     'Comentar',
+'news.alertc1'       =>     '<b>Sucesso!</b> Você deixou o seu comentário.',
+'news.alertc2'       =>     'Eita, alguma coisa deu errado, que tal tentar novamente?...',
+'news.alertc3'       =>     'Você não pode deixar um comentário aqui...',
+'news.alertc4'       =>     'Alguma coisa deu errado com o seu <i>código de segurança</i>, tente reentrar em nosso Hotel.',
+'news.alertc5'       =>     'Mantenha o seu comentário sem palavras inadequadas, e prometeremos não excluir sua conta ou algo semelhante a isso como punição, haha.',
 
 // Gallery
 'gallery.titulo'     =>     'Galeria',
