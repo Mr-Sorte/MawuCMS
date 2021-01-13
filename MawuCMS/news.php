@@ -467,7 +467,7 @@ if(isset($_POST['addcomment']))
 		
 		if(mysqli_num_rows($checkspam) >= 3 && $myrow['rank'] < $Holo['minrank'])
 		{
-			$commentmsg = "<div class='alert alert-danger' role='alert'>Spam interdit ! Tu ne peux pas poster plus de 3 commentaires par article !</div>";
+			$commentmsg = "<div class='alert alert-danger' role='alert'>".$Lang['news.alertc6']."</div>";
 		} 
 		else 
 		{

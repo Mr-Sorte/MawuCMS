@@ -194,6 +194,7 @@ $Lang = array(
 'news.alertc3'       =>     'Você não pode deixar um comentário aqui...',
 'news.alertc4'       =>     'Alguma coisa deu errado com o seu <i>código de segurança</i>, tente reentrar em nosso Hotel.',
 'news.alertc5'       =>     'Mantenha o seu comentário sem palavras inadequadas, e prometeremos não excluir sua conta ou algo semelhante a isso como punição, haha.',
+'news.alertc6'       =>     '<b>EITA!</b> Você está tentando fazer o que não pode, você só pode deixar <b>3</b> comentários Por notícia.',
 
 // Gallery
 'gallery.titulo'     =>     'Galeria',
