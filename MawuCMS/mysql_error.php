@@ -3,16 +3,14 @@ if ($mysqli -> connect_errno) {
 require_once(DR .'/inc/config.god.php');
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $Holo['htmllang']; ?>">
-
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
     if(themeh > 18 || themeh < 6){
-        document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
+        document.write('<html lang="en" data-theme="dark">');
     } else {
-		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
+		document.write('<html lang="en" data-theme="light">');
 	};
 </script>
 

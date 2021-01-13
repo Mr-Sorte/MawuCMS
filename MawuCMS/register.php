@@ -162,13 +162,11 @@ if(isset($_POST['Usuario']) && isset($_POST['Mail']) && isset($_POST['Contrasena
 
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $Holo['htmllang']; ?>">
-
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 18 || themeh < 6){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?> || themeh < <?php echo $Holo['en_auto_dark']; ?>){
         document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
     } else {
 		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');

@@ -9,24 +9,21 @@ if(maintenance == '1' && $myrow['rank'] < $Holo['minrank'])
 ?>
 <!DOCTYPE html>
 <?php if(Loged == FALSE) { ?>
-
-<html lang="<?php echo $Holo['htmllang']; ?>">
-
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 18 || themeh < 6){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?> || themeh < <?php echo $Holo['en_auto_dark']; ?>){
         document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
     } else {
 		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
 	};
 </script>
-
 <?php } ?>
 <?php if(Loged == TRUE) { ?>
 <html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <?php } ?>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">

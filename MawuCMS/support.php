@@ -1,30 +1,28 @@
 <?php
 require_once("inc/core.god.php");
-
-if(mysql_num_rows($chb) > 0) 
-{
-    header("Location: banned");
-	exit;
-}
-
-if(MANTENIMIENTO == '1' && $myrow['rank'] < $Holo['minrank']) 
-{
-    header("Location: mantenimiento");
-	exit;
-}
 ?>
 <!DOCTYPE html>
 <?php if(Loged == FALSE) { ?>
-<html lang="pt-BR" data-theme="light">
+<script>
+    var themed = new Date();
+    var themeh = themed.getHours();
+
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?> || themeh < <?php echo $Holo['en_auto_dark']; ?>){
+        document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
+    } else {
+		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
+	};
+</script>
 <?php } ?>
 <?php if(Loged == TRUE) { ?>
-<html lang="pt-BR" data-theme="<?php echo $myrow['theme']; ?>">
+<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
 <?php } ?>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $Holo['name']; ?>: Suporte</title>
+	<title><?php echo $Holo['name']; ?>: <?php echo $Lang['support.titulo']; ?></title>
 
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
@@ -67,7 +65,7 @@ img.emoji {
 <body class="home page-template-default" onselectstart='return false' ondragstart='return false'>
 <?php if(Loged == FALSE) { ?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-		<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+		<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -75,23 +73,26 @@ img.emoji {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			
 <ul id="menu-principal" class="navbar-nav mr-auto">
+	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
+		<a href="/index" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
+	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/index" class="nav-link">Início</a>
+		<a href="/login" class="nav-link"><?php echo $Lang['menu.login']; ?></a>
+	</li>
+	<li class="menu-item menu-item-type-post_type_archive nav-item">
+		<a href="/register" class="nav-link"><?php echo $Lang['menu.register']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-home current-menu-item page_item nav-item">
-		<a href="/login" class="nav-link">Entrar</a>
-	</li>
-	<li class="menu-item menu-item-type-post_type_archive nav-item">
-		<a href="/register" class="nav-link">Registro</a>
+		<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 	</li>
 	<li class="menu-item menu-item-type-post_type_archive nav-item active">
-		<a href="/support" class="nav-link active">Suporte</a>
+		<a href="/support" class="nav-link active"><?php echo $Lang['menu.support']; ?></a>
 	</li>
 </ul>
 
 <div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
-		<a href="/register" class="btn btn-success">Registrar</a>    
-		<a href="/login" class="btn btn-primary">Entrar na sua Conta</a>
+		<a href="/register" class="btn btn-success"><?php echo $Lang['menu.register']; ?></a><span style="cursor:default">    </span>
+		<a href="/login" class="btn btn-primary"><?php echo $Lang['menu.loginbutton']; ?></a>
 </div>
 
 		</div>
@@ -99,40 +100,40 @@ img.emoji {
 <?php } ?>
 <?php if(Loged == TRUE) { ?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
-	<a class="navbar-brand"><?php echo $Holo['name']; ?> Hotel<span class="tag">Beta</span></a>
+	<a class="navbar-brand" style="cursor:default"><?php echo $Holo['name']; ?> Hotel<span class="tag"><?php echo $Lang['logo.tag']; ?></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul id="menu-principal" class="navbar-nav mr-auto">
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/me" class="nav-link">Início</a>
+				<a href="/me" class="nav-link"><?php echo $Lang['menu.index']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/articles" class="nav-link">Notícias</a>
+				<a href="/articles" class="nav-link"><?php echo $Lang['menu.articles']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/gallery" class="nav-link">Galeria</a>
+				<a href="/gallery" class="nav-link"><?php echo $Lang['menu.gallery']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/famous" class="nav-link">Famosos</a>
+				<a href="/famous" class="nav-link"><?php echo $Lang['menu.famous']; ?></a>
 			</li>
 			<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/team" class="nav-link">Equipe</a>
-			</li>
-			<li class="menu-item menu-item-type-post_type_archive nav-item active">
-				<a href="/support" class="nav-link active">Suporte</a>
+				<a href="/team" class="nav-link"><?php echo $Lang['menu.team']; ?></a>
 			</li>
 			<!--<li class="menu-item menu-item-type-post_type_archive nav-item">
-				<a href="/shop" class="nav-link"><font color="dark orange">Loja</font></a>
+				<a href="/shop" class="nav-link"><font color="dark orange"><?php echo $Lang['menu.shop']; ?></font></a>
 			</li>-->
+			<li class="menu-item menu-item-type-post_type_archive nav-item active">
+				<a href="/support" class="nav-link active"><?php echo $Lang['menu.support']; ?></a>
+			</li>
 		</ul>
 		
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 		
-		<?php $isadmin = mysql_query("SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank > 5");
-        while($isadm = mysql_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white">Painel</font></a>    <?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success">Entrar no Hotel</a>    
+		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
+        while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
+		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -143,9 +144,9 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i>Ver meu Perfil</a>
-						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Desconectar</a>
+						<a class="dropdown-item" href="/home/<?php echo $myrow['username']; ?>"><i class="fas fa-user text-muted mr-2"></i><?php echo $Lang['menu.myprofile']; ?></a>
+						<a class="dropdown-item" href="/account/prefer"><i class="fas fa-cog text-muted mr-2"></i> <?php echo $Lang['menu.settings']; ?></a>
+						<a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
@@ -154,7 +155,7 @@ img.emoji {
 <?php } ?>
 
 <main>
-<div class="jumbotron jumbotron-fluid green">
+<div style="cursor:default" class="jumbotron jumbotron-fluid green">
 		<div class="container">
 		<h1>Suporte</h1>
 	</div>
@@ -162,17 +163,17 @@ img.emoji {
 
 <section>
 
-	<div class="container">
+	<div style="cursor:default" class="container">
 <?php if(Loged == FALSE) { ?>
 			<div class="col-md-12">
 			<div id="custom_widget_parceiro-2" class="widget widget_custom_widget_parceiro mb-4">
-			    <div class="alert alert-secondary" role="alert"><b>Sabia?</b> A ferramenta de Suporte/Ajuda pode se tornar melhor se você estiver logado em uma conta! <a href="/login">Clique aqui para entrar</a></div>
+			    <div class="alert alert-secondary" role="alert"><?php echo $Lang['support.alert1']; ?></div>
 			</div>
 			</div>
 		<div class="col-md-6 offset-md-3">
-		<p><h3>Nosso e-mail</h3><br><b>Eita</b>, como você não está em conexão com nenhuma conta, não podemos te oferecer muitos recursos no quesito <i>Ajuda/Suporte</i>, mas podemos ser bem paciente e atenciosos com você caso queira nos mandar um e-mail, nosso endereço de e-mail para suporte é - <b><?php echo $Holo['contactemail']; ?></b>, as respostas podem demorar até 24h.<br><br><font color="dark orange">(Você pode utilizar o e-mail para informar algum erro no sistema, alguma sugestão ou tentar entrar em ação contra ou a favor de um banimento)</font></p>
+		<p><?php echo $Lang['support.alert2']; ?><br><br><font color="dark orange"><?php echo $Lang['support.alert2desc']; ?></font></p>
 		<hr>
-		<p><h3>Outras formas de solicitar ajuda</h3><br>Se caso você não consiga ou ache muito difícil nos contatar via e-mail, temos também um grupo no aplicativo <b>Discord</b>, la sim você pode achar outros usuários e até mesmo conseguir ajuda de forma instantânea.<br><br><a href="<?php echo $Holo['discordinvl']; ?>" target="_blank" class="btn btn-primary">Entrar no grupo do Discord</a></p>
+		<p><?php echo $Lang['support.alert3']; ?></p>
 		</div>
 <?php } ?>
 
@@ -180,12 +181,12 @@ img.emoji {
 <?php 
 if(isset($_POST['ticket']))
 { 
-	$category = mysql_real_escape_string($_POST['category']);
-	$texto = mysql_real_escape_string($_POST['texto']);
+	$category = mysqli_real_escape_string .filtro($_POST['category']);
+	$texto = mysqli_real_escape_string .filtro($_POST['texto']);
 
     if(!empty($_POST['category']) || empty($_POST['texto']))
     { 
-        $query_NewTicket = mysql_query("INSERT INTO cms_tickets SET category = '".$category."', ticket = '". filtro($_POST['texto']) ."', date = '". time() . "', author_name = '". $myrow['username'] ."', author_id = '". $myrow['id'] ."'");
+        $query_NewTicket = mysqli_query(connect::cxn_mysqli(),"INSERT INTO cms_tickets SET category = '".$category."', ticket = '". filtro($_POST['texto']) ."', date = '". time() . "', author_name = '". $myrow['username'] ."', author_id = '". $myrow['id'] ."'");
 
         if($query_NewTicket) 
         { 
@@ -207,42 +208,42 @@ if(isset($_POST['ticket']))
 ?>
     <p>
 		<div class="col-md-6 offset-md-3">
-		<h3>Enviar um Ticket</h3>
+		<h3><?php echo $Lang['support.send']; ?></h3>
 		    <form action="" method="post">
 				<div class="form-group form-username">
-					<label for="user_login">Nome de usuário:</label>
+					<label for="user_login"><?php echo $Lang['support.form1']; ?></label>
 					<input disabled="" class="form-control" type="text" value="<?php echo $myrow['username']; ?>">
-					<small class="form-text text-muted">Não é possível alterar nomes de usuário.</small>
+					<small class="form-text text-muted"><?php echo $Lang['support.username']; ?></small>
 				</div>
 
 				<div class="form-group">
-					<label for="category">Categoria:</label>
+					<label for="category"><?php echo $Lang['support.form2']; ?></label>
 					<select class="custom-select" id="category" name="category" required >
-					    <option selected="selected" disabled="" value="">Escolha uma categoria...</option>
-						<option value="ajuda">Ajuda & Suporte</option>
-						<option value="reclamacao">Reclamações</option>
-						<option value="bugs">Erros & Bugs</option>
-						<option value="sugestoes">Sugestões</option>
-						<option value="contato">Quero entrar em Contato</option>
+					    <option selected="selected" disabled="" value=""><?php echo $Lang['support.catdesc']; ?></option>
+						<option value="ajuda"><?php echo $Lang['support.cat1']; ?></option>
+						<option value="reclamacao"><?php echo $Lang['support.cat2']; ?></option>
+						<option value="bugs"><?php echo $Lang['support.cat3']; ?></option>
+						<option value="sugestoes"><?php echo $Lang['support.cat4']; ?></option>
+						<option value="contato"><?php echo $Lang['support.cat5']; ?></option>
 					</select>
 				</div>
 				
 				<div class="form-group form-textarea">
-					<label for="description">Conte o que acontece:</label>
+					<label for="description"><?php echo $Lang['support.form3']; ?></label>
 					<textarea class="form-control" name="texto" id="texto" rows="5" cols="60" style="resize: none;" placeholder="Escreva algo..." required></textarea>
-					<small class="form-text text-muted">Seja bem claro no que for digitar, em caso de abuso do sistema, você será permanentemente banido.</small>
+					<small class="form-text text-muted"><?php echo $Lang['support.desc5']; ?></small>
 				</div>
 
 				<div class="form-group form-username">
-					<button class="btn btn-success" type="submit" name="ticket">Enviar Ticket</button>
+					<button class="btn btn-success" type="submit" name="ticket"><?php echo $Lang['support.form4']; ?></button>
 				</div>
 			</form>
 		
 	</p>
 		<hr>
-		<p><h3>Nosso e-mail</h3><br>Se você quer algo mais formal ou complexo, nos mande um e-mail, nosso endereço de e-mail para suporte é - <b><?php echo $Holo['contactemail']; ?></b>, as respostas podem demorar até 24h.</p>
+		<p><?php echo $Lang['support.alert2']; ?></p>
 		<hr>
-		<p><h3>Outras formas de solicitar ajuda</h3><br>Se caso você não consiga ou ache muito difícil nos contatar via e-mail, temos também um grupo no aplicativo <b>Discord</b>, la sim você pode achar outros usuários e até mesmo conseguir ajuda de forma instantânea.<br><br><a href="<?php echo $Holo['discordinvl']; ?>" target="_blank" class="btn btn-primary">Entrar no grupo do Discord</a></p>
+		<p><?php echo $Lang['support.alert3']; ?></p>
 		</div>
 <?php } ?>
 	</div>

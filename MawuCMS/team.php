@@ -15,6 +15,7 @@ if(maintenance == '1' && $myrow['rank'] < $Holo['minrank'])
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">

@@ -28,13 +28,11 @@ $lyrics = explode("\n", $lyrics);
 $chosen = $lyrics[ mt_rand(0, count($lyrics) - 1) ];
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $Holo['htmllang']; ?>">
-
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 18 || themeh < 6){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?> || themeh < <?php echo $Holo['en_auto_dark']; ?>){
         document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
     } else {
 		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');

@@ -12,7 +12,6 @@ if(isset($_POST['Username']) && isset($_POST['Password']))
 {
 	
 	$Getuser = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". filtro($_POST['Username']) ."' AND password = '". HashSecur($_POST['Password']) ."'");
-
 	
 	if(isset($_POST['g-recaptcha-response'])){
           $captcha = $_POST['g-recaptcha-response'];
@@ -49,13 +48,11 @@ if(isset($_POST['Username']) && isset($_POST['Password']))
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $Holo['htmllang']; ?>">
-
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 18 || themeh < 6){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?> || themeh < <?php echo $Holo['en_auto_dark']; ?>){
         document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
     } else {
 		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
@@ -160,7 +157,6 @@ img.emoji {
 			<p class="login-password">
 				<label for="user_pass"><?php echo $Lang['login.password']; ?></label>
 				<input type="password" name="Password" id="user_pass" class="input" size="20" required>
-				<small class="form-text text-muted"><a href="/forgot"><?php echo $Lang['login.forgot']; ?></a></small>
 			</p>
 			<p class="login-submit">
 			<?php if($Holo['recaptcha_on'] == "true") { ?>
