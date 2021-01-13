@@ -20,24 +20,24 @@ define('SMTP_PASSWORD', ''); # SMTP Password
 // Configuration
 $Holo = array(
 'panel'         =>     'housekeeping',
-'htmllang'      =>     'fr-FR',
+'htmllang'      =>     'pt-BR',
 'name'          =>     'MawuCMS',
-'debut_auto_dark'        =>     '21', # Start of night mode in hours(For automatic theme user)
-'fin_auto_dark'          =>     '7', # End of night mode in hours(For automatic theme user)
+'in_auto_dark'  =>     '18', # Start of night mode in hours(For automatic theme user)
+'en_auto_dark'  =>     '6', # End of night mode in hours(For automatic theme user)
 
 // Links
 'url'           =>     'http://localhost',
 'client_url'    =>     'http://localhost/hotel',
-'cameraurl'     =>     'http://localhost/WulezSWF/camera/',
-'thumbsurl'     =>     'http://localhost/WulezSWF/camera/thumbnails/',
+'cameraurl'     =>     'http://localhost/camera/',
+'thumbsurl'     =>     'http://localhost/camera/thumbnails/',
 'avatar'        =>     'http://habbo.com.br/habbo-imaging/avatarimage?figure=',
-'url_badges'    =>     'http://localhost/WulezSWF/c_images/album1584/',
+'url_badges'    =>     'http://localhost/c_images/album1584/',
 
 // Register
-'mision'        =>     '',
-'monedas'       =>     '0',
-'duckets'       =>     '0',
-'diamants'      =>     '0',
+'mision'        =>     'MawuCMS',
+'monedas'       =>     '1000',
+'duckets'       =>     '160',
+'diamants'      =>     '5',
 'gender'        =>     'M',
 'look'          =>     'ch-215-82.hr-100-42.lg-270-1408.ha-1003-64.hd-180-1370',
 
@@ -52,7 +52,7 @@ $Holo = array(
 'minrank'       =>     '5',
 'maxrank'       =>     '10',
 'minhkr'        =>     '6',
-'recaptcha_on'  =>     'true',
+'recaptcha_on'  =>     'false',
 'recaptcha'     =>     '');
 
 // Language
@@ -116,9 +116,6 @@ $Lang = array(
 'login.error1'       =>     'Não deixe campos vazios.',
 'login.error2'       =>     'Nome de usuário inválido.',
 'login.error3'       =>     'Você não é um robô? Verifique sua identidade.',
-
-// Forgot
-'forgot.titulo'      =>     'Esqueci minha Senha',
 
 // Register
 'register.titulo'    =>     'Criar nova Conta',
@@ -226,6 +223,26 @@ $Lang = array(
 'team.descinfo'      =>     'A Equipe é feita por membros a partir de Moderação até Criação geral, eles estão aqui dispostos a fazer tudo por vocês e pelo nosso Hotel.',
 'team.hide1'         =>     '<b>Ei...</b> Como vimos que você é',
 'team.hide2'         =>     'precisamos lhe informar que existem cargos ocultos aqui, sendo eles -',
+
+// Support
+'support.titulo'     =>     'Suporte',
+'support.alert1'     =>     '<b>Sabia?</b> A ferramenta de Suporte/Ajuda pode se tornar melhor se você estiver logado em uma conta! <a href="/login">Clique aqui para entrar</a>',
+'support.alert2'     =>     '<h3>Nosso e-mail</h3><br><b>Eita</b>, como você não está em conexão com nenhuma conta, não podemos te oferecer muitos recursos no quesito <i>Ajuda/Suporte</i>, mas podemos ser bem paciente e atenciosos com você caso queira nos mandar um e-mail, nosso endereço de e-mail para suporte é - <b>'.$Holo['contactemail'].'</b>, as respostas podem demorar até 24h.',
+'support.alert2desc' =>     '(Você pode utilizar o e-mail para informar algum erro no sistema, alguma sugestão ou tentar entrar em ação contra ou a favor de um banimento)',
+'support.alert3'     =>     '<h3>Outras formas de solicitar ajuda</h3><br>Se caso você não consiga ou ache muito difícil nos contatar via e-mail, temos também um grupo no aplicativo <b>Discord</b>, la sim você pode achar outros usuários e até mesmo conseguir ajuda de forma instantânea.<br><br><a href="'.$Holo['discordinvl'].'" target="_blank" class="btn btn-primary">Entrar no grupo do Discord</a>',
+'support.send'       =>     'Enviar um Ticket',
+'support.form1'      =>     'Nome de usuário:',
+'support.form2'      =>     'Categoria:',
+'support.form3'      =>     'Conte o que acontece:',
+'support.form4'      =>     'Enviar Ticket',
+'support.catdesc'    =>     'Escolha uma categoria...',
+'support.cat1'       =>     'Ajuda & Suporte',
+'support.cat2'       =>     'Reclamações',
+'support.cat3'       =>     'Erros & Bugs',
+'support.cat4'       =>     'Sugestões',
+'support.cat5'       =>     'Quero entrar em Contato',
+'support.username'   =>     'Não é possível alterar nomes de usuário.',
+'support.desc5'      =>     'Seja bem claro no que for digitar, em caso de abuso do sistema, você será permanentemente banido.',
 
 // Maintenance
 'maintenance.text1'  =>     '<b>ATENÇÃO!</b> '.$Holo['name'].' Hotel está temporariamente fechado para Manutenções, o motivo seria -',
