@@ -2906,3 +2906,12 @@ body.admin-bar {
   width: 100%;
   height: 4px;
 }
+
+#p141 {
+    position: absolute;
+    height: 38px;
+    width: 26px;
+    background: url(/Mawu/image/pageme.png) 0 -47px;
+    left: 25px;
+    top: 40px;
+}
