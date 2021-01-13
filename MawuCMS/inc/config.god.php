@@ -20,7 +20,7 @@ define('SMTP_PASSWORD', ''); # SMTP Password
 // Configuration
 $Holo = array(
 'panel'         =>     'housekeeping',
-'htmllang'      =>     'pt-BR',
+'htmllang'      =>     'en',
 'name'          =>     'MawuCMS',
 'in_auto_dark'  =>     '18', # Start of night mode in hours(For automatic theme user)
 'en_auto_dark'  =>     '6', # End of night mode in hours(For automatic theme user)
@@ -28,14 +28,14 @@ $Holo = array(
 // Links
 'url'           =>     'http://localhost',
 'client_url'    =>     'http://localhost/hotel',
-'cameraurl'     =>     'http://localhost/camera/',
-'thumbsurl'     =>     'http://localhost/camera/thumbnails/',
+'cameraurl'     =>     'http://localhost/WulezSWF/camera/',
+'thumbsurl'     =>     'http://localhost/WulezSWF/camera/thumbnails/',
 'avatar'        =>     'http://habbo.com.br/habbo-imaging/avatarimage?figure=',
-'url_badges'    =>     'http://localhost/c_images/album1584/',
+'url_badges'    =>     'http://localhost/WulezSWF/c_images/album1584/',
 
 // Register
 'mision'        =>     'MawuCMS',
-'monedas'       =>     '1000',
+'monedas'       =>     '500',
 'duckets'       =>     '160',
 'diamants'      =>     '5',
 'gender'        =>     'M',
@@ -116,6 +116,35 @@ $Lang = array(
 'login.error1'       =>     'Não deixe campos vazios.',
 'login.error2'       =>     'Nome de usuário inválido.',
 'login.error3'       =>     'Você não é um robô? Verifique sua identidade.',
+
+// Forgot
+'forgot.titulo'      =>     'Esqueci minha Senha',
+'forgot.back'        =>     'Voltar',
+'forgot.confirm'     =>     'Pronto',
+'forgot.iperror'     =>     'Seu IP é diferente do IP usado para solicitar uma nova senha! Por motivos de segurança, use a mesma conexão de internet(IP) para fazer a solicitação. Se você tem um IP dinâmico, sem sorte, provavelmente mudou nesse meio tempo! Maiores dúvidas ou problemas, entre em <a href="/support">contato com a gente</a>.',
+'forgot.error1'      =>     'Alguma coisa de errado aconteceu, tente novamente...',
+'forgot.alertlink'   =>     '<p class="alert alert-secondary"><a class="text-inherit" data-toggle="tooltip" title="" data-original-title="Por sua segurança, verifique se o site começa com '.$Holo['url'].'/"><img src="'.$Holo['url'].'/Mawu/image/securlink.png">&ensp;<font color="green"></font>'.$Holo['url'].'/</a></p>',
+'forgot.changetitle' =>     'Sua nova Senha',
+'forgot.new1'        =>     'Utilize, pelo menos, 6 caracteres. Inclua, pelo menos, uma letra, um número e um caracter especial.',
+'forgot.new2'        =>     'Crie uma nova senha:',
+'forgot.new3'        =>     'Repita a sua nova senha:',
+'forgot.resetmsg1'   =>     'Não deixe os campos vazios.',
+'forgot.resetmsg2'   =>     'As novas senhas não coincidem.',
+'forgot.resetmsg3'   =>     'Sua senha foi alterada com Sucesso! Aguarde...',
+'forgot.resetmsg4'   =>     'Algo deu errado, verifique tudo e tente novamente.',
+'forgot.resetmsg5'   =>     'Nome ou Email incorretos, tente novamente.',
+'forgot.resetmsg6'   =>     'Alguma coisa deu bem errado, tente novamente e verifique todos os campos.',
+'forgot.alsuccess'   =>     'Acabamos de enviar um e-mail com um link para você reestabelecer a sua senha.<br><br><b>IMPORTANTE! Lembre-se de verificar a pasta "lixo" e "correio não desejado".</b>',
+'forgot.uremail'     =>     'Nome de usuário da sua conta:',
+'forgot.urusern'     =>     'O email da sua conta:',
+
+// Email
+'email.text1'        =>     'Olá',
+'email.text2'        =>     'Um patinho de borracha nos disse que você precisou mudar a senha da conta '.$Holo['name'].' registrada com o seguinte e-mail:',
+'email.text3'        =>     'O link abaixo perderá a validade em 10 minutos, portanto seja rápido!',
+'email.text4'        =>     'Clique aqui para mudar a sua senha com segurança',
+'email.text5'        =>     'Você não pediu essa mudança? Ok, pedimos desculpas por essa mensagem. Basta ignorá-la e a sua senha atual continuará a mesma!',
+'email.text6'        =>     'Confirmação de mudança de senha',
 
 // Register
 'register.titulo'    =>     'Criar nova Conta',
