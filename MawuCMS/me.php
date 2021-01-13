@@ -6,12 +6,6 @@ if(Loged == FALSE)
 	header("Location: /");
 	exit;
 }
-
-if(maintenance == '1' && $myrow['rank'] < $Holo['minrank']) 
-{
-    header("Location: maintenance");
-	exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
@@ -95,7 +89,7 @@ img.emoji {
 		
 		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
         while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
+		<?php if(maintenance == '0') { ?><a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span><?php } ?>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -120,17 +114,22 @@ img.emoji {
 <div class="jumbotron jumbotron-fluid hero">
 	<div class="container">
 		<h1 class="my-3" style="cursor:default"><img src="<?php echo $Holo['avatar'] . $myrow['look']; ?>&headonly=0&direction=2&head_direction=3&size=s" /> <font size="5"><?php echo $myrow['username']; ?></font></h1>
+<?php if(maintenance == '0') { ?>
 		<span style="cursor:default"><b><?php echo Onlines(); ?></b> <?php echo $Lang['menu.onlines']; ?></span>
+<?php } ?>
 	</div>
 </div>
 
 <section>
 	<div class="container">
+	
+<?php if(maintenance == '1') { ?>
+	<div class="alert alert-danger" role="alert"><div id="p141"></div><br><center><?php echo $Lang['maintenance.text1']; ?> <b><?php echo $main['motivo']; ?></b>.<br><?php echo $Lang['maintenance.text2']; ?></center><br></div>
+<?php } ?>
 
-<div class="row">
-
+		<div class="row">
 			
-<div class="col-md-3 pr-md-3">
+						<div class="col-md-3 pr-md-3">
 	<div class="sidebar">
 		<div id="custom_widget_publicidades-2" class="widget widget_custom_widget_publicidades mb-4">
 			<div class="section-title">

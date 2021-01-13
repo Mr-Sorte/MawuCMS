@@ -4,16 +4,18 @@ require_once(DR .'/inc/config.god.php');
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $Holo['htmllang']; ?>">
+
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 20 || themeh < 6){
+    if(themeh > 18 || themeh < 6){
         document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
     } else {
 		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
 	};
 </script>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">

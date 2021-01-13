@@ -53,7 +53,20 @@ if(isset($_POST['resultado']))
 ?>
 <!DOCTYPE html>
 <?php if(Loged == FALSE) { ?>
-<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">
+
+<html lang="<?php echo $Holo['htmllang']; ?>">
+
+<script>
+    var themed = new Date();
+    var themeh = themed.getHours();
+
+    if(themeh > 18 || themeh < 6){
+        document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="dark">');
+    } else {
+		document.write('<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="light">');
+	};
+</script>
+
 <?php } ?>
 <?php if(Loged == TRUE) { ?>
 <html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
@@ -238,8 +251,8 @@ while($newscategory = mysqli_fetch_array($newscategorys)){
 <?php } ?>
 		</ul>
 
-			<h1 style="cursor:default"><?php echo $noticia3; ?></h1>
-			<p style="cursor:default"><small><?php echo $noticia4; ?></small></p>
+			<h1 style="cursor:default"><?php echo filtro($noticia3); ?></h1>
+			<p style="cursor:default"><small><?php echo filtro($noticia4); ?></small></p>
 
 			<div class="infos">
 				<div class="mx-3 mt-3">
