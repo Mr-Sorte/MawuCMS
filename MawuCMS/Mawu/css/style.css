@@ -2915,3 +2915,11 @@ body.admin-bar {
     left: 25px;
     top: 40px;
 }
+
+.effectrainbow {
+    display: inline-block;
+    background-image: url(/Mawu/image/rainbow.gif);
+    background-position: center;
+    -webkit-background-clip: text;
+    color: transparent;
+}
