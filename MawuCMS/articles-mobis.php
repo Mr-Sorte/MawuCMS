@@ -105,7 +105,7 @@ function goBack() {
 		
 		<?php $isadmin = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE id = '".$myrow['id']."' AND rank >= ".$Holo['minhkr']."");
         while($isadm = mysqli_fetch_assoc($isadmin)){ ?><a href="<?php echo $Holo['url'] . '/' . $Holo['panel']; ?>" target="_blank" class="btn btn-warning"><font color="white"><center><i class="fas fa-cogs"></i></center></font></a><span style="cursor:default">    </span><?php } ?>
-		<a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span>
+		<?php if(maintenance == '0') { ?><a href="<?php echo $Holo['client_url']; ?>" class="btn btn-success"><?php echo $Lang['menu.hotel']; ?></a><span style="cursor:default">    </span><?php } ?>
 		
 			<div class="dropdown" style="cursor:cell">
 			
@@ -174,6 +174,11 @@ function goBack() {
 
 <section>
 	<div class="container">
+	
+<?php if(maintenance == '1') { ?>
+	<div class="alert alert-danger" role="alert"><div id="p141"></div><br><center><?php echo $Lang['maintenance.text1']; ?> <b><?php echo $main['motivo']; ?></b>.<br><?php echo $Lang['maintenance.text2']; ?></center><br></div>
+<?php } ?>
+	
 	<div class="section-title" style="cursor:default"><h3><?php echo $Lang['news.have1']; ?> <b><?php echo mysqli_num_rows(mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_news WHERE category = 'mobis'")) ?></b> <?php echo $Lang['news.have2']; ?></h3></div>
 		<div class="row">
 		

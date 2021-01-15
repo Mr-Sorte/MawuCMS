@@ -131,6 +131,10 @@ img.emoji {
 <section>
 	<div class="container">
 
+<?php if(maintenance == '1') { ?>
+	<div class="alert alert-danger" role="alert"><div id="p141"></div><br><center><?php echo $Lang['maintenance.text1']; ?> <b><?php echo $main['motivo']; ?></b>.<br><?php echo $Lang['maintenance.text2']; ?></center><br></div>
+<?php } ?>
+
 			<div class="section-title">
 				<h3 style="cursor:default"><?php echo $Lang['index.noticias']; ?></h3>
 			</div>

@@ -2,7 +2,7 @@
 
 if(Loged == FALSE)
 {
-	header("Location: /");
+	header("Location: /login?redir=hotel");
 	exit;
 }
 
