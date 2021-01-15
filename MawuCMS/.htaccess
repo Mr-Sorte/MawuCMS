@@ -22,6 +22,7 @@ RewriteRule ^banned(|/)$ ./banned.php
 RewriteRule ^mantenimiento(|/)$ ./mantenimiento.php
 RewriteRule ^disconnected(|/)$ ./disconnected.php
 RewriteRule ^hotel(|/)$ ./hotel.php
+RewriteRule ^beta(|/)$ ./hotelv2.php
 RewriteRule ^me(|/)$ ./me.php
 RewriteRule ^articles(|/)$ ./articles.php
 RewriteRule ^articles/gratis(|/)$ ./articles-gratis.php
