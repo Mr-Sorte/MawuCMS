@@ -1,14 +1,13 @@
-﻿<?php
+<?php
 require_once("../inc/core.god.php");
 require_once("../inc/hk_session.php");
+require_once("../inc/plugins/vendor/autoload.php");
 
-if(UserH == FALSE) {
-    header("Location: " . $Holo['url'] ."/".$Holo['panel']."");
-	exit;
-}
 
-if(Loged == TRUE && UserH == TRUE) {
-if($myrow['rank'] >= $Holo['hkr_manager']) {
+if(Loged == TRUE) {
+if($myrow['rank'] >= $Holo['hkr_owner']) {
+
+
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +15,7 @@ if($myrow['rank'] >= $Holo['hkr_manager']) {
 <head>
     <meta charset="utf-8"/>
 
-    <title><?php echo $Holo['name']; ?> - Administration</title>
+    <title><?php echo $Holo['name']; ?> - Owner passe create</title>
 	<link rel="icon" type="image/png" href="<?php echo $Holo['url']; ?>/<?php echo $Holo['panel']; ?>/hen/images/favicon.ico" />
     <meta name="description" content="Panel administrateur <?php echo $Holo['name']; ?> Hotel">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,130 +65,138 @@ if($myrow['rank'] >= $Holo['hkr_manager']) {
       <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
          <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
 
-<?php require_once("../housekeeping/MWW/header.php"); ?>
 			
             <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
                <div class="kt-container  kt-grid kt-grid--ver">
                   <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
                   <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
-				    <?php require_once("../housekeeping/MWW/navbar.php"); ?>
                   </div>
                   <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
                      <div class="kt-container  kt-grid__item kt-grid__item--fluid" style="margin-top:30px">
-          
+                      
 <div class="kt-portlet kt-portlet--mobile">
         <div class="kt-portlet__head kt-portlet__head--lg">
            <div class="kt-portlet__head-label">
               <span class="kt-portlet__head-icon">
-              <i class="kt-font-brand flaticon2-settings"></i>
+              <i class="kt-font-brand flaticon-customer"></i>
               </span>
-              <h3 class="kt-portlet__head-title">Maintenance</h3>
+              <h3 class="kt-portlet__head-title">Générer mon premier passe staff (owner)</h3>
            </div>
         </div>
 		
-<?php
-if(isset($_POST['motivo']))
-{
-if(isset($_POST['jeton']) && ($_POST['jeton'] == $_SESSION['jeton'])) {
-$Motivo = filtrolow($_POST['motivo']);
+<div class="kt-portlet">
 
-if(empty($Motivo))
+<?php				  
+if(isset($_POST['staffname']) && isset($_POST['staffmail']))
 {
-echo '<div class="kt-portlet__body"><div class="form-group form-group-last"><div class="alert alert-danger" role="alert"><div class="alert-text">Un probleme est survenu, essaie a nouveau.</div></div></div></div>';
-} else {
-mysqli_query(connect::cxn_mysqli(),"UPDATE cms_mantenimiento SET mantenimiento = '1', motivo = '". $Motivo ."', timestamp = '". time() ."'");
-mysqli_query(connect::cxn_mysqli(),"INSERT INTO cms_hklogs SET type = 'Maintenance', note = 'Maintenance on', author_name = '". $myrow['username'] ."', author_id = '". $myrow['id'] ."', author_rank = '". $myrow['rank'] ."', timestamp = '". time() ."'");
-echo '<div class="kt-portlet__body"><div class="form-group form-group-last"><div class="alert alert-success" role="alert"><div class="alert-text">Terminer ! Mise en maintenance ! Chargement...</div></div></div></div><meta http-equiv="refresh" content="2; url=/housekeeping/maintenance.php">';
-}
-} else {
-	echo "<div class='alert alert-danger' role='alert'>Anti-CSRF: Jeton de sécurité invalide.</div>";
-}
-}
+	if(isset($_POST['jeton']) && ($_POST['jeton'] == $_SESSION['jeton'])) {	
+    $staffname = filtro($_POST['staffname']);
+    $staffmail = filtro($_POST['staffmail']);
 
-if(isset($_POST['quitar']))
-{
-if(isset($_POST['jeton']) && ($_POST['jeton'] == $_SESSION['jeton'])) {
-mysqli_query(connect::cxn_mysqli(),"UPDATE cms_mantenimiento SET mantenimiento = '0', motivo = '', timestamp = ''");
-mysqli_query(connect::cxn_mysqli(),"INSERT INTO cms_hklogs SET type = 'Maintenance', note = 'Maintenance off', author_name = '". $myrow['username'] ."', author_id = '". $myrow['id'] ."', author_rank = '". $myrow['rank'] ."', timestamp = '". time() ."'");
-echo '<div class="kt-portlet__body"><div class="form-group form-group-last"><div class="alert alert-warning" role="alert"><div class="alert-text">Terminer ! Sortie de maintenance ! Chargement...</div></div></div></div><meta http-equiv="refresh" content="2; url=/housekeeping/maintenance.php">';
-} else {
+    $Checkuser = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM users WHERE username = '". $staffname ."' AND mail = '". $staffmail ."'");
+    $userrr = mysqli_fetch_assoc($Checkuser);
+
+    if(empty($staffname) || empty($staffmail))
+    {
+		echo "<div class='form-group form-group-last'><div class='alert alert-danger' role='alert'><div class='alert-text'>Ne laissez pas les champs vides.</div></div></div>";
+    }
+	elseif($staffname != $userrr['username'])
+    {
+		echo "<div class='form-group form-group-last'><div class='alert alert-danger' role='alert'><div class='alert-text'>Le pseudo est incorrect.</div></div></div>";
+    }
+	elseif($userrr['rank'] < $Holo['minhkr'])
+    {
+		echo "<div class='form-group form-group-last'><div class='alert alert-danger' role='alert'><div class='alert-text'>Tu ne peux pas généré un passe owner pour cette utilisateur qui n'est pas encore fondateur, rank toi avant.</div></div></div>";
+    }
+    elseif($staffmail != $userrr['mail'])
+    {
+		echo "<div class='form-group form-group-last'><div class='alert alert-danger' role='alert'><div class='alert-text'>Le mail est incorrect.</div></div></div>";
+    }
+    else
+    {
+        function passegenerator($nbChar){
+        return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789'),1, $nbChar); 
+                                        }	
+	    $generatedpasse = passegenerator(15);
+		$hotelreset = $Holo['name'];
+		
+        mysqli_query(connect::cxn_mysqli(),"INSERT INTO cms_hklogs SET type = 'Ownerpasse', note = 'A attribué un passe owner à: ". $staffname ."', author_name = '". $myrow['username'] ."', author_id = '". $myrow['id'] ."', author_rank = '". $myrow['rank'] ."', timestamp = '". time() ."'");
+	    mysqli_query(connect::cxn_mysqli(),"UPDATE users SET passcode = '". HashSecurBis($generatedpasse) ."' WHERE username = '". $staffname ."' AND mail = '". $staffmail ."'");
+        // Create the Transport
+        $transport = (new Swift_SmtpTransport(SMTP_HOST, SMTP_PORT))        ### SMTP HOST and PORT
+          ->setUsername(SMTP_USERNAME)                                      ### SMTP MAIL
+          ->setPassword(SMTP_PASSWORD)                                      ### SMTP PASS
+		  ->setEncryption(SMTP_ENCRYPTION)                                  ### SMTP Encryption (null / ssl / tls)
+        ;
+
+        // Create the Mailer using your created Transport
+        $mailer = new Swift_Mailer($transport);
+
+        // Create a message
+        $message = (new Swift_Message('Ton nouveau passe staff ' . $Holo['name'] .''))
+          ->setFrom([SMTP_USERNAME => "$hotelreset"])
+          ->setTo(["$staffmail" => "$staffname"])
+		  ->setBody(
+            '<html>' .
+            ' <body>' .
+			'  Hey ' . $staffname . ' !<br>' .
+            '  <br>Voici ton nouveau passe staff:<br><b>' . $generatedpasse . '</b><br>' .
+			"  <br><i>Note le bien et supprime definitivement ce mail. Tu peux aussi le changer en te connectant sur l'administration, section Changer mon passe.</i>" .
+            '  <br><br>PS: Ceci est un message automatique, merci de ne pas répondre.' .
+            ' </body>' .
+            '</html>',
+            'text/html' // Mark the content-type as HTML
+                   );
+
+        // Send the message
+        $result = $mailer->send($message);
+		echo '<div class="kt-portlet__body"><div class="form-group form-group-last"><div class="alert alert-success" role="alert"><div class="alert-text">Le passe staff à etais généré ! Tu va le recevoir par mail à <b><u></u>' . $staffmail . '</b> ! Clique <a href="/housekeeping/index.php">ICI</a> pour te connecter.</div></div></div></div><meta http-equiv="refresh" content="120; url=/housekeeping/index.php">';
+    }
+	} else {
 	echo "<div class='alert alert-danger' role='alert'>Anti-CSRF: Jeton de sécurité invalide.</div>";
-}
+    }
 }
 ?>
-<?php 
-$sqlputo = mysqli_query(connect::cxn_mysqli(),"SELECT * FROM cms_mantenimiento");
-$putito = mysqli_fetch_assoc($sqlputo);
-if($putito['mantenimiento'] == '0') {
-?>
+
 			<form class="kt-form" action="" method="post">
 				<div class="kt-portlet__body">
 					<div class="form-group form-group-last">
 						<div class="alert alert-secondary" role="alert">
 							<div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
 						  	<div class="alert-text">
-								Tu es dans une partie très importante de l'hôtel, fait <b><font color="red">ATTENTION</font></b> a ce que tu fait ici. Demande toujours l'autorisation au Manager ou au Fondateur avant de mettre l'hotel en maintenance. Si la situation est critique et que aucun responsable n'est present, tu peux le faire sans demander l'autorisation mais seulement en situation grave !<br><i>Exemple: decouverte d'une faille, beug du serveur, attaque lourde sur le serveur, probleme avec une API tiers indispensable, etc...</i>
+								Le nouveau passe sera généré aléatoirement. Cette page sert seulement a créer un passe pour le fondateur, qui pourra ensuite creer des passes pour les staffs en ce connectant à l'administration. <b><u>Une fois fait, sauvegarde sur ton pc et supprimer cette page (owner-passcreat.php) de ton serveur pour plus de securité.</u></b>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label>Responsable de la maintenance:</label>
-						<input type="text" class="form-control" disabled="disabled" value="<?php echo $myrow['username']; ?>">
-					</div>
-					<div class="form-group">
-						<label for="exampleTextarea">Raison de la maintenance:</label>
-						<textarea type="text" name="motivo" class="form-control" rows="3" required placeholder="Donne plus d'infos au joueurs sur la raison de la maintenance..."></textarea>
-					</div>
-					    <input type="hidden" name="jeton" value="<?php echo $_SESSION['jeton']; ?>">
+                        <label>Ton pseudo:</label>
+                        <input class="form-control" type="text" name="staffname" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ton mail:</label>
+                        <input class="form-control" type="text" name="staffmail" required>
+                    </div>
+					<input type="hidden" name="jeton" value="<?php echo $_SESSION['jeton']; ?>">
 				</div>
 				<div class="kt-portlet__foot">
 					<div class="kt-form__actions">
-						<button type="submit" class="btn btn-success">Executer</button>
+						<button type="submit" name="dar" class="btn btn-success">Générer et envoyer</button>
 						<button type="reset" class="btn btn-secondary">Annuler</button>
 					</div>
 				</div>
 			</form>
-<?php
-} else {
-?>
-			<form class="kt-form" action="" method="post">
-				<div class="kt-portlet__body">
-					<div class="form-group form-group-last">
-						<div class="alert alert-secondary" role="alert">
-							<div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-						  	<div class="alert-text">
-								Tu es dans une partie très importante de l'hôtel, fait <b><font color="red">ATTENTION</font></b> a ce que tu fait ici. Demande toujours l'autorisation au Manager ou au Fondateur avant de mettre l'hotel en maintenance. Si la situation est critique et que aucun responsable n'est present, tu peux le faire sans demander l'autorisation mais seulement en situation grave !<br><i>Exemple: decouverte d'une faille, beug du serveur, attaque lourde sur le serveur, probleme avec une API tiers indispensable, etc...</i>
-							</div>
-						</div>
-					</div>
-							<div class="kt-section kt-section--last">
-								<div class="kt-section__body">
-									<div class="form-group row">
-										<label class="col-3 col-form-label">À propos de la maintenance actuelle:</label>
-										<div class="col-9">
-											<span class="form-text text-muted">Nous sommes en maintenance, si tu es pleinement conscient de ce que vous faites, tu peux sortir l'hôtel de maintenance.</span>
-										</div>
-									</div>
-									<div class="form-group row kt-margin-t-10 kt-margin-b-10">
-										<label class="col-3 col-form-label"></label>
-										<div class="col-9">
-										    <input type="hidden" name="jeton" value="<?php echo $_SESSION['jeton']; ?>">
-											<button type="submit" name="quitar" class="btn btn-outline-danger btn-sm kt-margin-t-5 kt-margin-b-5">Veux-tu vraiment sortir l'hôtel de maintenance?</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				</div>
-			</form>
-<?php } ?>
-		
+		</div>
 </div>
-                    
+
+			
+</div></div></div>
+	</div>
+</div>
+
                   </div>
                </div>
             </div>
-			
-<?php require_once("../housekeeping/MWW/footer.php"); ?>
 			
          </div>
       </div>
@@ -209,7 +216,7 @@ if($putito['mantenimiento'] == '0') {
 </body>
 </html>
 <?PHP } else { 
-               header("Location: " . $Holo['url'] . "/");
+               echo "Acces interdit - Rank toi au grade maximum avec phpMyAdmin avant d'ouvrir cette page";
 	           exit;
              } } else {
                         header("Location: " . $Holo['url'] . "/");

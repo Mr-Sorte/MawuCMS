@@ -8,7 +8,7 @@ if(UserH == FALSE) {
 }
 
 if(Loged == TRUE && UserH == TRUE) {
-if($myrow['rank'] >= $Holo['minhkr']) {
+if($myrow['rank'] >= $Holo['hkr_moderator']) {
 
 
 ?>

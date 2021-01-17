@@ -1,10 +1,10 @@
-<?php if(isset($myrow)) { if($myrow['rank'] >= 6 && UserH == TRUE) { ?>
+<?php if(isset($myrow)) { if($myrow['rank'] >= $Holo['minhkr'] && UserH == TRUE) { ?>
  
  <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
     <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1">
        <ul class="kt-menu__nav ">
           <li class="kt-menu__item " aria-haspopup="true" ><a href="/housekeeping/home.php" class="kt-menu__link ajaxLoading"><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Tableau de bord</span></a></li>
-          <?php if($myrow['rank'] >= 8) { ?>
+          <?php if($myrow['rank'] >= $Holo['hkr_manager']) { ?>
 		  <li class="kt-menu__section ">
              <h4 class="kt-menu__section-text">Administration</h4>
              <i class="kt-menu__section-icon flaticon-more-v2"></i>
@@ -17,14 +17,13 @@
               <a href="/housekeeping/rank.php" class="kt-menu__link ">
               <i class="kt-menu__link-icon flaticon-customer"></i><span class="kt-menu__link-text">Gestion des rangs</span></a>
           </li>
-          <?php if($myrow['rank'] >= 9) { ?>
 		  <li class="kt-menu__item ajaxLoading" aria-haspopup="true" >
               <a href="/housekeeping/passcreat.php" class="kt-menu__link ">
                 <i class="kt-menu__link-icon flaticon-customer"></i><span class="kt-menu__link-text">Générer / changer un passe pour un staff</span></a>
           </li>
-                  <?PHP } ?>
+
 		  <?PHP } ?>
-		  <?php if($myrow['rank'] >= 7) { ?>
+		  <?php if($myrow['rank'] >= $Holo['hkr_moderator']) { ?>
 		  <li class="kt-menu__section ">
              <h4 class="kt-menu__section-text">Modération</h4>
              <i class="kt-menu__section-icon flaticon-more-v2"></i>
@@ -34,7 +33,7 @@
               <i class="kt-menu__link-icon flaticon-globe"></i><span class="kt-menu__link-text">Gestion des bans</span></a>
           </li>
 		  <?PHP } ?>
-		  <?php if($myrow['rank'] >= 6) { ?>
+		  <?php if($myrow['rank'] >= $Holo['hkr_animator']) { ?>
 		  <li class="kt-menu__section ">
              <h4 class="kt-menu__section-text">Animation & Communauté</h4>
              <i class="kt-menu__section-icon flaticon-more-v2"></i>
