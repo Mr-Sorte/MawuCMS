@@ -112,8 +112,7 @@ if($chbtype == "Compte")
 ?>
 	<div style="cursor:default" class="text-center">
 			<div class="card-body text-center">
-					<h1 class="mb-0" data-toggle="tooltip" data-original-title="<?php echo $myrow['username']; ?>"><?php echo $myrow['username']; ?></h1>
-					<div class="mb-3 text-muted"><?php echo $myrow['mail']; ?></div>
+					<h1 class="mb-0" data-toggle="tooltip" data-original-title="<?php echo $ip; ?>"><?php echo $ip; ?></h1>
 			</div>	
 			<p class="text-muted mb-0"><?php echo $Lang['banned.youreban']; ?></p>
 					<hr>
