@@ -50,9 +50,15 @@ $Holo = array(
 'discordwid'    =>     '',
 
 // Security
-'minrank'       =>     '5',
-'maxrank'       =>     '10',
-'minhkr'        =>     '6',
+'minrank'       =>     '5',                                            # Rank min staff
+'minhkr'        =>     '5',                                            # Rank min for access in hk: Login
+'maxrank'       =>     '8',                                            # Rank max staff
+	
+'hkr_animator'  =>     '5',                                            # Rank min for access in hk: News, news edit, badge create
+'hkr_moderator' =>     '6',                                            # Rank min for access in hk: Bans
+'hkr_manager'   =>     '7',                                            # Rank min for access in hk: Maintenance, rank, pass create
+'hkr_owner'     =>     '8',                                            # Rank min for access in hk: Owner first pass create
+	
 'recaptcha_on'  =>     'false',
 'recaptcha'     =>     ''); # ReCaptcha Key
 
