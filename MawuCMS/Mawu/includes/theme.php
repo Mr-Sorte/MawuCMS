@@ -27,7 +27,6 @@ if($theusertheme == "auto") { ?>
 <?php } else { ?>
 <html data-theme="<?php echo $myrow['theme']; ?>">
 <?PHP } } ?>
-<noscript><meta http-equiv="refresh" content="3; URL='/script_error'"/></noscript>
 	    
 <?PHP } else { 
     header("Location: /");
