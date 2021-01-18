@@ -1,13 +1,12 @@
 <?PHP
 if ($mysqli -> connect_errno) {
-require_once(DR .'/inc/config.god.php');
 ?>
 <!DOCTYPE html>
 <script>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > 18 || themeh < 6){
+    if(themeh > 20-1 || themeh < 6-1){
         document.write('<html lang="en" data-theme="dark">');
     } else {
 		document.write('<html lang="en" data-theme="light">');
