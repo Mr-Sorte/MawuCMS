@@ -3,7 +3,7 @@ if(isset($Holo)) {
 	
 if($chbactive == "False") 
 {
-    header("Location: error");
+    header("Location: /");
 	exit;
 }
 
