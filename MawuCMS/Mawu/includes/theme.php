@@ -5,7 +5,7 @@
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > <?php echo $Holo['debut_auto_dark']; ?>-1 || themeh < <?php echo $Holo['fin_auto_dark']; ?>-1){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?>-1 || themeh < <?php echo $Holo['en_auto_dark']; ?>-1){
         document.write('<html data-theme="dark">');
     } else {
 		document.write('<html data-theme="light">');
@@ -18,7 +18,7 @@ if($theusertheme == "auto") { ?>
     var themed = new Date();
     var themeh = themed.getHours();
 
-    if(themeh > <?php echo $Holo['debut_auto_dark']; ?>-1 || themeh < <?php echo $Holo['fin_auto_dark']; ?>-1){
+    if(themeh > <?php echo $Holo['in_auto_dark']; ?>-1 || themeh < <?php echo $Holo['en_auto_dark']; ?>-1){
         document.write('<html data-theme="dark">');
     } else {
 		document.write('<html data-theme="light">');
