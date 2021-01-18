@@ -14,7 +14,7 @@ if($_GET['action'] == 'logout') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $Holo['htmllang']; ?>" data-theme="<?php echo $myrow['theme']; ?>">
+<?php require_once("Mawu/includes/theme.php"); ?>
 
 <head>
 	<meta charset="utf-8">
@@ -67,6 +67,10 @@ img.emoji {
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
+					<?PHP
+                                        if($chbtype == "Compte")
+                                        {
+                                        ?>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 			<div class="dropdown" style="cursor:cell">
@@ -78,11 +82,14 @@ img.emoji {
 				</div>
 					
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-						<a class="dropdown-item" href="/logout?action=logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
+						<a class="dropdown-item" href="/banned?action=logout"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php echo $Lang['menu.logout']; ?></a>
 					</div>
 			</div>
 		</div>
 	</div>
+					<?PHP
+                                        }
+                                        ?>
 	</nav>
 
 <main>
